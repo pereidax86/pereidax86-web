@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 
-// https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
@@ -12,9 +11,11 @@ export default defineConfig({
   site: 'https://pereidax86.com',
   integrations: [sitemap(), robotsTxt()],
   
-  // --- REDIRECCIONES ---
+  build: {
+    assets: 'assets'
+  },
+
   redirects: {
-    // Sintaxis: 'URL_VIEJA_WORDPRESS': 'URL_NUEVA_ASTRO'
     '/2025/01/personaliza-vi-mejora-tu-flujo-de-trabajo/': '/blog/personaliza-vi-flujo-trabajo',
     '/2025/01/vi-el-editor-de-texto-esencial-para-linux/': '/blog/vi-editor-esencial',
     '/2025/01/linux-basico-en-10-comandos-y-como-desatar-todo-su-poder/': '/blog/linux-basico-10-comandos',
