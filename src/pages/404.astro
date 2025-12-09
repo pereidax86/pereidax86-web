@@ -1,0 +1,89 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="404 | Recurso no encontrado">
+    <main class="flex flex-col items-center justify-center min-h-[85vh] px-4 animate-fade-in font-mono">
+        
+        {/* --- TERMINAL WINDOW --- */}
+        <div class="w-full max-w-3xl bg-[#1e1e2e] rounded-lg shadow-2xl overflow-hidden border border-neutral-800 relative z-10">
+            
+            {/* Header de la terminal */}
+            <div class="bg-[#181825] px-4 py-2 flex items-center gap-2 border-b border-neutral-800">
+                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                <div class="ml-4 text-xs text-gray-500 select-none">pereidax86@dev-box: ~/web</div>
+            </div>
+
+            {/* Contenido de la terminal */}
+            <div class="p-6 text-sm md:text-base font-mono leading-relaxed min-h-[300px] text-gray-300">
+                
+                {/* --- PROMPT SIMULADO (Estilo Powerlevel10k) --- */}
+                <div class="flex flex-wrap items-center gap-0 mb-4 select-none">
+                    {/* Segmento 1: OS */}
+                    <div class="bg-blue-600 text-black px-3 py-1 font-bold rounded-l-sm flex items-center gap-2">
+                        <span></span>
+                    </div>
+                    {/* Flecha CSS */}
+                    <div class="w-0 h-0 border-l-[12px] border-l-blue-600 border-y-[14px] border-y-transparent border-r-0"></div>
+                    
+                    {/* Segmento 2: Path */}
+                    <div class="bg-neutral-700 text-gray-200 px-3 py-1 ml-[-1px]">
+                        ~/Dev/pereidax86-web
+                    </div>
+                    <div class="w-0 h-0 border-l-[12px] border-l-neutral-700 border-y-[14px] border-y-transparent border-r-0"></div>
+
+                    {/* Segmento 3: Git */}
+                    <div class="bg-yellow-600 text-black px-3 py-1 font-bold ml-[-1px]">
+                         master
+                    </div>
+                    <div class="w-0 h-0 border-l-[12px] border-l-yellow-600 border-y-[14px] border-y-transparent border-r-0"></div>
+
+                    {/* Segmento Error (Derecha simulada o siguiente linea) */}
+                    <div class="ml-auto flex items-center">
+                        <span class="text-red-500 font-bold mr-2">✘ INT</span>
+                        <span class="text-gray-500 text-xs">11:19:16 AM</span>
+                    </div>
+                </div>
+
+                {/* --- COMANDO Y OUTPUT --- */}
+                <div class="space-y-2">
+                    <p class="flex gap-2">
+                        <span class="text-green-400">❯</span>
+                        <span class="text-gray-100 typing-effect">cat ./requested_page.html</span>
+                    </p>
+                    
+                    <p class="text-red-400 mt-2">
+                        cat: ./requested_page.html: No such file or directory
+                    </p>
+
+                    <p class="text-gray-400 mt-4">
+                        # Debugging info:<br/>
+                        > Error Code: <span class="text-blue-400">404</span><br/>
+                        > Status: <span class="text-yellow-400">MISSING</span><br/>
+                        > Recommendation: Return to $HOME
+                    </p>
+                    
+                    {/* Cursor parpadeante */}
+                    <p class="flex gap-2 mt-6">
+                        <span class="text-green-400">❯</span>
+                        <span class="w-2.5 h-5 bg-gray-400 animate-pulse"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        {/* --- BOTÓN REGRESAR (Estilo Index) --- */}
+        <div class="mt-8">
+            <a href="/" class="w-full bg-neutral-900 rounded-xl px-8 py-4 flex items-center justify-between hover:bg-neutral-800 transition-all border border-neutral-800 text-gray-200 hover:border-blue-500/50 group">
+                <span class="flex items-center gap-3 font-bold">
+                    <span class="text-blue-500 group-hover:-translate-x-1 transition-transform">cd ~</span> 
+                    /home/pereidax86
+                </span>
+            </a>
+        </div>
+
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+    </main>
+</Layout>

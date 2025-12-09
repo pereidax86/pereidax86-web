@@ -1,11 +1,310 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// ==============================================================================
+// 🎨 PALETA DE MARCA PERSONAL (DOCUMENTACIÓN)
+// ==============================================================================
+// 
+// PRIMARIOS (Tech & Cyberpunk):
+// ------------------------------------------------------------------------------
+// 🔵 Tech Blue (Principal/Acción):
+//    - Tailwind: text-blue-500 | bg-blue-500 | border-blue-500
+//    - Hex: #3b82f6
+//    - Uso: Iconos principales, bordes activos, botones de llamada a la acción.
+//
+// 💠 Tech Blue Light (Texto/Brillo):
+//    - Tailwind: text-blue-400
+//    - Hex: #60a5fa
+//    - Uso: Texto resaltado sobre fondo oscuro, efectos de glow.
+//
+// 🟣 Deep Purple (Acento/Profundidad):
+//    - Tailwind: purple-600
+//    - Hex: #9333ea
+//    - Uso: Gradientes, sombras secundarias, detalles de fondo.
+//
+// NEUTROS (Fondo & Estructura):
+// ------------------------------------------------------------------------------
+// ⚫ Background Base: Neutral-950 (#0a0a0a) a Neutral-900 (#171717)
+// ⚪ Texto Base: Gray-300 (#d1d5db) a White (#ffffff)
+// ==============================================================================
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+
+// --- CONFIGURACIÓN ---
+const GRAVATAR_HASH = "4949755b64eb223f0fa2b210aaf9707c";
+const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=400`;
+// NOTA: En tu LinkedIn tienes otro correo. ¿Cuál prefieres usar aquí? 
+// Dejé el de pereidax86, pero cámbialo si prefieres el de sysadminctl.services
+const EMAIL_CONTACTO = "luis@pereidax86.com"; 
+
+// --- DATOS DEL PERFIL ---
+const pageTitle = "Luis Pereida | @pereidax86";
+const bioText = "Ingeniero en Sistemas y Maestro en TIC. Me apasiona el Open Source y desmitificar la tecnología. Comparto lo que sé sobre Linux, Ciberseguridad y todo lo que ocurre detrás de una terminal de pantalla negra y letras blancas.";
+const tiktokFollowers = "744";
+
+// --- NUEVOS DATOS (Rescatados de LinkedIn) ---
+const techStack = [
+    { name: "Linux", icon: "🐧" },
+    { name: "Red Hat", icon: "🎩" },
+    { name: "Cybersecurity", icon: "🛡️" },
+    { name: "Python", icon: "🐍" },
+    { name: "AI & Automation", icon: "🤖" },
+    { name: "Podman", icon: "🦭" },
+    { name: "Open Source", icon: "🔓" },
+    { name: "Astro", icon: "🚀" },
+    { name: "Tailwind", icon: "🎨" },
+];
+
+const currentStatus = "🌱 Learning: CISSP & Advanced Red Teaming";
+const philosophy = "Creo que cualquier concepto técnico complejo puede explicarse con una analogía simple. Mi meta es romper barreras y hacer el conocimiento accesible para todos.";
+
+// --- CERTIFICACIONES ---
+const certTop = {
+    name: "Certified Ethical Hacker",
+    image: "/badges/CEH_2E345519D3F7.png",
+    url: "https://aspen.eccouncil.org/Verify",
+    isCredly: false,
+    meta: { id: "ECC3657809142", label: "ID Number" }
+};
+
+const certsMiddle = [
+    {
+        name: "RedHat Certified System Administrator",
+        image: "/badges/rhcsa.png",
+        url: "https://www.credly.com/badges/6701c173-e710-4c21-800a-ac6086ef59c1/public_url",
+        isCredly: true
+    },
+    {
+        name: "RedHat Certified Specialist Virtualization",
+        image: "/badges/rh-virtualization.png",
+        url: "https://www.credly.com/badges/99a80d64-5d22-4944-bcf3-0e477eece1e6/public_url",
+        isCredly: true
+    },
+    {
+        name: "RedHat Certified Specialist Containers",
+        image: "/badges/rh-containers.png",
+        url: "https://www.credly.com/badges/4f5dd55a-d796-44ad-af8d-d44f63ed4daa/public_url",
+        isCredly: true
+    },
+];
+
+const certBottom = {
+    name: "IBM Cloud Advocate v2",
+    image: "/badges/ibm-cloud.png",
+    url: "https://www.credly.com/badges/6cb65f66-7a49-473f-a9cd-7015c12c4e05/public_url",
+    isCredly: true
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={pageTitle} description={bioText}>
+    <main class="w-full max-w-2xl px-6 py-12 flex flex-col items-center gap-8 animate-fade-in">
+        
+        {/* --- HEADER --- */}
+        <div class="text-center space-y-6 w-full">
+            <div class="relative w-40 h-40 mx-auto group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                <img
+                    src={GRAVATAR_URL}
+                    alt="Luis Pereida"
+                    class="relative w-full h-full rounded-full object-cover bg-neutral-900 border-4 border-neutral-950 shadow-2xl"
+                />
+                <div class="absolute bottom-2 right-2 bg-neutral-900 rounded-full p-1 border border-neutral-800" title="SysAdmin Active">
+                    <div class="w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <h1 class="text-4xl font-extrabold text-white tracking-tight">Luis Pereida</h1>
+                <p class="text-lg text-blue-400 font-mono">@pereidax86</p>
+                
+                {/* STATUS BAR (CISSP) */}
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900/80 border border-green-500/20 text-green-400/90 text-xs font-mono mt-2">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    {currentStatus}
+                </div>
+            </div>
+
+            <div class="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 text-gray-300 leading-relaxed text-sm md:text-base max-w-xl mx-auto font-mono text-pretty">
+                <p>{bioText}</p>
+
+                {/* TECH STACK PILLS */}
+                <div class="flex flex-wrap justify-center gap-2 mt-4 pt-4 border-t border-neutral-800/50">
+                    {techStack.map((tech) => (
+                        <span class="px-2.5 py-1 rounded-md bg-neutral-950 border border-neutral-800 text-xs text-blue-300 font-bold hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default flex items-center gap-1.5">
+                            <span>{tech.icon}</span>
+                            {tech.name}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+        {/* --- CERTIFICACIONES --- */}
+        <div class="w-full flex flex-col items-center gap-6">
+            <h3 class="text-xs font-mono text-gray-500 uppercase tracking-widest text-center mb-2">
+                Certificaciones Oficiales
+            </h3>
+            
+            {/* TOP */}
+            <div class="w-full flex justify-center">
+                 <div class="flex flex-col items-center gap-2 group relative">
+                    <a href={certTop.url} target="_blank" class="relative w-32 h-32 flex items-center justify-center rounded-full transition-all duration-300 z-10">
+                        <div class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)] transition-all duration-500"></div>
+                        <img src={certTop.image} alt={certTop.name} class="w-full h-full object-contain p-4 drop-shadow-xl transform group-hover:scale-110 transition-transform duration-300" onerror="this.onerror=null; this.src='https://via.placeholder.com/150';" />
+                    </a>
+                    <div class="flex flex-col items-center z-20">
+                        <span class="text-xs font-bold text-gray-200 group-hover:text-blue-400 transition-colors">{certTop.name}</span>
+                        <div class="flex flex-col items-center mt-1 bg-neutral-950 px-3 py-1.5 rounded border border-neutral-800 group-hover:border-blue-500/30 transition-colors shadow-lg">
+                            <span class="text-[9px] text-gray-500 uppercase tracking-wider">{certTop.meta.label}</span>
+                            <span class="text-[11px] font-mono text-blue-400 select-all cursor-text">{certTop.meta.id}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* MIDDLE */}
+            <div class="w-full grid grid-cols-3 gap-4 md:gap-8 justify-items-center max-w-lg">
+                {certsMiddle.map((cert) => (
+                    <div class="flex flex-col items-center gap-2 group relative w-full">
+                        <a href={cert.url} target="_blank" class="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-full transition-all duration-300">
+                            <div class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(147,51,234,0.3)] transition-all duration-500"></div>
+                            <img src={cert.image} alt={cert.name} class="w-full h-full object-contain p-3 drop-shadow-md transform group-hover:scale-110 transition-transform duration-300" />
+                        </a>
+                        <span class="text-xs font-medium text-gray-400 group-hover:text-white transition-colors text-center leading-tight">{cert.name}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* BOTTOM */}
+            <div class="w-full flex justify-center">
+                 <div class="flex flex-col items-center gap-2 group relative">
+                    <a href={certBottom.url} target="_blank" class="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-full transition-all duration-300">
+                         <div class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.3)] transition-all duration-500"></div>
+                        <img src={certBottom.image} alt={certBottom.name} class="w-full h-full object-contain p-3 drop-shadow-md transform group-hover:scale-110 transition-transform duration-300" />
+                    </a>
+                    <span class="text-xs font-medium text-gray-400 group-hover:text-white transition-colors text-center leading-tight">{certBottom.name}</span>
+                </div>
+            </div>
+        </div>
+
+        <hr class="w-full border-neutral-800/50" />
+
+        {/* --- FILOSOFÍA (Fun Fact) --- */}
+        <div class="w-full bg-neutral-900/30 border-l-4 border-purple-600 rounded-r-xl p-6 italic text-gray-400 text-sm leading-relaxed">
+            <span class="block text-purple-400 font-bold text-xs not-italic mb-1 uppercase tracking-wider">Mi Filosofía</span>
+            "{philosophy}"
+        </div>
+
+        {/* --- REDES SOCIALES --- */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            <a href="https://tiktok.com/@pereidax86" target="_blank" class="md:col-span-2 group relative block w-full">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl blur opacity-50 group-hover:opacity-100 transition duration-200"></div>
+                <button class="relative w-full bg-neutral-900 rounded-xl px-6 py-4 flex items-center justify-between hover:bg-neutral-800 transition-all border border-neutral-800 text-white font-bold">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2 bg-neutral-800 rounded-lg text-pink-500 group-hover:text-pink-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path></svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-sm text-gray-400 font-normal">Sígueme en TikTok</div>
+                            <div class="text-lg">@pereidax86</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-end gap-1">
+                        <span class="bg-neutral-800 border border-neutral-700 text-white text-xs px-3 py-1 rounded-full font-mono group-hover:bg-neutral-700 transition-colors">
+                            {tiktokFollowers} Seg
+                        </span>
+                    </div>
+                </button>
+            </a>
+            
+             <a href="https://youtube.com/@pereidax86" target="_blank" class="block w-full">
+                <button class="w-full h-full bg-neutral-900/50 rounded-xl px-6 py-4 flex items-center justify-between hover:bg-neutral-800 hover:border-red-500/50 transition-all border border-neutral-800 text-gray-200">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg>
+                        YouTube
+                    </span>
+                </button>
+            </a>
+
+            <a href="https://instagram.com/pereidax86" target="_blank" class="block w-full">
+                <button class="w-full h-full bg-neutral-900/50 rounded-xl px-6 py-4 flex items-center justify-between hover:bg-neutral-800 hover:border-pink-500/50 transition-all border border-neutral-800 text-gray-200">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-pink-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+                        Instagram
+                    </span>
+                </button>
+            </a>
+
+            <a href="https://linkedin.com/in/pereidax86" target="_blank" class="block w-full">
+                <button class="w-full h-full bg-neutral-900/50 rounded-xl px-6 py-4 flex items-center justify-between hover:bg-neutral-800 hover:border-blue-500/50 transition-all border border-neutral-800 text-gray-200">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                        LinkedIn
+                    </span>
+                </button>
+            </a>
+
+            <a href="https://github.com/pereidax86" target="_blank" class="block w-full">
+                <button class="w-full h-full bg-neutral-900/50 rounded-xl px-6 py-4 flex items-center justify-between hover:bg-neutral-800 hover:border-white/20 transition-all border border-neutral-800 text-gray-200">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 3.58 8 7.425 9.4.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-3.482.756-4.218-1.68-4.218-1.68-.455-1.156-1.11-1.464-1.11-1.464-1.137-.776.086-.76.086-.76 1.256.088 1.917 1.29 1.917 1.29 1.117 1.914 2.93 1.36 3.645 1.04.114-.808.438-1.36.797-1.673-2.78-.316-5.704-1.39-5.704-6.185 0-1.366.488-2.483 1.29-3.36-.128-.314-.56-1.59.123-3.313 0 0 1.05-.336 3.44 1.284A11.944 11.944 0 0 1 12 5.92c1.066.005 2.135.144 3.144.424 2.387-1.62 3.435-1.284 3.435-1.284.686 1.724.254 3 .127 3.314.804.877 1.288 1.994 1.288 3.36 0 4.806-2.928 5.866-5.717 6.175.45.39.852 1.158.852 2.333 0 1.685-.015 3.045-.015 3.458 0 .267.18.578.688.48C18.423 20 22 16.42 22 12c0-5.523-4.477-10-10-10Z"/>
+                        </svg>
+                        GitHub
+                    </span>
+                </button>
+            </a>
+        </div>
+
+        {/* --- BLOG Y CONTACTO --- */}
+        <div class="w-full pt-4 pb-8 space-y-4">
+            <a href="/blog" class="block w-full">
+                <button class="w-full bg-neutral-200 rounded-xl px-6 py-4 flex items-center justify-center gap-2 hover:scale-[1.01] transition-transform text-neutral-900 font-bold border-2 border-transparent hover:border-blue-500">
+                    <span class="text-xl">🚀</span>
+                    <span>Leer mi Blog</span>
+                </button>
+            </a>
+
+            {/* SECCIÓN CONTACTO*/}
+            <div class="pt-4 text-center">
+                <p class="text-sm text-gray-500 mb-3 font-mono">¿Quieres que trabajemos juntos?</p>
+                <a href={`mailto:${EMAIL_CONTACTO}`} class="block w-full">
+                    <button class="group w-full bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-xl px-6 py-4 flex items-center justify-center gap-3 hover:scale-[1.01] transition-all border border-neutral-700 hover:border-blue-500/50 shadow-lg">
+                        <div class="p-1.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <span class="text-gray-300 font-medium group-hover:text-white transition-colors">Pongámonos en contacto</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        {/* --- GITHUB SNAKE (NUEVO BLOQUE) --- */}
+        <div class="w-full pt-2 pb-8 flex flex-col items-center gap-4">
+            <h3 class="text-xs font-mono text-gray-500 uppercase tracking-widest text-center">
+                Actividad en Código
+            </h3>
+            <div class="w-full flex justify-center bg-neutral-900/30 rounded-xl p-2 border border-neutral-800/50 hover:border-blue-500/20 transition-colors">
+                <img 
+                    src="https://raw.githubusercontent.com/pereidax86/pereidax86/output/github-contribution-grid-snake-dark.svg" 
+                    alt="GitHub Snake Animation" 
+                    class="w-full max-w-lg opacity-80 hover:opacity-100 transition-opacity duration-500"
+                />
+            </div>
+        </div>
+
+        <footer class="text-gray-600 text-xs font-mono text-center pb-8">
+            <p>© 2025 Luis Pereida.</p>
+            <p class="mt-1">Hecho con Astro 🚀 & Tailwind 🎨</p>
+            <p class="mt-2 text-neutral-700">
+                powered by 
+                <a href="https://sysadminctl.services" target="_blank" class="text-blue-500/60 hover:text-blue-400 underline decoration-dotted transition-colors">
+                    sysadminctl.services🛡️
+                </a>
+            </p>
+        </footer>
+    </main>
 </Layout>
