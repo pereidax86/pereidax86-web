@@ -1,144 +1,172 @@
 ---
-import { getCollection } from 'astro:content';
-// Asegúrate de tener este import
-import type { CollectionEntry } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  
-  // CORRECCIÓN AQUÍ: Agregamos el tipo al argumento 'post'
-  return posts.map((post: CollectionEntry<'blog'>) => ({
+  const posts = await getCollection("blog");
+
+  return posts.map((post: CollectionEntry<"blog">) => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+  post: CollectionEntry<"blog">;
 }
 
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-const formattedDate = post.data.pubDate.toLocaleDateString('es-MX', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+const formattedDate = post.data.pubDate.toLocaleDateString("es-MX", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
   <main class="w-full max-w-4xl px-4 py-12 mx-auto animate-fade-in">
-    
-    <a href="/blog" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-400 transition-colors mb-8 font-mono group">
-      <span class="group-hover:-translate-x-1 transition-transform">←</span> Volver al Blog
+    <a href="/blog" class="inline-flex items-center gap-2 group">
+      <button
+        class="flex items-center gap-2 px-4 py-2 bg-neutral-900/50 hover:bg-neutral-800 text-gray-400 hover:text-white rounded-lg font-mono text-sm transition-all border border-neutral-800 hover:border-blue-500/50 shadow-sm group-hover:shadow-blue-500/10"
+      >
+        <span class="group-hover:-translate-x-1 transition-transform">←</span>
+        Volver al Blog
+      </button>
     </a>
 
     <article class="w-full">
       <div class="text-center space-y-4 mb-10">
-        <div class="flex items-center justify-center gap-2 text-xs font-mono text-purple-400 uppercase tracking-wider">
-            <span>{formattedDate}</span>
-            <span>•</span>
-            <span>{post.data.author}</span>
+        <div
+          class="flex items-center justify-center gap-2 text-xs font-mono text-purple-400 uppercase tracking-wider"
+        >
+          <span>{formattedDate}</span>
+          <span>•</span>
+          <span>{post.data.author}</span>
         </div>
-        
+
         <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight">
           {post.data.title}
         </h1>
 
         <div class="flex flex-wrap justify-center gap-2 mt-4">
-            {post.data.tags.map((tag: string) => (
-                <span class="px-2 py-1 bg-neutral-900 border border-neutral-800 rounded text-xs text-gray-400 font-mono">
-                    #{tag}
-                </span>
-            ))}
+          {
+            post.data.tags.map((tag: string) => (
+              <span class="px-2 py-1 bg-neutral-900 border border-neutral-800 rounded text-xs text-gray-400 font-mono">
+                #{tag}
+              </span>
+            ))
+          }
         </div>
       </div>
 
-      {post.data.image && (
-        <div class="w-full h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-            <img 
-                src={post.data.image} 
-                alt={post.data.title} 
-                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+      {
+        post.data.image && (
+          <div class="w-full h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
+            <img
+              src={post.data.image}
+              alt={post.data.title}
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
-        </div>
-      )}
+          </div>
+        )
+      }
 
-      <div class="markdown-content max-w-3xl mx-auto text-gray-300 leading-relaxed text-lg">
+      <div
+        class="markdown-content max-w-3xl mx-auto text-gray-300 leading-relaxed text-lg"
+      >
         <Content />
       </div>
-
     </article>
-    
-{/* --- FOOTER DEL POST --- */}
+
+    {/* --- FOOTER DEL POST --- */}
     <hr class="border-neutral-800 my-12" />
-    
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6 p-6 bg-neutral-900/30 rounded-2xl border border-neutral-800">
-        <div class="text-center md:text-left">
-            <p class="text-gray-300 font-bold mb-1">¿Te sirvió este artículo?</p>
-            <p class="text-gray-500 text-sm">Ayúdame compartiéndolo con otros SysAdmins.</p>
-        </div>
 
-        {/* BOTÓN COMPARTIR (Nativo) */}
-        <button 
-            id="share-btn"
-            class="flex items-center gap-3 px-6 py-3 bg-neutral-800 hover:bg-blue-600 hover:text-white text-gray-300 rounded-xl font-mono font-bold transition-all duration-300 border border-neutral-700 hover:border-blue-500 shadow-lg hover:shadow-blue-500/20 group"
+    <div
+      class="flex flex-col md:flex-row justify-between items-center gap-6 p-6 bg-neutral-900/30 rounded-2xl border border-neutral-800"
+    >
+      <div class="text-center md:text-left">
+        <p class="text-gray-300 font-bold mb-1">¿Te sirvió este artículo?</p>
+        <p class="text-gray-500 text-sm">
+          Ayúdame compartiéndolo con otros SysAdmins.
+        </p>
+      </div>
+
+      {/* BOTÓN COMPARTIR (Nativo) */}
+      <button
+        id="share-btn"
+        class="flex items-center gap-3 px-6 py-3 bg-neutral-800 hover:bg-blue-600 hover:text-white text-gray-300 rounded-xl font-mono font-bold transition-all duration-300 border border-neutral-700 hover:border-blue-500 shadow-lg hover:shadow-blue-500/20 group"
+      >
+        <svg
+          class="w-5 h-5 group-hover:scale-110 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
         >
-            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-            </svg>
-            <span id="share-text">Compartir Artículo</span>
-        </button>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+          ></path>
+        </svg>
+        <span id="share-text">Compartir Artículo</span>
+      </button>
     </div>
-
   </main>
 </Layout>
 
 <script>
-    // Lógica del Web Share API
-    const shareBtn = document.getElementById('share-btn');
-    const shareText = document.getElementById('share-text');
+  // Lógica del Web Share API
+  const shareBtn = document.getElementById("share-btn");
+  const shareText = document.getElementById("share-text");
 
-    shareBtn?.addEventListener('click', async () => {
-        const shareData = {
-            title: document.title,
-            text: 'Mira este artículo de @pereidax86 sobre Linux y Ciberseguridad:',
-            url: window.location.href,
-        };
+  shareBtn?.addEventListener("click", async () => {
+    const shareData = {
+      title: document.title,
+      text: "Mira este artículo de @pereidax86 sobre Linux y Ciberseguridad:",
+      url: window.location.href,
+    };
 
-        // 1. Intenta usar el menú nativo del celular (Android/iOS)
-        if (navigator.share) {
-            try {
-                await navigator.share(shareData);
-            } catch (err) {
-                console.log('Compartir cancelado por el usuario');
-            }
-        } else {
-            // 2. Fallback para Desktop: Copiar al portapapeles
-            try {
-                await navigator.clipboard.writeText(window.location.href);
-                
-                // Feedback visual temporal
-                if (shareText) {
-                    const originalText = shareText.innerText;
-                    shareText.innerText = '✅ ¡Enlace Copiado!';
-                    shareBtn.classList.add('bg-green-600', 'border-green-500', 'text-white');
-                    shareBtn.classList.remove('bg-neutral-800', 'text-gray-300');
-                    
-                    setTimeout(() => {
-                        shareText.innerText = originalText;
-                        shareBtn.classList.remove('bg-green-600', 'border-green-500', 'text-white');
-                        shareBtn.classList.add('bg-neutral-800', 'text-gray-300');
-                    }, 2500);
-                }
-            } catch (err) {
-                console.error('Error al copiar', err);
-            }
+    // 1. Intenta usar el menú nativo del celular (Android/iOS)
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log("Compartir cancelado por el usuario");
+      }
+    } else {
+      // 2. Fallback para Desktop: Copiar al portapapeles
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+
+        // Feedback visual temporal
+        if (shareText) {
+          const originalText = shareText.innerText;
+          shareText.innerText = "✅ ¡Enlace Copiado!";
+          shareBtn.classList.add(
+            "bg-green-600",
+            "border-green-500",
+            "text-white",
+          );
+          shareBtn.classList.remove("bg-neutral-800", "text-gray-300");
+
+          setTimeout(() => {
+            shareText.innerText = originalText;
+            shareBtn.classList.remove(
+              "bg-green-600",
+              "border-green-500",
+              "text-white",
+            );
+            shareBtn.classList.add("bg-neutral-800", "text-gray-300");
+          }, 2500);
         }
-    });
+      } catch (err) {
+        console.error("Error al copiar", err);
+      }
+    }
+  });
 </script>
-
-  </main>
-</Layout>

@@ -1,40 +1,43 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
 	title: string;
 	description?: string;
 }
 
-const { 
-	title, 
-	description = "SysAdmin, Linux & Content Creator. Experto en Ciberseguridad, Red Hat y Open Source." 
+const {
+	title,
+	description = "SysAdmin, Linux & Content Creator. Experto en Ciberseguridad, Red Hat y Open Source.",
 } = Astro.props;
 
 const GA_MEASUREMENT_ID = "G-K51M1B6HWZ";
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://pereidax86.com");
+const canonicalURL = new URL(
+	Astro.url.pathname,
+	Astro.site || "https://pereidax86.com",
+);
 
 // --- SCHEMA JSON-LD (Datos Estructurados para Google) ---
 const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Luis Pereida",
-  "url": "https://pereidax86.com",
-  "image": "https://pereidax86.com/og-image.png",
-  "jobTitle": "SysAdmin & Cybersecurity Specialist",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "SysAdminCtl Services"
-  },
-  "sameAs": [
-    "https://www.linkedin.com/in/pereidax86",
-    "https://twitter.com/pereidax86",
-    "https://github.com/pereidax86",
-    "https://tiktok.com/@pereidax86",
-    "https://instagram.com/pereidax86"
-  ],
-  "description": description
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Luis Pereida",
+	url: "https://pereidax86.com",
+	image: "https://pereidax86.com/og-image.png",
+	jobTitle: "SysAdmin & Cybersecurity Specialist",
+	worksFor: {
+		"@type": "Organization",
+		name: "SysAdminCtl Services",
+	},
+	sameAs: [
+		"https://www.linkedin.com/in/pereidax86",
+		"https://twitter.com/pereidax86",
+		"https://github.com/pereidax86",
+		"https://tiktok.com/@pereidax86",
+		"https://instagram.com/pereidax86",
+	],
+	description: description,
 };
 ---
 
@@ -45,15 +48,18 @@ const schemaData = {
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
-        
-        <link rel="canonical" href={canonicalURL} />
-        <link rel="sitemap" href="/sitemap-index.xml" />
-        <meta name="robots" content="index, follow" />
+
+		<link rel="canonical" href={canonicalURL} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<meta name="robots" content="index, follow" />
 
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="author" content="Luis Pereida" />
-		<meta name="keywords" content="Luis Pereida, SysAdmin, Linux, Ciberseguridad, CEH, Red Hat, IBM Cloud, TIC, Open Source" />
+		<meta
+			name="keywords"
+			content="Luis Pereida, SysAdmin, Linux, Ciberseguridad, CEH, Red Hat, IBM Cloud, TIC, Open Source"
+		/>
 
 		<meta property="og:type" content="profile" />
 		<meta property="og:url" content={canonicalURL} />
@@ -67,39 +73,106 @@ const schemaData = {
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content="/og-image.png" />
 
-		<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(schemaData)}
+		/>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Rubik:wght@400;500;700;800&display=swap"
+			rel="stylesheet"
+		/>
 
-		<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+		<script
+			async
+			src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+		></script>
 		<script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
 			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', GA_MEASUREMENT_ID);
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+			gtag("config", GA_MEASUREMENT_ID);
 		</script>
 	</head>
-	
-	<body class="bg-neutral-950 text-gray-200 font-sans antialiased min-h-screen flex flex-col items-center selection:bg-blue-500 selection:text-white">
-        <div class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        
+
+	<body
+		class="bg-neutral-950 text-gray-200 font-sans antialiased min-h-screen flex flex-col items-center selection:bg-blue-500 selection:text-white"
+	>
+		<div
+			class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+		>
+		</div>
+
 		<slot />
+
+		{/* BOTÓN SCROLL TOP */}
+		<button
+			id="scroll-top-btn"
+			aria-label="Volver arriba"
+			class="fixed bottom-8 right-8 p-3 bg-neutral-900/80 hover:bg-blue-600 text-white rounded-full shadow-lg border border-neutral-700 hover:border-blue-500 transition-all duration-300 transform translate-y-20 opacity-0 z-50 backdrop-blur-sm group"
+		>
+			<svg
+				class="w-6 h-6 group-hover:-translate-y-1 transition-transform"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+			</svg>
+		</button>
+
+		<script>
+			const scrollBtn = document.getElementById("scroll-top-btn");
+
+			window.addEventListener("scroll", () => {
+				if (window.scrollY > 300) {
+					scrollBtn?.classList.remove("translate-y-20", "opacity-0");
+					scrollBtn?.classList.add("translate-y-0", "opacity-100");
+				} else {
+					scrollBtn?.classList.add("translate-y-20", "opacity-0");
+					scrollBtn?.classList.remove("translate-y-0", "opacity-100");
+				}
+			});
+
+			scrollBtn?.addEventListener("click", () => {
+				window.scrollTo({
+					top: 0,
+					behavior: "smooth",
+				});
+			});
+		</script>
 	</body>
 </html>
 
 <style is:global>
-    :root {
-        --font-rubik: 'Rubik', system-ui, sans-serif;
-        --font-jetbrains: 'JetBrains Mono', monospace;
-    }
-    body { font-family: var(--font-rubik); }
-    .font-mono { font-family: var(--font-jetbrains) !important; }
+	:root {
+		--font-rubik: "Rubik", system-ui, sans-serif;
+		--font-jetbrains: "JetBrains Mono", monospace;
+	}
+	body {
+		font-family: var(--font-rubik);
+	}
+	.font-mono {
+		font-family: var(--font-jetbrains) !important;
+	}
 
 	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(10px); }
-		to { opacity: 1; transform: translateY(0); }
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 	.animate-fade-in {
 		animation: fadeIn 0.8s ease-out forwards;
