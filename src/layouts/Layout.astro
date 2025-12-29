@@ -36,6 +36,9 @@ const schemaData = {
 		"https://github.com/pereidax86",
 		"https://tiktok.com/@pereidax86",
 		"https://instagram.com/pereidax86",
+		"https://sessionize.com/pereidax86/",
+		"https://www.twitch.tv/pereidax86",
+		"https://www.facebook.com/people/pereidax86/61559816602008",
 	],
 	description: description,
 };
@@ -96,6 +99,22 @@ const schemaData = {
 			}
 			gtag("js", new Date());
 			gtag("config", GA_MEASUREMENT_ID);
+		</script>
+
+		{/* METRICOOL TRACKER */}
+		<script is:inline>
+			function loadScript(a) {
+				var b = document.getElementsByTagName("head")[0],
+					c = document.createElement("script");
+				((c.type = "text/javascript"),
+					(c.src = "https://tracker.metricool.com/resources/be.js"),
+					(c.onreadystatechange = a),
+					(c.onload = a),
+					b.appendChild(c));
+			}
+			loadScript(function () {
+				beTracker.t({ hash: "fbb093ef437984ba1efc0c70a8bd9815" });
+			});
 		</script>
 	</head>
 
