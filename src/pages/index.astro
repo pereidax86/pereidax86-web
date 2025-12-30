@@ -31,14 +31,12 @@ import Layout from "../layouts/Layout.astro";
 // --- CONFIGURACIÓN ---
 const GRAVATAR_HASH = "4949755b64eb223f0fa2b210aaf9707c";
 const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=400`;
-// NOTA: En tu LinkedIn tienes otro correo. ¿Cuál prefieres usar aquí?
-// Dejé el de pereidax86, pero cámbialo si prefieres el de sysadminctl.services
 const EMAIL_CONTACTO = "luis@pereidax86.com";
 
 // --- DATOS DEL PERFIL ---
 const pageTitle = "Luis Pereida | @pereidax86";
 const bioText =
-    "Ingeniero en Sistemas y Maestro en TIC. Me apasiona el Open Source y desmitificar la tecnología. Comparto lo que sé sobre Linux, Ciberseguridad y todo lo que ocurre detrás de una terminal de pantalla negra y letras blancas.";
+    "Ingeniero en Sistemas y Maestro en TIC. Me apasiona el Open Source y desmitificar la tecnología. Comparto lo que sé sobre Linux, Ciberseguridad, Inteligencia Artificial y todo lo que ocurre detrás de una terminal de pantalla negra y letras blancas.";
 const tiktokFollowers = "744";
 
 const techStack = [
@@ -132,14 +130,16 @@ const certBottom = {
                     Luis Pereida
                 </h1>
                 <p
-                    class="text-lg md:text-2xl text-blue-400 font-mono font-bold text-center mt-2"
+                    class="text-lg md:text-2xl text-blue-400 font-mono font-bold text-center mt-2 hover:text-white transition-colors duration-500 cursor-default"
+                    style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);"
                 >
                     y hago ciberseguridad para todos
                 </p>
                 <p
-                    class="text-base text-gray-400/80 font-mono mt-2 tracking-wide"
+                    class="text-base text-gray-400/80 font-mono mt-2 tracking-wide h-6 flex items-center gap-1"
                 >
-                    @pereidax86
+                    <span id="typewriter" class="text-gray-300"></span><span
+                        class="animate-pulse bg-gray-300 w-2 h-4 block"></span>
                 </p>
 
                 {/* STATUS BAR (CISSP) */}
@@ -177,6 +177,19 @@ const certBottom = {
                     }
                 </div>
             </div>
+        </div>
+
+        <hr class="w-full border-neutral-800/50" />
+
+        {/* --- FILOSOFÍA (Fun Fact) --- */}
+        <div
+            class="w-full bg-neutral-900/30 border-l-4 border-purple-600 rounded-r-xl p-6 italic text-gray-400 text-sm leading-relaxed"
+        >
+            <span
+                class="block text-purple-400 font-bold text-xs not-italic mb-1 uppercase tracking-wider"
+                >Mi Filosofía</span
+            >
+            "{philosophy}"
         </div>
 
         {/* --- CERTIFICACIONES --- */}
@@ -278,19 +291,6 @@ const certBottom = {
                     >
                 </div>
             </div>
-        </div>
-
-        <hr class="w-full border-neutral-800/50" />
-
-        {/* --- FILOSOFÍA (Fun Fact) --- */}
-        <div
-            class="w-full bg-neutral-900/30 border-l-4 border-purple-600 rounded-r-xl p-6 italic text-gray-400 text-sm leading-relaxed"
-        >
-            <span
-                class="block text-purple-400 font-bold text-xs not-italic mb-1 uppercase tracking-wider"
-                >Mi Filosofía</span
-            >
-            "{philosophy}"
         </div>
 
         {/* --- REDES SOCIALES --- */}
@@ -598,4 +598,22 @@ const certBottom = {
             </p>
         </footer>
     </main>
+    <script>
+        const text = "@pereidax86";
+        const typewriter = document.getElementById("typewriter");
+        let i = 0;
+
+        function type() {
+            if (i < text.length) {
+                if (typewriter) {
+                    typewriter.innerHTML += text.charAt(i);
+                }
+                i++;
+                setTimeout(type, 100);
+            }
+        }
+
+        // Iniciar animación después de un breve delay
+        setTimeout(type, 500);
+    </script>
 </Layout>
