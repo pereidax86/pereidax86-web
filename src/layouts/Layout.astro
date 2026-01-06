@@ -5,12 +5,16 @@ interface Props {
 	title: string;
 	description?: string;
 	robots?: string;
+	image?: string;
+	type?: string;
 }
 
 const {
 	title,
 	description = "Ingeniero en Sistemas y Maestro en TIC. Desmitificando la tecnología con Open Source, Linux y Ciberseguridad. Tutoriales y guías para profesionales y entusiastas.",
 	robots = "index, follow",
+	image = "/og-image.png",
+	type = "profile",
 } = Astro.props;
 
 const GA_MEASUREMENT_ID = "G-VV212086YH";
@@ -66,17 +70,17 @@ const schemaData = {
 			content="Luis Pereida, SysAdmin, Linux, Ciberseguridad, CEH, Red Hat, IBM Cloud, TIC, Open Source, Python, Automation, DevOps, Tutoriales Tecnológicos"
 		/>
 
-		<meta property="og:type" content="profile" />
+		<meta property="og:type" content={type} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content="/og-image.png" />
+		<meta property="og:image" content={new URL(image, Astro.url)} />
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:creator" content="@pereidax86" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content="/og-image.png" />
+		<meta name="twitter:image" content={new URL(image, Astro.url)} />
 
 		<script
 			type="application/ld+json"
