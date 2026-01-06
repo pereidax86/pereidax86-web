@@ -4,11 +4,13 @@ import "../styles/global.css";
 interface Props {
 	title: string;
 	description?: string;
+	robots?: string;
 }
 
 const {
 	title,
 	description = "Ingeniero en Sistemas y Maestro en TIC. Desmitificando la tecnología con Open Source, Linux y Ciberseguridad. Tutoriales y guías para profesionales y entusiastas.",
+	robots = "index, follow",
 } = Astro.props;
 
 const GA_MEASUREMENT_ID = "G-VV212086YH";
@@ -54,7 +56,7 @@ const schemaData = {
 
 		<link rel="canonical" href={canonicalURL} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta name="robots" content="index, follow" />
+		<meta name="robots" content={robots} />
 
 		<title>{title}</title>
 		<meta name="description" content={description} />
