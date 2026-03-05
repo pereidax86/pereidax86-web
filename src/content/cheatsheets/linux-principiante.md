@@ -14,6 +14,8 @@ printable: true
 
 ## 🚀 Introducción: Perdiendo el miedo
 
+<img src="/images/cheatsheets/linux-supervivencia.png" alt="Guía de supervivencia en Linux" style="float: right; width: 35%; margin: 0 0 20px 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+
 **¡Felicidades!** Que estés leyendo esto significa que te has animado a empezar a usar Linux, y eso es algo **muy bueno**. Sé que al principio puede parecer algo complicado, como si solo los expertos con barbas largas y camisetas de Tux (el pingüinito de linux, para los compas) pudieran usarlo. Además, si has buscado ayuda en foros o redes sociales, probablemente te encontraste con usuarios... digamos, poco amigables. Es común que los más inexpertos sean los más tóxicos (paradójicamente), pero también hay mucha gente buena onda que ayuda por el puro espíritu de la comunidad. No estás solo.
 
 **Pero tranquilo, ya diste el primer paso.** Linux no es complicado, simplemente funciona diferente a lo que estás acostumbrado. Es como mudarte a una ciudad nueva: al principio todo parece extraño, pero con el tiempo te das cuenta de que solo son costumbres diferentes.
