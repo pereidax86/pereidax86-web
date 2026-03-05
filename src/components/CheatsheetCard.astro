@@ -1,0 +1,68 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    difficulty: "principiante" | "intermedio" | "avanzado";
+    icon: string;
+    slug: string;
+    tags: string[];
+    shortName?: string; // Nombre corto opcional (ej: "LINUX", "ANSIBLE")
+}
+
+const { title, description, difficulty, icon, slug, tags, shortName } =
+    Astro.props;
+
+// Usar shortName si existe, sino extraer de title
+const displayName =
+    shortName || title.split(" ").pop()?.toUpperCase() || title.toUpperCase();
+
+// Color mapping por dificultad
+const difficultyColors = {
+    principiante: {
+        bg: "bg-green-500/10",
+        border: "border-green-500/30",
+        text: "text-green-400",
+    },
+    intermedio: {
+        bg: "bg-yellow-500/10",
+        border: "border-yellow-500/30",
+        text: "text-yellow-400",
+    },
+    avanzado: {
+        bg: "bg-red-500/10",
+        border: "border-red-500/30",
+        text: "text-red-400",
+    },
+};
+
+const colors = difficultyColors[difficulty];
+const difficultyLabel =
+    difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+---
+
+<a href={`/cheatsheets/${slug}`} class="group block w-full">
+    <article
+        class="h-full bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 hover:border-blue-500/50 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)] transition-all duration-300 flex flex-col items-center justify-center gap-4"
+    >
+        <!-- Ícono grande -->
+        <div
+            class="text-7xl group-hover:scale-110 transition-transform duration-300"
+        >
+            {icon}
+        </div>
+
+        <!-- Nombre corto en mayúsculas -->
+        <h3
+            class="text-3xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight"
+        >
+            {displayName}
+        </h3>
+
+        <!-- Badge de dificultad -->
+        <span
+            class={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider ${colors.bg} ${colors.border} ${colors.text} border`}
+        >
+            {difficultyLabel}
+        </span>
+    </article>
+</a>

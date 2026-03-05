@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import FloatingBanner from "../components/FloatingBanner.astro";
 
 interface Props {
 	title: string;
@@ -133,6 +134,8 @@ const schemaData = {
 		</div>
 
 		<slot />
+
+		<FloatingBanner client:idle />
 
 		{/* BOTÓN SCROLL TOP */}
 		<button

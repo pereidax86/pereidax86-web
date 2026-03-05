@@ -1,0 +1,162 @@
+---
+// src/components/FloatingBanner.astro
+
+const socialNetworks = [
+    {
+        name: "TikTok",
+        url: "https://tiktok.com/@pereidax86",
+        color: "border-pink-500",
+        textColor: "text-pink-500",
+        cta: "Sígueme en TikTok",
+    },
+    {
+        name: "YouTube",
+        url: "https://youtube.com/@pereidax86",
+        color: "border-red-600",
+        textColor: "text-red-600",
+        cta: "Suscríbete en YouTube",
+    },
+    {
+        name: "Instagram",
+        url: "https://instagram.com/pereidax86",
+        color: "border-purple-500",
+        textColor: "text-purple-500",
+        cta: "Sígueme en Instagram",
+    },
+    {
+        name: "LinkedIn",
+        url: "https://linkedin.com/in/pereidax86",
+        color: "border-blue-600",
+        textColor: "text-blue-600",
+        cta: "Conecta en LinkedIn",
+    },
+    {
+        name: "Twitch",
+        url: "https://twitch.tv/pereidax86",
+        color: "border-purple-600",
+        textColor: "text-purple-600",
+        cta: "Sígueme en Twitch",
+    },
+];
+
+const pathname = Astro.url.pathname;
+const isHome = pathname === "/" || pathname === "";
+---
+
+{
+  !isHome && (
+    <div
+        id="floating-banner"
+        class="fixed bottom-4 left-4 z-50 hidden flex-row items-center gap-4 bg-neutral-900/95 backdrop-blur-md border border-neutral-800 p-4 pr-8 rounded-2xl shadow-2xl transition-all duration-[2000ms] ease-out translate-y-10 opacity-0 max-w-sm"
+    >
+    <!-- Botón de Cerrar -->
+    <button
+        id="close-banner"
+        class="absolute -top-3 -right-3 bg-neutral-800 text-gray-400 hover:text-white hover:bg-red-500/20 hover:border-red-500/50 rounded-full p-1.5 border border-neutral-700 shadow-md transition-all"
+        aria-label="Cerrar"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+
+    <!-- Video Circular -->
+    <div class="relative w-20 h-20 shrink-0">
+        <div
+            id="video-border"
+            class="absolute -inset-1 rounded-full border-2 animate-pulse"
+        >
+        </div>
+        <div
+            class="w-full h-full rounded-full overflow-hidden border-2 border-neutral-900 bg-black shadow-inner"
+        >
+            <video
+                src="/video/subscribete.mp4"
+                class="w-full h-full object-cover transform scale-110"
+                autoplay
+                loop
+                muted
+                playsinline></video>
+        </div>
+    </div>
+
+    <!-- Texto y CTA -->
+    <div class="flex flex-col max-w-[240px]">
+        <p class="text-sm text-gray-300 font-medium leading-tight mb-1.5">
+            ¿Quieres seguir aprendiendo?
+        </p>
+        <a
+            id="social-link"
+            href="#"
+            target="_blank"
+            class="text-base font-bold hover:underline decoration-2 underline-offset-2 transition-all leading-snug"
+        >
+            <!-- Se llena con JS -->
+        </a>
+        <p class="text-xs text-gray-400 leading-tight mt-1">
+            y no te pierdas nada.
+        </p>
+    </div>
+</div>
+  )
+}
+
+<script define:vars={{ socialNetworks }}>
+    const banner = document.getElementById("floating-banner");
+    const closeBtn = document.getElementById("close-banner");
+    const socialLink = document.getElementById("social-link");
+    const videoBorder = document.getElementById("video-border");
+    
+    // Configuración
+    const BANNER_DELAY = 5000; // 5 segundos
+    const shouldShow = true;
+
+    if (shouldShow) {
+        // Seleccionar red social aleatoria
+        const randomSocial =
+            socialNetworks[Math.floor(Math.random() * socialNetworks.length)];
+
+        // Configurar contenido
+        if (socialLink && videoBorder) {
+            socialLink.href = randomSocial.url;
+            socialLink.textContent = randomSocial.cta;
+            socialLink.classList.add(randomSocial.textColor);
+            videoBorder.classList.add(randomSocial.color);
+        }
+
+        // Mostrar baner con delay
+        setTimeout(() => {
+            if (banner) {
+                banner.classList.remove("hidden");
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        banner.classList.remove("translate-y-10", "opacity-0");
+                    });
+                });
+            }
+        }, BANNER_DELAY);
+    }
+
+    // Manejar cierre
+    if (closeBtn && banner) {
+        closeBtn.addEventListener("click", () => {
+            // Ocultar visualmente
+            banner.classList.add("translate-y-20", "opacity-0");
+
+            // Esperar animación y ocultar del DOM
+            setTimeout(() => {
+                banner.classList.add("hidden");
+            }, 500);
+        });
+    }
+</script>

@@ -1,0 +1,92 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import CheatsheetCard from "../../components/CheatsheetCard.astro";
+
+const allCheatsheets = await getCollection("cheatsheets");
+const sortedCheatsheets = allCheatsheets.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const pageTitle = "Guías Rápidas de Supervivencia | @pereidax86";
+const pageDescription =
+    "Aprende lo esencial sin el miedo existencial. Guías prácticas, directas y con ejercicios para dominar Linux, Ansible, Docker y más.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <main class="w-full max-w-4xl px-6 py-12 mx-auto animate-fade-in">
+        <!-- Botón Volver -->
+        <a href="/" class="inline-flex items-center gap-2 group mb-8">
+            <button
+                class="flex items-center gap-2 px-4 py-2 bg-neutral-900/50 hover:bg-neutral-800 text-gray-400 hover:text-white rounded-lg font-mono text-sm transition-all border border-neutral-800 hover:border-blue-500/50 shadow-sm group-hover:shadow-blue-500/10"
+            >
+                <span class="group-hover:-translate-x-1 transition-transform"
+                    >←</span
+                >
+                Volver al Inicio
+            </button>
+        </a>
+
+        <!-- Header -->
+        <div class="text-center space-y-4 w-full mb-12">
+            <h1
+                class="text-4xl md:text-5xl font-extrabold text-white tracking-tight"
+            >
+                ⚡ Guías Rápidas de Supervivencia
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Aprende lo esencial sin el miedo existencial. Todo con ejemplos
+                prácticos, ejercicios y hasta chistes malos. Imprimible para
+                llevar a donde sea.
+            </p>
+        </div>
+
+        <!-- Filtros por dificultad (opcional para futuro) -->
+        <div class="w-full flex justify-center gap-3 flex-wrap">
+            <span
+                class="px-4 py-2 rounded-full bg-neutral-900/50 border border-neutral-800 text-gray-400 text-sm font-mono"
+            >
+                Todas las guías
+            </span>
+        </div>
+
+        <!-- Grid de cheatsheets -->
+        {
+            sortedCheatsheets.length > 0 ? (
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {sortedCheatsheets.map((cheatsheet) => (
+                        <CheatsheetCard
+                            title={cheatsheet.data.title}
+                            description={cheatsheet.data.description}
+                            difficulty={cheatsheet.data.difficulty}
+                            icon={cheatsheet.data.icon}
+                            slug={cheatsheet.slug}
+                            tags={cheatsheet.data.tags}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div class="w-full text-center py-12">
+                    <p class="text-gray-500 font-mono">Próximamente... 🚀</p>
+                </div>
+            )
+        }
+    </main>
+</Layout>
+
+<style>
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.6s ease-out;
+    }
+</style>

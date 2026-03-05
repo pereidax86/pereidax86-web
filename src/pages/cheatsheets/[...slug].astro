@@ -1,0 +1,758 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const cheatsheetEntries = await getCollection("cheatsheets");
+    return cheatsheetEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const GRAVATAR_HASH = "4949755b64eb223f0fa2b210aaf9707c";
+const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=100`;
+---
+
+<Layout
+    title={`${entry.data.title} | @pereidax86`}
+    description={entry.data.description}
+    image={entry.data.image}
+    type="article"
+>
+    <!-- Print Header (solo visible al imprimir) -->
+    <div class="print-header">
+        <div
+            class="flex items-center justify-between p-4 border-b-2 border-neutral-300"
+        >
+            <div class="flex items-center gap-3">
+                <img
+                    src={GRAVATAR_URL}
+                    alt="@pereidax86"
+                    class="w-12 h-12 rounded-full"
+                />
+                <div>
+                    <div class="font-bold text-lg">@pereidax86</div>
+                    <div class="text-sm text-gray-600">pereidax86.com</div>
+                </div>
+            </div>
+            <div class="text-right text-sm text-gray-600">
+                {entry.data.title}
+            </div>
+        </div>
+    </div>
+
+    <main class="w-full max-w-4xl px-6 py-8 mx-auto">
+        <!-- Botón Volver -->
+        <a
+            href="/cheatsheets"
+            class="inline-flex items-center gap-2 group mb-6"
+        >
+            <button
+                class="flex items-center gap-2 px-4 py-2 bg-neutral-900/50 hover:bg-neutral-800 text-gray-400 hover:text-white rounded-lg font-mono text-sm transition-all border border-neutral-800 hover:border-blue-500/50 shadow-sm group-hover:shadow-blue-500/10"
+            >
+                <span class="group-hover:-translate-x-1 transition-transform"
+                    >←</span
+                >
+                Volver a las guías
+            </button>
+        </a>
+
+        <!-- Header -->
+        <header class="mb-2 space-y-6">
+            <div class="flex items-start gap-6">
+                <div class="text-6xl">{entry.data.icon}</div>
+                <div class="flex-1 space-y-3">
+                    <h1
+                        class="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
+                    >
+                        {entry.data.title}
+                    </h1>
+                    {
+                        entry.data.subtitle && (
+                            <p class="text-lg text-gray-400 italic">
+                                {entry.data.subtitle}
+                            </p>
+                        )
+                    }
+                    <p class="text-gray-300">
+                        {entry.data.description}
+                    </p>
+                </div>
+            </div>
+        </header>
+    </main>
+
+    <!-- Metadata - Sticky Bar (Outside main for proper sticky behavior) -->
+    <div
+        class="sticky top-0 z-20 flex flex-wrap items-center gap-4 px-6 py-3 border-b border-neutral-800 bg-black/95 backdrop-blur-sm no-print w-full"
+    >
+        <span
+            class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-mono uppercase"
+        >
+            {entry.data.difficulty}
+        </span>
+        <div class="flex-1"></div>
+
+        <!-- Botones de acción -->
+        <div class="flex gap-2">
+            <button
+                id="toc-toggle-desktop"
+                class="hidden lg:flex px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-700 text-white hover:bg-neutral-800 hover:border-blue-500/50 transition-all items-center gap-2 text-sm font-mono"
+            >
+                <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                Índice
+            </button>
+            <button
+                id="share-btn"
+                class="px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-700 text-white hover:bg-neutral-800 hover:border-blue-500/50 transition-all flex items-center gap-2 text-sm font-mono"
+            >
+                <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                    ></path>
+                </svg>
+                <span id="share-text">Compartir</span>
+            </button>
+
+            <button
+                onclick="window.print()"
+                class="px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-700 text-white hover:bg-neutral-800 hover:border-blue-500/50 transition-all flex items-center gap-2 text-sm font-mono"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+                    ></path>
+                </svg>
+                Imprimir PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Content Area: Expanded width for better use of space on Desktop -->
+    <main class="w-full max-w-7xl px-6 pb-12 mx-auto">
+        <!-- Layout con TOC Sidebar (Desktop/Tablet) y Accordion (Mobile) -->
+        <div class="flex flex-col lg:flex-row gap-8 relative">
+            <!-- TOC Mobile (Accordion) -->
+            <div class="lg:hidden w-full mb-6">
+                <button
+                    id="toc-toggle"
+                    class="w-full flex items-center justify-between px-4 py-3 bg-neutral-900/50 border border-neutral-800 rounded-lg hover:border-blue-500/50 transition-all"
+                >
+                    <span
+                        class="font-mono text-sm text-white flex items-center gap-2"
+                    >
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        Contenido
+                    </span>
+                    <svg
+                        id="toc-icon"
+                        class="w-5 h-5 text-gray-400 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <nav
+                    id="toc-mobile"
+                    class="hidden mt-2 p-4 bg-neutral-900/30 border border-neutral-800 rounded-lg"
+                >
+                    <!-- TOC links will be injected here by JS -->
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1 min-w-0">
+                <div
+                    class="markdown-content text-gray-300 leading-relaxed text-lg"
+                >
+                    <Content />
+                </div>
+            </div>
+
+            <!-- TOC Sidebar (Desktop/Tablet) - Floating Overlay -->
+            <aside
+                id="toc-sidebar"
+                class="hidden fixed right-8 top-24 z-50 w-72 h-[calc(100vh-8rem)] transition-all duration-300 transform translate-x-4"
+            >
+                <nav
+                    id="toc-desktop"
+                    class="sticky top-0 w-full h-full overflow-y-auto p-6 bg-neutral-900/95 backdrop-blur-xl border border-neutral-700/50 rounded-2xl shadow-2xl shadow-black/50 scrollbar-hide"
+                >
+                    <h3
+                        class="text-sm font-bold text-white mb-3 font-mono uppercase tracking-wider"
+                    >
+                        Contenido
+                    </h3>
+                    <!-- TOC links will be injected here by JS -->
+                </nav>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer
+            class="mt-16 pt-8 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4 no-print"
+        >
+            <a
+                href="/cheatsheets"
+                class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-mono text-sm transition-colors"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Ver todas las guías</span>
+            </a>
+
+            <div class="flex items-center gap-3 text-sm text-gray-500">
+                <span>Compartir:</span>
+                <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(entry.data.title)}&url=${encodeURIComponent(`https://pereidax86.com/cheatsheets/${entry.slug}`)}`}
+                    target="_blank"
+                    class="hover:text-blue-400 transition-colors"
+                >
+                    Twitter
+                </a>
+                <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://pereidax86.com/cheatsheets/${entry.slug}`)}`}
+                    target="_blank"
+                    class="hover:text-blue-400 transition-colors"
+                >
+                    Facebook
+                </a>
+            </div>
+        </footer>
+    </main>
+</Layout>
+
+<style is:global>
+    /* Estilos para impresión */
+    @media print {
+        /* Ocultar elementos UI */
+        .no-print,
+        nav,
+        footer:not(.print-footer) {
+            display: none !important;
+        }
+
+        /* Mostrar header de impresión */
+        .print-header {
+            display: block !important;
+        }
+
+        /* Ajustes de página */
+        @page {
+            margin: 2cm;
+            size: A4;
+        }
+
+        /* Fondo blanco y texto negro */
+        body {
+            background: white !important;
+            color: black !important;
+        }
+
+        main {
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+
+        /* Títulos en negro */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: black !important;
+            page-break-after: avoid;
+        }
+
+        /* Párrafos */
+        p {
+            color: black !important;
+        }
+
+        /* Code blocks legibles */
+        pre,
+        code {
+            background: #f5f5f5 !important;
+            color: #1a1a1a !important;
+            border: 1px solid #ddd !important;
+            page-break-inside: avoid;
+        }
+
+        /* Tablas legibles */
+        table {
+            border: 1px solid #333 !important;
+            page-break-inside: avoid;
+        }
+
+        th {
+            background: #e5e5e5 !important;
+            color: black !important;
+            border: 1px solid #333 !important;
+        }
+
+        td {
+            border: 1px solid #666 !important;
+            color: black !important;
+        }
+
+        /* Evitar cortes de sección */
+        section,
+        article > * {
+            page-break-inside: avoid;
+        }
+
+        /* Links visibles con URLs */
+        a[href^="http"]:after {
+            content: " (" attr(href) ")";
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 3px solid #333 !important;
+            background: #f5f5f5 !important;
+            color: black !important;
+        }
+
+        /* Imágenes */
+        img {
+            max-width: 100%;
+            page-break-inside: avoid;
+        }
+    }
+
+    /* Estilos normales (pantalla) */
+    @media screen {
+        .print-header {
+            display: none;
+        }
+
+        /* Separación visual para H3s (Temas nuevos) */
+        .markdown-content h3 {
+            border-top: 1px solid rgba(163, 163, 163, 0.2); /* Neutral-400 opacity 20% */
+            padding-top: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Separación MÁS FUERTE y ELEGANTE para H2s (Grandes Secciones) */
+        .markdown-content h2 {
+            border-top: 1px solid rgba(59, 130, 246, 0.4); /* Blue-500 opacity 40% - Color de acento */
+            padding-top: 3rem;
+            margin-top: 4rem;
+            /* Asegurar que el primero no tenga borde extra si está al inicio */
+            &:first-child {
+                border-top: none;
+                padding-top: 0;
+            }
+        }
+
+        /* Evitar separación en el primer H3 si está justo después de un H2 o al inicio */
+        .markdown-content h2 + h3,
+        .markdown-content h3:first-child {
+            border-top: none;
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    // Lógica del Web Share API para cheatsheets
+    const shareBtn = document.getElementById("share-btn");
+    const shareText = document.getElementById("share-text");
+
+    shareBtn?.addEventListener("click", async () => {
+        const shareData = {
+            title: document.title,
+            text: "Mira esta guía de @pereidax86:",
+            url: window.location.href,
+        };
+
+        // 1. Intenta usar el menú nativo del celular (Android/iOS)
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.log("Compartir cancelado por el usuario");
+            }
+        } else {
+            // 2. Fallback para Desktop: Copiar al portapapeles
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+
+                // Feedback visual temporal
+                if (shareText) {
+                    const originalText = shareText.innerText;
+                    shareText.innerText = "✅ ¡Copiado!";
+                    shareBtn.classList.add(
+                        "bg-green-600",
+                        "border-green-500",
+                        "text-white",
+                    );
+                    shareBtn.classList.remove(
+                        "bg-neutral-900",
+                        "text-gray-300",
+                    );
+
+                    setTimeout(() => {
+                        shareText.innerText = originalText;
+                        shareBtn.classList.remove(
+                            "bg-green-600",
+                            "border-green-500",
+                            "text-white",
+                        );
+                        shareBtn.classList.add(
+                            "bg-neutral-900",
+                            "text-gray-300",
+                        );
+                    }, 2500);
+                }
+            } catch (err) {
+                console.error("Error al copiar", err);
+            }
+        }
+    });
+</script>
+
+<script>
+    // ============================================
+    // TOC (Table of Contents) Generation & Scroll Spy
+    // ============================================
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const content = document.querySelector(".markdown-content");
+        const tocDesktop = document.getElementById("toc-desktop");
+        const tocMobile = document.getElementById("toc-mobile");
+        const tocToggle = document.getElementById("toc-toggle");
+        const tocIcon = document.getElementById("toc-icon");
+        const tocToggleDesktop = document.getElementById("toc-toggle-desktop");
+        const tocSidebar = document.getElementById("toc-sidebar");
+
+        if (!content) return;
+
+        // Extraer h2 y h3 (títulos principales y comandos)
+        const headings = content.querySelectorAll("h2, h3");
+
+        if (headings.length === 0) {
+            // Si no hay headings, ocultar el TOC
+            if (tocDesktop) tocDesktop.parentElement.style.display = "none";
+            if (tocToggle) tocToggle.parentElement.style.display = "none";
+            if (tocToggleDesktop) tocToggleDesktop.style.display = "none";
+            return;
+        }
+
+        // Generar IDs únicos para cada heading (si no tienen)
+        headings.forEach((heading, index) => {
+            if (!heading.id) {
+                const text = heading.textContent.trim();
+                const id = text
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, "")
+                    .replace(/\s+/g, "-")
+                    .substring(0, 50);
+                heading.id = `${id}-${index}`;
+            }
+        });
+
+        // Generar HTML del TOC
+        const tocHTML = Array.from(headings)
+            .map((heading) => {
+                const level = heading.tagName.toLowerCase();
+                const text = heading.textContent.trim();
+                const id = heading.id;
+
+                // Estilos unicos por nivel: H2 (bold + claro), H3 (indentado + normal)
+                const isH3 = level === "h3";
+                const classes = isH3
+                    ? "ml-4 text-gray-400 font-normal"
+                    : "font-bold text-gray-200";
+
+                return `
+                    <a
+                        href="#${id}"
+                        data-target="${id}"
+                        class="toc-link block py-1.5 px-2 text-sm ${classes} hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors"
+                    >
+                        ${text}
+                    </a>
+                `;
+            })
+            .join("");
+
+        // Insertar TOC en desktop y mobile
+        if (tocDesktop) {
+            const container = document.createElement("div");
+            container.innerHTML = tocHTML;
+            tocDesktop.appendChild(container);
+        }
+        if (tocMobile) {
+            const container = document.createElement("div");
+            container.innerHTML = tocHTML;
+            tocMobile.appendChild(container);
+        }
+
+        // Toggle del accordion mobile
+        if (tocToggle && tocMobile && tocIcon) {
+            tocToggle.addEventListener("click", () => {
+                const isHidden = tocMobile.classList.contains("hidden");
+                tocMobile.classList.toggle("hidden");
+                tocIcon.style.transform = isHidden
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)";
+            });
+        }
+
+        // Toggle del sidebar desktop
+        if (tocToggleDesktop && tocSidebar) {
+            tocToggleDesktop.addEventListener("click", () => {
+                const isHidden = tocSidebar.classList.contains("hidden");
+
+                if (isHidden) {
+                    tocSidebar.classList.remove("hidden");
+                    // Small delay to allow display:block to apply before animating opacity/transform
+                    setTimeout(() => {
+                        tocSidebar.classList.remove(
+                            "translate-x-4",
+                            "opacity-0",
+                        );
+                    }, 10);
+                } else {
+                    tocSidebar.classList.add("translate-x-4", "opacity-0");
+                    setTimeout(() => {
+                        tocSidebar.classList.add("hidden");
+                    }, 300); // Wait for transition
+                }
+
+                // Visual feedback on button
+                tocToggleDesktop.classList.toggle("bg-neutral-800");
+                tocToggleDesktop.classList.toggle("border-blue-500/50");
+            });
+        }
+
+        // Smooth scroll para los links del TOC
+        document.querySelectorAll(".toc-link").forEach((link) => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute("data-target");
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                    // Cerrar accordion mobile después de click
+                    if (tocMobile && !tocMobile.classList.contains("hidden")) {
+                        tocMobile.classList.add("hidden");
+                        if (tocIcon) tocIcon.style.transform = "rotate(0deg)";
+                    }
+                    // Cerrar sidebar desktop después de click
+                    if (
+                        tocSidebar &&
+                        !tocSidebar.classList.contains("hidden")
+                    ) {
+                        tocSidebar.classList.add("translate-x-4", "opacity-0");
+                        setTimeout(() => {
+                            tocSidebar.classList.add("hidden");
+                        }, 300);
+
+                        if (tocToggleDesktop) {
+                            tocToggleDesktop.classList.remove(
+                                "bg-neutral-800",
+                                "border-blue-500/50",
+                            );
+                        }
+                    }
+                }
+            });
+        });
+
+        // Click outside to close (Cerrar al dar clic fuera)
+        document.addEventListener("click", (e) => {
+            if (
+                tocSidebar &&
+                !tocSidebar.classList.contains("hidden") &&
+                !tocSidebar.contains(e.target) &&
+                tocToggleDesktop &&
+                !tocToggleDesktop.contains(e.target)
+            ) {
+                tocSidebar.classList.add("translate-x-4", "opacity-0");
+                setTimeout(() => {
+                    tocSidebar.classList.add("hidden");
+                }, 300);
+
+                if (tocToggleDesktop) {
+                    tocToggleDesktop.classList.remove(
+                        "bg-neutral-800",
+                        "border-blue-500/50",
+                    );
+                }
+            }
+        });
+
+        // Scroll Spy: destacar sección activa
+        const observerOptions = {
+            root: null,
+            rootMargin: "-20% 0px -70% 0px",
+            threshold: 0,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const id = entry.target.id;
+                const tocLinks = document.querySelectorAll(
+                    `.toc-link[data-target="${id}"]`,
+                );
+
+                if (entry.isIntersecting) {
+                    // Remover active de todos
+                    document.querySelectorAll(".toc-link").forEach((link) => {
+                        link.classList.remove(
+                            "text-blue-400",
+                            "bg-blue-500/10",
+                            "font-bold",
+                            "border-l-2",
+                            "border-blue-500",
+                        );
+                        link.classList.add("text-gray-400");
+                    });
+
+                    // Agregar active al actual
+                    tocLinks.forEach((link) => {
+                        link.classList.remove("text-gray-400");
+                        link.classList.add(
+                            "text-blue-400",
+                            "bg-blue-500/10",
+                            "font-bold",
+                            "border-l-2",
+                            "border-blue-500",
+                        );
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observar todos los headings
+        headings.forEach((heading) => observer.observe(heading));
+    });
+
+    // ============================================
+    // Share Button Logic (Web Share API)
+    // ============================================
+
+    const shareBtn = document.getElementById("share-btn");
+    const shareText = document.getElementById("share-text");
+
+    shareBtn?.addEventListener("click", async () => {
+        const shareData = {
+            title: document.title,
+            text: "Mira esta guía de @pereidax86:",
+            url: window.location.href,
+        };
+
+        // 1. Intenta usar el menú nativo del celular (Android/iOS)
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.log("Compartir cancelado por el usuario");
+            }
+        } else {
+            // 2. Fallback para Desktop: Copiar al portapapeles
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+
+                // Feedback visual temporal
+                if (shareText) {
+                    const originalText = shareText.innerText;
+                    shareText.innerText = "✅ ¡Copiado!";
+                    shareBtn.classList.add(
+                        "bg-green-600",
+                        "border-green-500",
+                        "text-white",
+                    );
+                    shareBtn.classList.remove(
+                        "bg-neutral-900",
+                        "text-gray-300",
+                    );
+
+                    setTimeout(() => {
+                        shareText.innerText = originalText;
+                        shareBtn.classList.remove(
+                            "bg-green-600",
+                            "border-green-500",
+                            "text-white",
+                        );
+                        shareBtn.classList.add(
+                            "bg-neutral-900",
+                            "text-gray-300",
+                        );
+                    }, 2500);
+                }
+            } catch (err) {
+                console.error("Error al copiar", err);
+            }
+        }
+    });
+</script>
