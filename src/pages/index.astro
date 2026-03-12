@@ -680,7 +680,7 @@ const certBottom = {
             </div>
         </div>
 
-        {/* --- BLOG Y CONTACTO --- */}
+        {/* --- NAVEGACIÓN PRINCIPAL --- */}
         <div class="w-full pt-4 pb-8 space-y-4">
             <div class="flex gap-4 w-full">
                 <a href="/blog" class="flex-1">
@@ -710,6 +710,14 @@ const certBottom = {
                 </a>
             </div>
 
+            <a href="/presentations" class="block w-full">
+                <button
+                    class="w-full h-full bg-neutral-900 rounded-xl px-4 py-4 flex items-center justify-center gap-2 hover:scale-[1.01] transition-transform text-white font-bold border-2 border-neutral-800 hover:border-purple-500 shadow-md"
+                >
+                    <span class="text-xl">👨‍🏫</span>
+                    <span>Ver Presentaciones</span>
+                </button>
+            </a>
             {/* SECCIÓN CONTACTO*/}
             <div class="pt-4 text-center">
                 <p class="text-sm text-gray-500 mb-3 font-mono">
@@ -745,77 +753,77 @@ const certBottom = {
                 </a>
             </div>
         </div>
-
-        {/* --- GITHUB SNAKE (NUEVO BLOQUE) --- */}
-        <div class="w-full pt-2 pb-8 flex flex-col items-center gap-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-white text-center">
-                Actividad en Código
-            </h2>
-            <div
-                class="w-full flex justify-center bg-neutral-900/30 rounded-xl p-2 border border-neutral-800/50 hover:border-blue-500/20 transition-colors"
-            >
-                <img
-                    src="https://raw.githubusercontent.com/pereidax86/pereidax86/output/github-contribution-grid-snake-dark.svg"
-                    alt="GitHub Snake Animation"
-                    class="w-full max-w-lg opacity-80 hover:opacity-100 transition-opacity duration-500"
-                />
-            </div>
-        </div>
-
-        <footer class="text-gray-600 text-xs font-mono text-center pb-8">
-            <p>© 2025 Luis Pereida.</p>
-            <p class="mt-1">Hecho con Astro 🚀 & Tailwind 🎨</p>
-            <p class="mt-2 text-neutral-700">
-                powered by
-                <a
-                    href="https://sysadminctl.services"
-                    target="_blank"
-                    class="text-blue-500/60 hover:text-blue-400 underline decoration-dotted transition-colors"
-                >
-                    sysadminctl.services🛡️
-                </a>
-            </p>
-        </footer>
     </main>
-    <script>
-        const text = "@pereidax86";
-        const typewriter = document.getElementById("typewriter");
-        let i = 0;
 
-        function type() {
-            if (i < text.length) {
-                if (typewriter) {
-                    typewriter.innerHTML += text.charAt(i);
-                }
-                i++;
-                setTimeout(type, 100);
-            }
-        }
+    {/* --- GITHUB SNAKE (NUEVO BLOQUE) --- */}
+    <div class="w-full pt-2 pb-8 flex flex-col items-center gap-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-white text-center">
+            Actividad en Código
+        </h2>
+        <div
+            class="w-full flex justify-center bg-neutral-900/30 rounded-xl p-2 border border-neutral-800/50 hover:border-blue-500/20 transition-colors"
+        >
+            <img
+                src="https://raw.githubusercontent.com/pereidax86/pereidax86/output/github-contribution-grid-snake-dark.svg"
+                alt="GitHub Snake Animation"
+                class="w-full max-w-lg opacity-80 hover:opacity-100 transition-opacity duration-500"
+            />
+        </div>
+    </div>
 
-        // Iniciar animación después de un breve delay
-        setTimeout(type, 500);
-
-        // --- CAROUSEL LOGIC ---
-        const container = document.getElementById("carousel-container");
-        const prevBtn = document.getElementById("carousel-prev");
-        const nextBtn = document.getElementById("carousel-next");
-
-        if (container && prevBtn && nextBtn) {
-            const scrollAmount = 400; // Ancho aproximado de tarjeta + gap
-
-            prevBtn.addEventListener("click", () => {
-                container.scrollBy({
-                    left: -scrollAmount,
-                    behavior: "smooth",
-                });
-            });
-
-            nextBtn.addEventListener("click", () => {
-                container.scrollBy({
-                    left: scrollAmount,
-                    behavior: "smooth",
-                });
-            });
-        }
-    </script>
+    <footer class="text-gray-600 text-xs font-mono text-center pb-8">
+        <p>© 2025 Luis Pereida.</p>
+        <p class="mt-1">Hecho con Astro 🚀 & Tailwind 🎨</p>
+        <p class="mt-2 text-neutral-700">
+            powered by
+            <a
+                href="https://sysadminctl.services"
+                target="_blank"
+                class="text-blue-500/60 hover:text-blue-400 underline decoration-dotted transition-colors"
+            >
+                sysadminctl.services🛡️
+            </a>
+        </p>
+    </footer>
 </Layout>
+<script>
+    const text = "@pereidax86";
+    const typewriter = document.getElementById("typewriter");
+    let i = 0;
+
+    function type() {
+        if (i < text.length) {
+            if (typewriter) {
+                typewriter.innerHTML += text.charAt(i);
+            }
+            i++;
+            setTimeout(type, 100);
+        }
+    }
+
+    // Iniciar animación después de un breve delay
+    setTimeout(type, 500);
+
+    // --- CAROUSEL LOGIC ---
+    const container = document.getElementById("carousel-container");
+    const prevBtn = document.getElementById("carousel-prev");
+    const nextBtn = document.getElementById("carousel-next");
+
+    if (container && prevBtn && nextBtn) {
+        const scrollAmount = 400; // Ancho aproximado de tarjeta + gap
+
+        prevBtn.addEventListener("click", () => {
+            container.scrollBy({
+                left: -scrollAmount,
+                behavior: "smooth",
+            });
+        });
+
+        nextBtn.addEventListener("click", () => {
+            container.scrollBy({
+                left: scrollAmount,
+                behavior: "smooth",
+            });
+        });
+    }
+</script>

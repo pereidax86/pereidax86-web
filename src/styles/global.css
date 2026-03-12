@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../content/**/*.md";
 
 @theme {}
 

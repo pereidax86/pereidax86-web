@@ -1,0 +1,109 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const presentations = (await getCollection("presentations")).sort(
+    (
+        a: CollectionEntry<"presentations">,
+        b: CollectionEntry<"presentations">,
+    ) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const pageTitle = "Presentaciones | Luis Pereida";
+const pageDesc =
+    "Colección de presentaciones y charlas sobre tecnología, sysadmin y desarrollo.";
+---
+
+<Layout title={pageTitle} description={pageDesc}>
+    <main class="w-full max-w-5xl px-6 py-12 mx-auto animate-fade-in">
+        <a href="/" class="inline-flex items-center gap-2 group mb-8">
+            <button
+                class="flex items-center gap-2 px-4 py-2 bg-neutral-900/50 hover:bg-neutral-800 text-gray-400 hover:text-white rounded-lg font-mono text-sm transition-all border border-neutral-800 hover:border-blue-500/50 shadow-sm group-hover:shadow-blue-500/10"
+            >
+                <span class="group-hover:-translate-x-1 transition-transform"
+                    >←</span
+                >
+                Volver al Inicio
+            </button>
+        </a>
+
+        <div class="text-center mb-16 space-y-4">
+            <h1
+                class="text-4xl md:text-6xl font-extrabold text-white tracking-tight"
+            >
+                Presentaciones
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600"
+                >
+                    Tech
+                </span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                {pageDesc}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                presentations.map((presentation) => (
+                    <a
+                        href={`/presentations/${presentation.slug}`}
+                        class="group relative flex flex-col bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1"
+                    >
+                        <div class="aspect-video w-full overflow-hidden bg-neutral-950 relative flex items-center justify-center">
+                            <span class="text-5xl group-hover:scale-110 transition-transform duration-500">
+                                📽️
+                            </span>
+                            <div class="absolute top-2 right-2 bg-black/70 backdrop-blur-md px-2 py-1 rounded text-xs font-mono text-gray-300 border border-white/10">
+                                {presentation.data.pubDate.toLocaleDateString(
+                                    "es-MX",
+                                    {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                    },
+                                )}
+                            </div>
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="flex gap-2 mb-3">
+                                {presentation.data.tags &&
+                                    presentation.data.tags
+                                        .slice(0, 2)
+                                        .map((tag: string) => (
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-500/20">
+                                                {tag}
+                                            </span>
+                                        ))}
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-blue-400 transition-colors leading-tight">
+                                {presentation.data.title}
+                            </h3>
+
+                            <p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
+                                {presentation.data.description}
+                            </p>
+
+                            <div class="flex items-center text-sm font-mono text-purple-400 group-hover:translate-x-1 transition-transform">
+                                Ver presentación <span class="ml-2">→</span>
+                            </div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+
+        {
+            presentations.length === 0 && (
+                <div class="text-center py-20 border border-dashed border-neutral-800 rounded-2xl">
+                    <p class="text-gray-500 font-mono">
+                        /var/log/messages: No presentations found yet.
+                    </p>
+                </div>
+            )
+        }
+    </main>
+</Layout>

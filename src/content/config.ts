@@ -28,4 +28,15 @@ const cheatsheets = defineCollection({
     }),
 });
 
-export const collections = { blog, cheatsheets };
+const presentations = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        pubDate: z.coerce.date(),
+        author: z.string().default('Luis Pereida'),
+        tags: z.array(z.string()).default([]),
+        draft: z.boolean().optional(),
+    }),
+});
+
+export const collections = { blog, cheatsheets, presentations };

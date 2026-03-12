@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import PresentationLayout from "../../layouts/PresentationLayout.astro";
+
+// Generar rutas estáticas para cada presentación
+export async function getStaticPaths() {
+    const presentations = await getCollection("presentations");
+    return presentations.map((presentation) => ({
+        params: { id: presentation.slug },
+        props: { presentation },
+    }));
+}
+
+type Props = {
+    presentation: CollectionEntry<"presentations">;
+};
+
+const { presentation } = Astro.props;
+const { Content } = await presentation.render();
+---
+
+<PresentationLayout
+    title={`${presentation.data.title} | Presentaciones`}
+    description={presentation.data.description}
+>
+    <!-- Renderizamos el contenido Markdown -->
+    <Content />
+</PresentationLayout>

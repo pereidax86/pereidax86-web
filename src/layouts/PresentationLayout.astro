@@ -1,0 +1,429 @@
+---
+import "../styles/global.css";
+const SITE_TITLE = "Presentaciones | Luis Pereida";
+const SITE_DESCRIPTION = "Colección de presentaciones.";
+
+export interface Props {
+    title?: string;
+    description?: string;
+}
+
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+---
+
+<!doctype html>
+<html
+    lang="es"
+    class="dark scroll-smooth h-full selection:bg-blue-500 selection:text-white"
+>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Rubik:wght@400;500;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <style is:global>
+            .slide {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: none !important; /* Force hide by default against global resets */
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 4rem;
+                font-size: 1.5rem; /* Base presentation font size */
+                font-family: "Rubik", system-ui, sans-serif;
+                text-align: center;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            .slide.active {
+                display: flex !important;
+                opacity: 1;
+            }
+
+            /* Inherit global theme styling for presentation markdown */
+            .slide h1 {
+                font-size: 3.5rem;
+                font-weight: 800; /* extrabold */
+                margin-bottom: 2rem;
+                color: #ffffff;
+                letter-spacing: -0.025em; /* tracking-tight */
+            }
+            .slide h2 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-top: 1.5rem;
+                margin-bottom: 1.5rem;
+                color: #ffffff;
+                border-left: 4px solid #3b82f6; /* border-blue-500 */
+                padding-left: 1rem;
+                text-align: left;
+                width: 100%;
+                max-width: 80%;
+            }
+            .slide h3 {
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: #f3f4f6; /* gray-100 */
+                text-align: left;
+                width: 100%;
+                max-width: 80%;
+            }
+            .slide p {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 1.5rem;
+                max-width: 80%;
+                line-height: 1.6;
+                color: #d1d5db; /* gray-300 */
+            }
+            .slide ul,
+            .slide ol {
+                width: 100%;
+                max-width: 80%;
+                text-align: left;
+                margin-bottom: 1.5rem;
+                margin-left: 0;
+                margin-right: 0;
+                display: block;
+                padding-left: 2rem;
+                list-style-type: disc;
+                color: #d1d5db; /* gray-300 */
+            }
+            .slide li {
+                margin-bottom: 0.75rem;
+            }
+            .slide li::marker {
+                color: #3b82f6; /* blue-500 */
+            }
+            .slide a {
+                color: #60a5fa; /* blue-400 */
+                text-decoration: underline;
+                text-underline-offset: 4px;
+                text-decoration-color: rgba(
+                    59,
+                    130,
+                    246,
+                    0.3
+                ); /* decoration-blue-500/30 */
+                transition: color 0.2s;
+            }
+            .slide a:hover {
+                color: #93c5fd; /* blue-300 */
+            }
+            .slide img {
+                max-height: 55vh;
+                max-width: 90%;
+                object-fit: contain;
+                border-radius: 0.75rem; /* xl */
+                margin: 0 auto;
+                box-shadow:
+                    0 20px 25px -5px rgba(0, 0, 0, 0.5),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.2); /* 2xl shadow */
+            }
+            .slide pre {
+                font-size: 1.1rem;
+                font-family: "JetBrains Mono", monospace;
+                padding: 1.5rem;
+                border-radius: 0.75rem; /* xl */
+                background-color: #0d1117;
+                border: 1px solid #262626; /* neutral-800 */
+                max-width: 90%;
+                overflow-x: auto;
+                text-align: left;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); /* shadow-xl */
+                margin-bottom: 2rem;
+            }
+            .slide pre code {
+                background: transparent;
+                padding: 0;
+                border: none;
+                color: #d1d5db; /* gray-300 */
+            }
+            .slide code {
+                font-family: "JetBrains Mono", monospace;
+                background-color: #171717; /* bg-neutral-900 */
+                color: #f472b6; /* text-pink-400 */
+                padding: 0.125rem 0.375rem; /* px-1.5 py-0.5 */
+                border-radius: 0.25rem; /* rounded */
+                font-size: 1.2rem;
+                border: 1px solid #262626; /* border-neutral-800 */
+            }
+            .slide blockquote {
+                border-left: 4px solid #a855f7; /* border-purple-500 */
+                padding: 1rem 1.5rem;
+                color: #d1d5db; /* text-gray-300 */
+                font-style: italic;
+                background-color: rgba(
+                    168,
+                    85,
+                    247,
+                    0.1
+                ); /* bg-purple-500/10 */
+                border-radius: 0 0.5rem 0.5rem 0; /* rounded-r-lg */
+                margin-bottom: 2rem;
+                max-width: 80%;
+                text-align: left;
+            }
+            .slide strong {
+                color: #ffffff; /* text-white */
+                font-weight: 700; /* font-bold */
+            }
+
+            /* Navigation Controls */
+            .nav-btn {
+                position: fixed;
+                bottom: 2rem;
+                background: rgba(23, 23, 23, 0.5); /* neutral-900/50 */
+                backdrop-filter: blur(4px); /* backdrop-blur-sm */
+                color: #9ca3af; /* gray-400 */
+                border: 1px solid #262626; /* neutral-800 */
+                border-radius: 0.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                font-family: "JetBrains Mono", monospace;
+                cursor: pointer;
+                z-index: 50;
+                transition: all 0.2s;
+            }
+            .nav-btn:hover {
+                background: #262626; /* neutral-800 */
+                color: #ffffff; /* white */
+                border-color: rgba(59, 130, 246, 0.5); /* blue-500/50 */
+                box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1); /* shadow-blue-500/10 */
+            }
+
+            #prev-btn {
+                left: 2rem;
+            }
+            #next-btn {
+                right: 2rem;
+            }
+
+            #fullscreen-btn {
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: rgba(23, 23, 23, 0.5); /* neutral-900/50 */
+                backdrop-filter: blur(4px);
+                color: #9ca3af;
+                border: 1px solid #262626;
+                border-radius: 0.5rem;
+                padding: 0.5rem;
+                cursor: pointer;
+                z-index: 50;
+                transition: all 0.2s;
+            }
+            #fullscreen-btn:hover {
+                background: #262626;
+                color: #ffffff;
+                border-color: rgba(59, 130, 246, 0.5);
+                box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+            }
+
+            /* Hide the original slot content before processing */
+            #raw-content {
+                display: none;
+            }
+        </style>
+    </head>
+    <body
+        class="bg-neutral-950 text-gray-200 font-sans antialiased h-screen w-screen overflow-hidden flex flex-col selection:bg-blue-500 selection:text-white"
+    >
+        <!-- Dotted grid background overlay -->
+        <div
+            class="fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+        >
+        </div>
+
+        <button id="fullscreen-btn" aria-label="Toggle Fullscreen">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="fullscreen-icon"
+            >
+                <path
+                    id="enter-path"
+                    d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                ></path>
+                <path
+                    id="exit-path"
+                    d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+                    style="display: none;"></path>
+            </svg>
+        </button>
+
+        <div
+            id="presentation-container"
+            class="flex-1 relative w-full h-full z-10"
+        >
+            <!-- Rendered slides will be injected here -->
+        </div>
+
+        <button id="prev-btn" class="nav-btn" aria-label="Previous Slide"
+            >←</button
+        >
+        <button id="next-btn" class="nav-btn" aria-label="Next Slide">→</button>
+
+        <div id="raw-content">
+            <slot />
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const rawContent = document.getElementById("raw-content");
+                const container = document.getElementById(
+                    "presentation-container",
+                );
+                const prevBtn = document.getElementById("prev-btn");
+                const nextBtn = document.getElementById("next-btn");
+                const fullscreenBtn = document.getElementById("fullscreen-btn");
+                const enterPath = document.getElementById("enter-path");
+                const exitPath = document.getElementById("exit-path");
+
+                if (
+                    !rawContent ||
+                    !container ||
+                    !prevBtn ||
+                    !nextBtn ||
+                    !fullscreenBtn
+                )
+                    return;
+
+                // Process raw HTML to split into slides by <hr> tags
+                const nodes = Array.from(rawContent.childNodes);
+                let currentSlide = document.createElement("div");
+                currentSlide.className = "slide";
+
+                nodes.forEach((node) => {
+                    // In markdown, `---` generates an `<hr>` element
+                    if (node.nodeName.toLowerCase() === "hr") {
+                        if (currentSlide.childNodes.length > 0) {
+                            container.appendChild(currentSlide);
+                            currentSlide = document.createElement("div");
+                            currentSlide.className = "slide";
+                        }
+                    } else {
+                        // Clone the node so we preserve the original just in case, or just append
+                        currentSlide.appendChild(node.cloneNode(true));
+                    }
+                });
+
+                // Add the last slide if it contains anything
+                if (currentSlide.childNodes.length > 0) {
+                    container.appendChild(currentSlide);
+                }
+
+                const slides = document.querySelectorAll(".slide");
+                if (slides.length === 0) return;
+
+                let currentSlideIndex = 0;
+
+                function updateSlides() {
+                    slides.forEach((slide, index) => {
+                        if (index === currentSlideIndex) {
+                            slide.classList.add("active");
+                        } else {
+                            slide.classList.remove("active");
+                        }
+                    });
+
+                    // Update button visibility
+                    if (prevBtn)
+                        prevBtn.style.display =
+                            currentSlideIndex === 0 ? "none" : "block";
+                    if (nextBtn)
+                        nextBtn.style.display =
+                            currentSlideIndex === slides.length - 1
+                                ? "none"
+                                : "block";
+                }
+
+                function nextSlide() {
+                    if (currentSlideIndex < slides.length - 1) {
+                        currentSlideIndex++;
+                        updateSlides();
+                    }
+                }
+
+                function prevSlide() {
+                    if (currentSlideIndex > 0) {
+                        currentSlideIndex--;
+                        updateSlides();
+                    }
+                }
+
+                function toggleFullscreen() {
+                    if (!document.fullscreenElement) {
+                        document.documentElement
+                            .requestFullscreen()
+                            .catch((err) => {
+                                console.error(
+                                    `Error attempting to enable fullscreen: ${err.message}`,
+                                );
+                            });
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                }
+
+                // Event Listeners
+                prevBtn.addEventListener("click", prevSlide);
+                nextBtn.addEventListener("click", nextSlide);
+                fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+                // Hide buttons in fullscreen if desired, or toggle icons
+                document.addEventListener("fullscreenchange", () => {
+                    if (document.fullscreenElement) {
+                        fullscreenBtn.style.display = "none"; // hide in fullscreen per request
+                        // enterPath.style.display = 'none';
+                        // exitPath.style.display = 'block';
+                    } else {
+                        fullscreenBtn.style.display = "block"; // show when not in fullscreen
+                        // enterPath.style.display = 'block';
+                        // exitPath.style.display = 'none';
+                    }
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "ArrowRight" || e.key === " ") {
+                        e.preventDefault(); // Prevent scrolling on space
+                        nextSlide();
+                    } else if (e.key === "ArrowLeft") {
+                        e.preventDefault();
+                        prevSlide();
+                    } else if (e.key === "f") {
+                        e.preventDefault();
+                        toggleFullscreen();
+                    }
+                });
+
+                // Initialize
+                updateSlides();
+            });
+        </script>
+    </body>
+</html>
