@@ -1112,12 +1112,29 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
 
 ## 🙏 ¡Muchas Gracias!
 
-<div class="flex flex-col items-center justify-center gap-8 w-full max-w-[95%] mx-auto mt-8 text-center">
+<div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 4rem; width: 100%;">
 
-<div class="flex flex-col items-center gap-1">
-<p class="text-xl xl:text-2xl text-blue-400 font-mono font-bold text-center !mb-0">Yo soy</p>
-<p class="text-5xl xl:text-7xl font-extrabold text-white tracking-tight leading-tight text-center !mb-0">Luis Pereida</p>
-<p class="text-xl xl:text-2xl text-blue-400 font-mono font-bold text-center !mb-0">y hago ciberseguridad para todos</p>
+
+
+<!-- Columna derecha: Avatar badge -->
+<div style="position: relative; width: 10rem; height: 10rem; flex-shrink: 0;">
+<!-- Glow -->
+<div style="position: absolute; inset: -4px; background: linear-gradient(to right, #3b82f6, #9333ea); border-radius: 9999px; filter: blur(8px); opacity: 0.75;"></div>
+<!-- Avatar -->
+<img src="https://www.gravatar.com/avatar/4949755b64eb223f0fa2b210aaf9707c?s=400" alt="Luis Pereida" style="position: relative; width: 100%; height: 100%; border-radius: 9999px; object-fit: cover; background: #171717; border: 4px solid #0a0a0a; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); display: block; margin: 0 !important;">
+<!-- Pulse dot -->
+<div style="position: absolute; bottom: 0.5rem; right: 0.5rem; background: #171717; border-radius: 9999px; padding: 4px; border: 1px solid #404040;">
+<div style="width: 1rem; height: 1rem; background: #3b82f6; border-radius: 9999px; animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;"></div>
+</div>
+</div>
+
+<!-- Columna izquierda: Hero tagline -->
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem;">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; color: #60a5fa; white-space: nowrap;">Yo soy</div>
+<div style="font-family: 'Rubik', sans-serif; font-size: 4rem; font-weight: 800; color: #ffffff; letter-spacing: -0.05em; line-height: 1.1; white-space: nowrap;">Luis Pereida</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; color: #60a5fa; white-space: nowrap;">y hago ciberseguridad para todos</div>
+</div>
+
 </div>
 
 <p class="text-4xl xl:text-5xl font-black text-amber-400 !mb-0 leading-tight">¿Preguntas y Respuestas?</p>
