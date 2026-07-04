@@ -17,7 +17,7 @@ Vamos a explicarlo como se debe, con una analogía de la vida real.
 
 ---
 
-## La analogía: La caja fuerte de grado militar con la nota adhesiva
+## La caja fuerte de grado militar con la nota adhesiva
 
 Imagina que decides proteger las escrituras de tu casa y tus ahorros de toda la vida. Vas a una tienda especializada y compras una caja fuerte de acero reforzado de grado militar. Pesa media tonelada, tiene cerradura biométrica, teclado digital y un sistema de alarma que avisa a la policía si alguien la golpea. La instalas en tu oficina y te sientes el rey de la seguridad.
 
