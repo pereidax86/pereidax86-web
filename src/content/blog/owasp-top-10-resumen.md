@@ -9,7 +9,7 @@ image: "/images/blog/owasp-top-10-resumen.png"
 
 Después de casi un mes de intensos artículos, hemos llegado al verdadero final de nuestra aventura por el mundo de la ciberseguridad web. Quiero tomarme un momento para agradecerte profundamente por haber seguido esta serie. Escribirla ha sido un reto increíble y espero que hayas disfrutado leyéndola tanto como yo disfruté creándola para ti.
 
-Como regalo de despedida, he preparado este *Cheat Sheet* (Guía de referencia rápida). Es un resumen súper rápido, digerible y directo al grano de las 10 vulnerabilidades del OWASP Top 10. ¡Guárdalo en tus marcadores para tu próxima entrevista técnica o revisión de código!
+Como regalo de despedida, he preparado este guía de referencia rápida. Es un resumen súper rápido, digerible y directo al grano de las 10 vulnerabilidades del OWASP Top 10. ¡Guárdalo en tus marcadores para tu próxima entrevista técnica o revisión de código!
 
 ---
 
