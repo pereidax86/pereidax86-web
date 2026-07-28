@@ -4,7 +4,7 @@ description: "La IA va a sustituir muchos trabajos, pero también es la herramie
 pubDate: 2025-12-16
 author: "Luis Pereida"
 tags: ["IA", "Productividad", "Futuro", "Automatización", "Reflexión"]
-image: "/images/blog/ai-enhancement.png"
+image: "../../assets/images/blog/ai-enhancement.png"
 ---
 
 Existe un entendimiento generalizado, y un temor latente, de que la Inteligencia Artificial ha llegado para sustituir muchísimos trabajos realizados por humanos. Y la respuesta corta es: **sí, pero no**.

@@ -4,7 +4,7 @@ description: "Descubre por qué Vi es la navaja suiza de los editores en Linux, 
 pubDate: 2025-01-10
 author: "Luis Pereida"
 tags: ["Linux", "Vi", "Vim", "SysAdmin", "Terminal"]
-image: "/images/blog/vi-editor-esencial.webp"
+image: "../../assets/images/blog/vi-editor-esencial.webp"
 ---
 
 Cuando te aventuras en el mundo de Linux, tarde o temprano te encontrarás con **vi**, uno de los editores de texto más icónicos y poderosos del ecosistema Unix/Linux. Es el editor que parece tener una personalidad propia: minimalista, directo y, a veces, tan desconcertante que te preguntarás si está jugando contigo (spoiler: no, pero a veces lo parece).

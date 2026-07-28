@@ -4,7 +4,7 @@ description: "Descubre el origen, historia y por qué esta famosa lista es la bi
 pubDate: 2026-06-29
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Introduccion"]
-image: "/images/blog/owasp-top-10-introduccion.png"
+image: "../../assets/images/blog/owasp-top-10-introduccion.png"
 ---
 
 Lunes. Ese hermoso día de la semana en el que todos nos levantamos con una taza de café gigante, el alma a medio cargar y la firme convicción de que esta vez sí vamos a terminar todos los pendientes del Jira antes del viernes. Si eres desarrollador, probablemente también comiences el lunes con la mentalidad optimista de: *"Hoy mi código va a compilar a la primera y ningún usuario va a intentar meter un emoji de berenjena en el campo de texto de la edad"*. 

@@ -4,7 +4,7 @@ description: "Aprende a usar --help, man, info y otras herramientas nativas para
 pubDate: 2025-01-03
 author: "Luis Pereida"
 tags: ["Linux", "Terminal", "SysAdmin", "Productividad"]
-image: "/images/blog/ayuda-linux-sin-google.webp"
+image: "../../assets/images/blog/ayuda-linux-sin-google.webp"
 ---
 
 Si hay algo que define a los usuarios de Linux, es su habilidad para resolver problemas. Claro, muchas veces acudimos a "San Google" o a foros como Unix Exchange o Stack Overflow. Pero, ¿y si te dijera que no siempre necesitas salir de tu terminal para obtener ayuda?

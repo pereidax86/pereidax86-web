@@ -4,7 +4,7 @@ description: "Descubre cómo la IA Agente, la ciberseguridad preemptiva y la com
 pubDate: 2025-12-29
 author: "Luis Pereida"
 tags: ["Tecnologia", "IA", "Ciberseguridad", "Futuro", "2026"]
-image: "/images/blog/tendencias-2026.png"
+image: "../../assets/images/blog/tendencias-2026.png"
 ---
 
 El 2026 se perfila como un año de consolidación y evolución acelerada. Ya no estamos hablando de "qué es" la Inteligencia Artificial, sino de "quiénes son" nuestros agentes digitales. Vamos explorando las tendencias que dominarán la conversación tecnológica como una historia de adaptación necesaria.

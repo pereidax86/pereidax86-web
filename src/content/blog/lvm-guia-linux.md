@@ -4,7 +4,7 @@ description: "Descubre qué es LVM, cómo te da flexibilidad infinita para redim
 pubDate: 2026-01-26
 author: "Luis Pereida"
 tags: ["Linux", "LVM", "Almacenamiento", "SysAdmin", "Particiones"]
-image: "/images/blog/lvm-linux-magia.webp"
+image: "../../assets/images/blog/lvm-linux-magia.webp"
 ---
 
 En el [post anterior](/blog/que-es-raid-guia-linux) hablamos de RAID, esa "armadura" que protege tus datos cuando un disco duro decide jubilarse sin previo aviso. Aprendiste a crear arrays redundantes, a combinar velocidad con seguridad, y seguramente ya estás pensando en montar tu propio servidor NAS en el closet.

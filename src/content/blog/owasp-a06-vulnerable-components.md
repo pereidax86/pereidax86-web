@@ -4,7 +4,7 @@ description: "Ignorar las advertencias de dependencias desactualizadas es como d
 pubDate: 2026-07-13
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Dependencias"]
-image: "/images/blog/owasp-a06-vulnerable-components.png"
+image: "../../assets/images/blog/owasp-a06-vulnerable-components.png"
 ---
 
 Arrancamos la semana con energía y llegamos al sexto puesto de nuestro [OWASP Top 10](/blog/owasp-top-10-introduccion). Después de ver el viernes pasado por qué [agregar seguridad al final no funciona (A05: Diseño Inseguro)](/blog/owasp-a05-insecure-design), hoy vamos a hablar del problema más común, más ignorado y probablemente más fácil de solucionar si se tiene la disciplina correcta: **A06 - Componentes Vulnerables y Desactualizados** (*Vulnerable and Outdated Components*).

@@ -4,7 +4,7 @@ description: "Un resumen ultra rápido y digerible de las 10 vulnerabilidades m�
 pubDate: 2026-07-24
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Resumen", "Cheat Sheet"]
-image: "/images/blog/owasp-top-10-resumen.png"
+image: "../../assets/images/blog/owasp-top-10-resumen.png"
 ---
 
 Después de casi un mes de intensos artículos, hemos llegado al verdadero final de nuestra aventura por el mundo de la ciberseguridad web. Quiero tomarme un momento para agradecerte profundamente por haber seguido esta serie. Escribirla ha sido un reto increíble y espero que hayas disfrutado leyéndola tanto como yo disfruté creándola para ti.

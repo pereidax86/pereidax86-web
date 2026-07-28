@@ -4,7 +4,7 @@ description: "Intentar agregar seguridad al final del desarrollo es como ponerle
 pubDate: 2026-07-10
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Arquitectura"]
-image: "/images/blog/owasp-a05-insecure-design.png"
+image: "../../assets/images/blog/owasp-a05-insecure-design.png"
 ---
 
 Llegamos al viernes y a la mitad exacta de nuestro recorrido por el [OWASP Top 10](/blog/owasp-top-10-introduccion). Si te perdiste el post anterior sobre cómo resguardar tus contraseñas, te recomiendo leer [A04: Fallas Criptográficas](/blog/owasp-a04-cryptographic-failures). Hoy nos enfrentamos a un concepto fascinante porque no tiene que ver con olvidar un punto y coma, ni con usar una librería vieja, ni con escribir código vulnerable. Hoy vamos a hablar de cuando el sistema hace *exactamente* lo que se le programó para hacer, pero la idea original era terriblemente mala.

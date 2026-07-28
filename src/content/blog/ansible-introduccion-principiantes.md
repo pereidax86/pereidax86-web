@@ -4,7 +4,7 @@ description: "Aprende qué es Ansible, cómo funciona su arquitectura agentless,
 pubDate: 2026-03-24
 author: "Luis Pereida"
 tags: ["Ansible", "Automatización", "DevOps", "Linux", "SysAdmin"]
-image: "/images/blog/ansible-introduccion.webp"
+image: "../../assets/images/blog/ansible-introduccion.webp"
 ---
 
 Imagina esta escena: son las 11 de la noche de un viernes. Tienes que actualizar la configuración de nginx en 8 servidores antes de que llegue el tráfico del fin de semana. Abres 8 terminales. Te conectas al primero con SSH. Editas el archivo de configuración. Reinicias el servicio. Te conectas al segundo. Editas. Reinicias. Al tercero. Al cuarto...

@@ -4,7 +4,7 @@ description: "Si tu sistema permite que cualquier usuario acceda a páginas admi
 pubDate: 2026-07-01
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "AccessControl"]
-image: "/images/blog/owasp-a01-broken-access-control.png"
+image: "../../assets/images/blog/owasp-a01-broken-access-control.png"
 ---
 
 Miércoles. Ya superamos la mitad de la semana y, si leíste nuestro [post de introducción al OWASP Top 10](/blog/owasp-top-10-introduccion), sabrás que prometimos ir destripando cada una de estas vulnerabilidades una por una. Hoy nos toca hablar de la reina de la lista, la número uno indiscutible del ranking de descuidos digitales: **A01 - Control de Acceso Roto** (*Broken Access Control*).

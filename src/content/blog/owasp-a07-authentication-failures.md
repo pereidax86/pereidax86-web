@@ -4,7 +4,7 @@ description: "Construir tu propio sistema de login desde cero es como inventar t
 pubDate: 2026-07-15
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Autenticación"]
-image: "/images/blog/owasp-a07-authentication-failures.png"
+image: "../../assets/images/blog/owasp-a07-authentication-failures.png"
 ---
 
 Llegamos a la mitad de la semana y seguimos avanzando en nuestro [OWASP Top 10](/blog/owasp-top-10-introduccion). El lunes [aprendimos por qué las dependencias viejas son tuberías oxidadas (A06)](/blog/owasp-a06-vulnerable-components), y hoy toca hablar de una de las funciones que absolutamente todo desarrollador ha tenido que programar al menos una vez en su carrera: el módulo de *Login*.

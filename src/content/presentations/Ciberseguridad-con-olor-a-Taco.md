@@ -60,7 +60,7 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
     }
 </script>
 
-<div class="absolute top-0 left-0 w-full h-[55%] bg-cover bg-center border-b border-neutral-800" style="background-image: url('/images/presentations/ciberseguridad-con-olor-a-taco/Ciberseguridad-con-olor-a-Taco.png');">
+<div class="absolute top-0 left-0 w-full h-[55%] bg-cover bg-center border-b border-neutral-800" style="background-image: url('/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/Ciberseguridad-con-olor-a-Taco.png');">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neutral-950/50 to-neutral-950"></div>
 </div>
 <div class="absolute bottom-0 right-0 w-full h-[55%] flex flex-col justify-end items-end text-right p-12 pr-16 md:pr-40 pb-16 z-10">
@@ -120,7 +120,7 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
 
 </div>
 <div class="w-[60%] md:w-1/3">
-<img src="/images/presentations/ciberseguridad-con-olor-a-taco/el-chambitas.png" alt="El Chambitas interactuando confiado con un USB" class="rounded-xl shadow-lg border border-neutral-800 w-full h-auto !m-0">
+<img src="/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/el-chambitas.png" alt="El Chambitas interactuando confiado con un USB" class="rounded-xl shadow-lg border border-neutral-800 w-full h-auto !m-0">
 </div>
 </div>
 
@@ -159,7 +159,7 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
 
 </div>
 <div class="w-[50%] md:w-[32%] flex justify-center">
-    <img src="/images/presentations/ciberseguridad-con-olor-a-taco/cibertacos-el-inge.png" alt="CiberTacos El Inge con ladrones digitales" class="w-full h-auto !m-0 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-neutral-800 object-contain">
+    <img src="/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/cibertacos-el-inge.png" alt="CiberTacos El Inge con ladrones digitales" class="w-full h-auto !m-0 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-neutral-800 object-contain">
 </div>
 </div>
 
@@ -217,10 +217,10 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
 
 <div class="flex flex-col xl:flex-row items-center justify-center gap-8 w-full max-w-[98%] mt-8">
     <div class="w-full xl:w-1/2 flex justify-center items-center">
-        <img src="/images/presentations/ciberseguridad-con-olor-a-taco/CSF_cybersecurity_framework.webp" alt="NIST Cybersecurity Framework" class="w-full max-h-[60vh] h-auto rounded-xl shadow-2xl border border-neutral-800 object-contain bg-neutral-900/50 p-2">
+        <img src="/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/CSF_cybersecurity_framework.webp" alt="NIST Cybersecurity Framework" class="w-full max-h-[60vh] h-auto rounded-xl shadow-2xl border border-neutral-800 object-contain bg-neutral-900/50 p-2">
     </div>
     <div class="w-full xl:w-1/2 flex justify-center items-center">
-        <img src="/images/presentations/ciberseguridad-con-olor-a-taco/nist_framework_2_core.webp" alt="NIST Framework 2.0 Core" class="w-full max-h-[60vh] h-auto rounded-xl shadow-2xl border border-neutral-800 object-contain bg-neutral-900/50 p-2">
+        <img src="/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/nist_framework_2_core.webp" alt="NIST Framework 2.0 Core" class="w-full max-h-[60vh] h-auto rounded-xl shadow-2xl border border-neutral-800 object-contain bg-neutral-900/50 p-2">
     </div>
 </div>
 
@@ -439,7 +439,7 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
 
 <!-- Imagen Derecha -->
 <div class="w-[50%] md:w-[32%] flex justify-center">
-    <img src="/images/presentations/ciberseguridad-con-olor-a-taco/nist-cis-herramientas.png" alt="Caja de herramientas de ciberseguridad y libro de recetas" class="w-full h-auto !m-0 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-neutral-800 object-contain">
+    <img src="/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/nist-cis-herramientas.png" alt="Caja de herramientas de ciberseguridad y libro de recetas" class="w-full h-auto !m-0 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-neutral-800 object-contain">
 </div>
 </div>
 
@@ -989,7 +989,7 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
 <!-- Imagen Derecha -->
 
 <div class="w-[60%] md:w-1/3">
-<img src="/images/presentations/ciberseguridad-con-olor-a-taco/oceano-azul-msps.png" alt="Tiburones corporativos en pecera vs Océano Azul de las PyMEs" class="rounded-xl shadow-lg border border-neutral-800 w-full h-auto !m-0">
+<img src="/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/oceano-azul-msps.png" alt="Tiburones corporativos en pecera vs Océano Azul de las PyMEs" class="rounded-xl shadow-lg border border-neutral-800 w-full h-auto !m-0">
 </div>
 </div>
 
@@ -1065,7 +1065,7 @@ tags: ["HackGDL","ciberseguridad", "NIST", "PyME", "guía"]
 
 <!-- Imagen izquierda -->
 <div class="w-full lg:w-[35%] flex-shrink-0 flex justify-center">
-<img src="/images/presentations/ciberseguridad-con-olor-a-taco/cibertacos_el_inge.jpg" alt="Cibertacos El Inge" class="w-full max-w-xs lg:max-w-full h-auto !m-0 rounded-2xl shadow-[0_0_50px_rgba(251,191,36,0.15)] border border-amber-800/30 object-contain">
+<img src="/src/assets/images/presentations/ciberseguridad-con-olor-a-taco/cibertacos_el_inge.jpg" alt="Cibertacos El Inge" class="w-full max-w-xs lg:max-w-full h-auto !m-0 rounded-2xl shadow-[0_0_50px_rgba(251,191,36,0.15)] border border-amber-800/30 object-contain">
 </div>
 
 <!-- Contenido derecho -->

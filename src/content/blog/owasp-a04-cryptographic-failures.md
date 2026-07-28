@@ -4,7 +4,7 @@ description: "Almacenar contraseñas en texto plano o usar algoritmos obsoletos 
 pubDate: 2026-07-08
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Criptografía"]
-image: "/images/blog/owasp-a04-cryptographic-failures.png"
+image: "../../assets/images/blog/owasp-a04-cryptographic-failures.png"
 ---
 
 Llegamos al miércoles y seguimos desentrañando el [OWASP Top 10](/blog/owasp-top-10-introduccion). Ya pasamos por los [accesos mal configurados (A01)](/blog/owasp-a01-broken-access-control), los [problemas de configuración por defecto (A02)](/blog/owasp-a02-security-misconfiguration) y las [fallas en la cadena de suministro (A03)](/blog/owasp-a03-software-supply-chain-failures). Hoy vamos a hablar de un tema que a muchos desarrolladores les da dolor de cabeza, pero que es vital: **A04 - Fallas Criptográficas** (*Cryptographic Failures*).

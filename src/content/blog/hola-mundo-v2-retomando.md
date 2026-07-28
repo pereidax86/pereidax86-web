@@ -4,7 +4,7 @@ description: "Actualización de estado: Migración a Astro, gestión del tiempo 
 pubDate: 2025-12-09
 author: "Luis Pereida"
 tags: ["Personal", "Astro", "Blog", "Status Update"]
-image: "/images/blog/reboot-system.jpg"
+image: "../../assets/images/blog/reboot-system.jpg"
 ---
 
 Si estás leyendo esto, significa que la migración ha sido exitosa. **Bienvenido a la nueva versión de pereidax86.com.**

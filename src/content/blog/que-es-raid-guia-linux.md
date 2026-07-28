@@ -4,7 +4,7 @@ description: "Descubre qué es un RAID, los niveles más importantes (0, 1, 5, 1
 pubDate: 2026-01-21
 author: "Luis Pereida"
 tags: ["Linux", "RAID", "Almacenamiento", "SysAdmin", "Hardware"]
-image: "/images/blog/raid-linux-armadura.webp"
+image: "../../assets/images/blog/raid-linux-armadura.webp"
 ---
 
 En la [entrada anterior](/blog/la-regla-3-2-1-backups) hablamos de la regla 3-2-1, esa estrategia vital para que tus datos sobrevivan a incendios, robos o a tu propia torpeza.

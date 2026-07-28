@@ -4,7 +4,7 @@ description: "Continúa tu viaje en la terminal con pwd, touch, echo, history y 
 pubDate: 2025-01-26
 author: "Luis Pereida"
 tags: ["Linux", "Terminal", "SysAdmin", "Comandos"]
-image: "/images/blog/linux-commands-part2.webp"
+image: "../../assets/images/blog/linux-commands-part2.webp"
 ---
 
 Cuando comienzas a familiarizarte con Linux, podrías pensar que todo gira en torno a unos pocos comandos básicos. Al principio, enfrentarte a la consola puede parecer abrumador: no hay ventanas bonitas ni mensajes emergentes que te guíen.
@@ -24,7 +24,7 @@ pwd
 ```
 Por ejemplo, estás escribiendo un script y necesitas saber la ruta completa del directorio actual para incluirla en el script.
 
-```Bash
+```bash
 ruta_actual=$(pwd)
 echo "La ruta actual es: $ruta_actual"
 ```
@@ -117,7 +117,7 @@ Quieres saber qué directorios ocupan más espacio en tu sistema.
 du -h --max-depth=1
 ```
 > **protip >** Usa sort para ordenar los resultados de mayor a menor.
->```Bash
+>```bash
 >du -h --max-depth=1 | sort -rh
 >```
 

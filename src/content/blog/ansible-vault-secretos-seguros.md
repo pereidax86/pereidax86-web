@@ -4,7 +4,7 @@ description: "Aprende a usar Ansible Vault para cifrar secretos, contraseñas y 
 pubDate: 2026-05-04
 author: "Luis Pereida"
 tags: ["Ansible", "Automatización", "DevOps", "Linux", "Seguridad"]
-image: "/images/blog/ansible-vault.webp"
+image: "../../assets/images/blog/ansible-vault.webp"
 ---
 
 Esto pasa más seguido de lo que deberías sentirte cómodo admitiendo: alguien crea un Playbook de Ansible, necesita poner la contraseña de la base de datos en algún lado, y la pone directo en el YAML. Funciona. Lo commitea. Lo sube a GitHub.

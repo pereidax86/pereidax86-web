@@ -4,7 +4,7 @@ description: "Imagina que tu laptop explota hoy. Si eso te da pánico, necesitas
 pubDate: 2026-01-19
 author: "Luis Pereida"
 tags: ["Ciberseguridad", "Backups", "SysAdmin", "Prevención", "Linux", "Cloud", "Data", "Estrategia"]
-image: "/images/blog/backup-3-2-1.png"
+image: "../../assets/images/blog/backup-3-2-1.png"
 ---
 
 Hay un viejo adagio en el mundo de la informática que dice que existen dos tipos de personas: **los que ya perdieron datos importantes y los que están a punto de perderlos**. Si estás leyendo esto y piensas "a mí nunca me ha pasado", felicidades, eres una anomalía estadística... por ahora.

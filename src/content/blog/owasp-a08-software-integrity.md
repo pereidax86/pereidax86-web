@@ -4,7 +4,7 @@ description: "¿Qué pasa cuando la actualización oficial de tu software favori
 pubDate: 2026-07-17
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Integridad", "CI/CD"]
-image: "/images/blog/owasp-a08-software-integrity.png"
+image: "../../assets/images/blog/owasp-a08-software-integrity.png"
 ---
 
 Cerramos la semana llegando al puesto número ocho de nuestro [OWASP Top 10](/blog/owasp-top-10-introduccion). Hace unos días hablamos del riesgo de usar [Componentes Vulnerables y Desactualizados (A06)](/blog/owasp-a06-vulnerable-components), un problema donde somos culpables por negligencia al no actualizar nuestro código. Pero hoy vamos a ir un paso más allá hacia el lado oscuro del desarrollo. ¿Qué pasa cuando el componente es nuevo, supuestamente seguro, y viene directamente del fabricante oficial... pero alguien lo manipuló maliciosamente en el camino?

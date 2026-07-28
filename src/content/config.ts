@@ -1,19 +1,19 @@
 import { defineCollection, z } from 'astro:content';
 
 const blog = defineCollection({
-    schema: z.object({
+    schema: ({ image }) => z.object({
         title: z.string(),
         description: z.string(),
         pubDate: z.coerce.date(),
         author: z.string().default('Luis Pereida'),
-        image: z.string().optional(),
+        image: image().optional(),
         tags: z.array(z.string()),
         draft: z.boolean().optional(),
     }),
 });
 
 const cheatsheets = defineCollection({
-    schema: z.object({
+    schema: ({ image }) => z.object({
         title: z.string(),
         description: z.string(),
         subtitle: z.string().optional(),
@@ -23,7 +23,7 @@ const cheatsheets = defineCollection({
         icon: z.string(),
         pubDate: z.coerce.date(),
         author: z.string().default('Luis Pereida'),
-        image: z.string(),
+        image: image(),
         printable: z.boolean().default(true),
     }),
 });

@@ -4,7 +4,7 @@ description: "El software moderno se construye sobre miles de librerías de terc
 pubDate: 2026-07-06
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Dependencias"]
-image: "/images/blog/owasp-a03-software-supply-chain-failures.png"
+image: "../../assets/images/blog/owasp-a03-software-supply-chain-failures.png"
 ---
 
 Imagínate esto: vas caminando por la calle, y de una camioneta vieja y destartalada se te acerca una persona disfrazada de payaso que nunca en tu vida has visto, te ofrece un chocolatito que sacó de su bolsillo y te dice con una sonrisa: *"Ten, cómelo, es completamente gratis y sabe delicioso"*. 

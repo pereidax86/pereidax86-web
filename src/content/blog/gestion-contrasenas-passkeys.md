@@ -4,7 +4,7 @@ description: "La secuela necesaria. Si ya activaste el MFA, el siguiente paso es
 pubDate: 2026-01-12
 author: "Luis Pereida"
 tags: ["Ciberseguridad", "Passkeys", "Gestores de Contraseñas", "Privacidad", "2026"]
-image: "/images/blog/gestion-contrasenas.png"
+image: "../../assets/images/blog/gestion-contrasenas.png"
 ---
 
 En la [entrada anterior](/blog/ciberseguridad-basica-mfa) hablamos de lo básico: por qué "123456" es una invitación al desastre y cómo el MFA es ese segundo cerrojo que te salva la vida. Pero seamos realistas, si sigues mi consejo de "usa una contraseña única, larga y compleja para cada sitio", te vas a topar con un problema muy humano: **tu memoria no da para tanto**.

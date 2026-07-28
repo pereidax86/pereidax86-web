@@ -4,7 +4,7 @@ description: "Descubre Btrfs, la alternativa nativa a ZFS. Snapshots, RAID y fle
 pubDate: 2026-02-18
 author: "Luis Pereida"
 tags: ["Linux", "Btrfs", "Almacenamiento", "SysAdmin", "Filesystems"]
-image: "/images/blog/btrfs-guia-linux.webp"
+image: "../../assets/images/blog/btrfs-guia-linux.webp"
 ---
 
 He andado un poco desaparecido estos días, pero aquí sigo dándole. No, no me secuestraron aliens ni me quedé atrapado compilando un kernel personalizado en una cafetera para poder jugar DOOM (aunque la tentación estuvo ahí). A veces la vida real ("things happens", como dicen) se interpone en el blogging, pero lo importante es retomar el ritmo.

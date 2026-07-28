@@ -4,7 +4,7 @@ description: "Pierde el miedo a la terminal con estos 10 comandos esenciales (ls
 pubDate: 2025-01-05
 author: "Luis Pereida"
 tags: ["Linux", "Terminal", "Básico", "SysAdmin"]
-image: "/images/blog/linux-basic-commands.webp"
+image: "../../assets/images/blog/linux-basic-commands.webp"
 ---
 
 Cuando comienzas a administrar sistemas Linux, es normal sentir un poco de intimidación. La consola, con su apariencia austera y sin ventanas gráficas que te guíen, puede parecer un territorio desconocido.

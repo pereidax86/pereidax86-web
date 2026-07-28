@@ -4,7 +4,7 @@ description: "De nada sirve tener el mejor código del mundo si cuando un atacan
 pubDate: 2026-07-20
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Logs", "DevOps"]
-image: "/images/blog/owasp-a09-security-logging.png"
+image: "../../assets/images/blog/owasp-a09-security-logging.png"
 ---
 
 Empezamos una nueva semana y estamos a un solo paso de terminar nuestro recorrido por el [OWASP Top 10](/blog/owasp-top-10-introduccion). Hasta ahora, hemos hablado de cómo evitar que los atacantes entren a tu sistema: arreglando [Controles de Acceso (A01)](/blog/owasp-a01-broken-access-control), mejorando el [Login (A07)](/blog/owasp-a07-authentication-failures) y verificando la [Integridad de las dependencias (A08)](/blog/owasp-a08-software-integrity). 

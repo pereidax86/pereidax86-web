@@ -28,7 +28,14 @@
 
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import CheatsheetCard from "../components/CheatsheetCard.astro";
+
+import cehBadge from "../assets/badges/CEH_2E345519D3F7.png";
+import rhcsaBadge from "../assets/badges/rhcsa.png";
+import rhVirtBadge from "../assets/badges/rh-virtualization.png";
+import rhContBadge from "../assets/badges/rh-containers.png";
+import ibmCloudBadge from "../assets/badges/ibm-cloud.png";
 
 // --- BLOG DATA ---
 const allPosts = await getCollection("blog");
@@ -71,7 +78,7 @@ const philosophy =
 // --- CERTIFICACIONES ---
 const certTop = {
     name: "Certified Ethical Hacker",
-    image: "/badges/CEH_2E345519D3F7.png",
+    image: cehBadge,
     url: "https://aspen.eccouncil.org/Verify",
     isCredly: false,
     meta: { id: "ECC3657809142", label: "ID Number" },
@@ -80,19 +87,19 @@ const certTop = {
 const certsMiddle = [
     {
         name: "RedHat Certified System Administrator",
-        image: "/badges/rhcsa.png",
+        image: rhcsaBadge,
         url: "https://www.credly.com/badges/6701c173-e710-4c21-800a-ac6086ef59c1/public_url",
         isCredly: true,
     },
     {
         name: "RedHat Certified Specialist Virtualization",
-        image: "/badges/rh-virtualization.png",
+        image: rhVirtBadge,
         url: "https://www.credly.com/badges/99a80d64-5d22-4944-bcf3-0e477eece1e6/public_url",
         isCredly: true,
     },
     {
         name: "RedHat Certified Specialist Containers",
-        image: "/badges/rh-containers.png",
+        image: rhContBadge,
         url: "https://www.credly.com/badges/4f5dd55a-d796-44ad-af8d-d44f63ed4daa/public_url",
         isCredly: true,
     },
@@ -100,7 +107,7 @@ const certsMiddle = [
 
 const certBottom = {
     name: "IBM Cloud Advocate v2",
-    image: "/badges/ibm-cloud.png",
+    image: ibmCloudBadge,
     url: "https://www.credly.com/badges/6cb65f66-7a49-473f-a9cd-7015c12c4e05/public_url",
     isCredly: true,
 };
@@ -225,11 +232,10 @@ const certBottom = {
                             class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)] transition-all duration-500"
                         >
                         </div>
-                        <img
+                        <Image
                             src={certTop.image}
                             alt={certTop.name}
                             class="w-full h-full object-contain p-4 drop-shadow-xl transform group-hover:scale-110 transition-transform duration-300"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/150';"
                         />
                     </a>
                     <div class="flex flex-col items-center z-20">
@@ -266,7 +272,7 @@ const certBottom = {
                                 class="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-full transition-all duration-300"
                             >
                                 <div class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(147,51,234,0.3)] transition-all duration-500" />
-                                <img
+                                <Image
                                     src={cert.image}
                                     alt={cert.name}
                                     class="w-full h-full object-contain p-3 drop-shadow-md transform group-hover:scale-110 transition-transform duration-300"
@@ -292,7 +298,7 @@ const certBottom = {
                             class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.3)] transition-all duration-500"
                         >
                         </div>
-                        <img
+                        <Image
                             src={certBottom.image}
                             alt={certBottom.name}
                             class="w-full h-full object-contain p-3 drop-shadow-md transform group-hover:scale-110 transition-transform duration-300"
@@ -628,11 +634,17 @@ const certBottom = {
                             >
                                 <article class="h-full bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden hover:border-blue-500/30 transition-colors flex flex-col">
                                     <div class="relative aspect-video overflow-hidden">
-                                        <img
-                                            src={post.data.image}
-                                            alt={post.data.title}
-                                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                                        />
+                                        {post.data.image ? (
+                                            <Image
+                                                src={post.data.image}
+                                                alt={post.data.title}
+                                                class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                            />
+                                        ) : (
+                                            <div class="w-full h-full flex items-center justify-center bg-neutral-900">
+                                                <span class="text-4xl">🐧</span>
+                                            </div>
+                                        )}
                                         <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 to-transparent" />
                                     </div>
                                     <div class="p-4 flex flex-col flex-1 gap-2">

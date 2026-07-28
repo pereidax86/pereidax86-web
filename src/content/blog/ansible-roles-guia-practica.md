@@ -4,7 +4,7 @@ description: "Aprende a organizar tu automatización con Ansible Roles. Crea rol
 pubDate: 2026-04-07
 author: "Luis Pereida"
 tags: ["Ansible", "Automatización", "DevOps", "Linux", "SysAdmin"]
-image: "/images/blog/ansible-roles.png"
+image: "../../assets/images/blog/ansible-roles.png"
 ---
 
 Bien. Ya tienes Ansible funcionando. Ya corres Playbooks. Ya sabes lo que es un inventario y un módulo. Your servers fear you.
@@ -145,7 +145,7 @@ nginx_pid_file: /run/nginx.pid
 
 Las templates son archivos de texto con **sintaxis Jinja2** que Ansible procesa antes de copiarlos. Piensa en ellas como archivos de configuración con huecos que Ansible rellena automáticamente con tus variables.
 
-```jinja2
+```jinja
 {# roles/nginx/templates/nginx.conf.j2 #}
 worker_processes  {{ nginx_worker_processes }};
 pid               {{ nginx_pid_file }};

@@ -4,7 +4,7 @@ description: "Dar una plática en el HackGDL me recordó algo fundamental: la he
 pubDate: 2026-03-18
 author: "Luis Pereida"
 tags: ["Liderazgo", "Comunicacion", "Habilidades", "Ciberseguridad", "Personal", "HackGDL"]
-image: "/images/blog/comunicacion-tecnica-liderazgo.png"
+image: "../../assets/images/blog/comunicacion-tecnica-liderazgo.png"
 ---
 
 El sábado pasado estuve en el **[HackGDL](https://hackgdl.net)**, uno de esos eventos que te recuerdan por qué entraste a este mundo de la tecnología. Tuve el honor de dar una plática, pero me fui con una reflexión mucho más grande que los slides que preparé.

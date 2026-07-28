@@ -4,7 +4,7 @@ description: "Analizamos el temario actualizado de la certificación CISSP (vers
 pubDate: 2026-07-28
 author: "Luis Pereida"
 tags: ["Ciberseguridad", "CISSP", "Certificaciones", "CEH", "Sybex", "Seguridad", "Liderazgo", "Carrera Tech"]
-image: "/images/blog/cissp-2024-certificacion.png"
+image: "../../assets/images/blog/cissp-2024-certificacion.png"
 ---
 
 Si llevas un par de años en la industria de la tecnología o la ciberseguridad, probablemente hayas presenciado ese debate eterno y apasionado que parece resurgir cada cierto tiempo en LinkedIn o Twitter: **"¿Las certificaciones realmente sirven para algo o son solo papel?"**. Incluso he visto en TikTok a personas diciéndote qué certificaciones sirven y cuáles no, y que cierran vendiéndote un curso con "la verdad absoluta" o algo así... (Nota mental: voy a empezar a vender cursos).

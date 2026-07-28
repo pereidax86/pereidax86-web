@@ -20,7 +20,7 @@ const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=100`;
 <Layout
     title={`${entry.data.title} | @pereidax86`}
     description={entry.data.description}
-    image={entry.data.image}
+    image={entry.data.image?.src}
     type="article"
 >
     <!-- Print Header (solo visible al imprimir) -->

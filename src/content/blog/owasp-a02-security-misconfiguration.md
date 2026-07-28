@@ -4,7 +4,7 @@ description: "Tener contraseñas por defecto, el modo debug encendido en producc
 pubDate: 2026-07-03
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "Configuracion"]
-image: "/images/blog/owasp-a02-security-misconfiguration.png"
+image: "../../assets/images/blog/owasp-a02-security-misconfiguration.png"
 ---
 
 ¡Por fin es viernes! Ese maravilloso día en el que los servidores tiemblan porque los desarrolladores quieren meter a producción el último cambio de la semana antes de irse a tomar unas cervezas. Si eres del área de tecnología, sabes que el peor enemigo de tu fin de semana es una alerta a las 3:00 AM avisando que algo se rompió... o peor, que alguien se metió a tu base de datos.

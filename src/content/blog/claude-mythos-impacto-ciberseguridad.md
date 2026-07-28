@@ -4,7 +4,7 @@ description: "Claude Mythos Preview acaba de cambiar las reglas de la cibersegur
 pubDate: 2026-05-22
 author: "Luis Pereida"
 tags: ["IA", "Ciberseguridad", "Claude Mythos", "Zero-day", "Seguridad"]
-image: "/images/blog/claude-mythos.webp"
+image: "../../assets/images/blog/claude-mythos.webp"
 ---
 
 Son las 3:00 a.m. Tus servidores ronronean silenciosamente en un rack a miles de kilómetros. La luz parpadeante de los switches indica que todo fluye con normalidad. Llevan años operando sin problemas. Crees que estás seguro porque tienes tus *firewalls* estrictamente configurados, tus políticas de acceso al día y un equipo que reacciona a las alertas. Pero mientras duermes, se está librando una guerra invisible en el silicio, una donde el atacante no descansa. Es un adversario que lee código máquina a la velocidad de la luz, que no siente cansancio, que no necesita cobrar horas extras y, sobre todo, que no siente ningún remordimiento cuando encuentra ese pequeño error de configuración que alguien de tu equipo dejó olvidado hace cinco años.

@@ -4,7 +4,7 @@ description: "Descubre ZFS, el sistema de archivos que combina redundancia, flex
 pubDate: 2026-01-28
 author: "Luis Pereida"
 tags: ["Linux", "ZFS", "Almacenamiento", "SysAdmin", "Filesystems"]
-image: "/images/blog/zfs-todo-en-uno.webp"
+image: "../../assets/images/blog/zfs-todo-en-uno.webp"
 ---
 
 Si seguiste la serie de posts sobre almacenamiento, ya sabes que [RAID](/blog/que-es-raid-guia-linux) te protege contra fallos de hardware y que [LVM](/blog/lvm-guia-linux) te da flexibilidad para redimensionar particiones sin drama. Dos herramientas poderosas que, cuando se combinan correctamente, te dan un sistema de almacenamiento robusto y adaptable.

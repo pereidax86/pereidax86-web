@@ -4,7 +4,7 @@ description: "Empieza el año blindando tus cuentas. Descubre por qué cambiar t
 pubDate: 2026-01-05
 author: "Luis Pereida"
 tags: ["Ciberseguridad", "MFA", "Contraseñas", "Basico", "Seguridad"]
-image: "/images/blog/ciberseguridad-basica-mfa.png"
+image: "../../assets/images/blog/ciberseguridad-basica-mfa.png"
 ---
 
 ¡Feliz 2026! Espero que este año venga cargado de éxitos, salud y mucho código limpio. Está empezando el año y, como es tradición, ya tengo mi lista de propósitos: ir al gimnasio (esta vez sí, lo juro), comer más ensaladas y menos tacos, y finalmente terminar ese proyecto personal que empecé en 2018. Probablemente para febrero ya haya fallado en la mitad (especialmente en lo de los tacos), pero la intención es lo que cuenta, ¿no?

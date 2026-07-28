@@ -4,7 +4,7 @@ description: "Aprende a configurar tu archivo .vimrc para convertir Vi/Vim en un
 pubDate: 2025-01-20
 author: "Luis Pereida"
 tags: ["Vim", "Linux", "SysAdmin", "Productividad", "Configuración"]
-image: "/images/blog/vim-custom-setup.webp"
+image: "../../assets/images/blog/vim-custom-setup.webp"
 ---
 
 En nuestra [entrada anterior](/blog/ayuda-linux-sin-google), exploramos los conceptos básicos de Vi y cómo navegar entre sus modos principales, incluyendo ese divertido (y frustrante) momento cuando intentas cerrarlo por primera vez y terminas consultando a “San Google”.
@@ -29,7 +29,7 @@ Algunas configuraciones útiles para comenzar a personalizar Vi están orientada
 
 Aquí te dejo una configuración base sólida (“boilerplate”) que puedes copiar y pegar directamente en tu archivo:
 
-```Vim Script
+```vim
 
 " --- NAVEGACIÓN Y VISUALIZACIÓN ---```
 
@@ -82,7 +82,7 @@ Cuando trabajas con archivos de configuración gigantes (te estoy viendo a ti, h
 
 Agrega esto a tu configuración:
 
-```Vim Script
+```vim
 set foldmethod=indent
 set foldlevel=1
 ```
@@ -94,7 +94,7 @@ Usa `zc` para cerrar una sección.
 2. **Multitarea con Splits**
 Si necesitas visualizar dos archivos de texto al mismo tiempo (por ejemplo, comparando dos versiones de un script), intenta dividir la pantalla en múltiples ventanas:
 
-```Vim Script
+```vim
 :split otro_archivo.txt    " División Horizontal
 :vsplit tercer_archivo.txt " División Vertical
 ```
@@ -103,7 +103,7 @@ Si necesitas visualizar dos archivos de texto al mismo tiempo (por ejemplo, comp
 
 El último truco mágico que te quiero compartir es habilitar el autoguardado. Siempre pasa algo y, cuando pasa, recuerdas que no habías guardado los cambios en las últimas 4 horas.
 
-```Vim Script
+```vim
 set autowrite
 ```
 

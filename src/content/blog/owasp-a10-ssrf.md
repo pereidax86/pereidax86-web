@@ -4,7 +4,7 @@ description: "El gran final del OWASP Top 10. Descubre cómo los hackers engaña
 pubDate: 2026-07-22
 author: "Luis Pereida"
 tags: ["OWASP", "Ciberseguridad", "Desarrollo", "Web", "SSRF", "Cloud"]
-image: "/images/blog/owasp-a10-ssrf.png"
+image: "../../assets/images/blog/owasp-a10-ssrf.png"
 ---
 
 Llegamos al final del viaje. Después de semanas analizando cómo los atacantes rompen la [Criptografía (A04)](/blog/owasp-a04-cryptographic-failures), se saltan la [Autenticación (A07)](/blog/owasp-a07-authentication-failures) y se aprovechan de nuestra falta de [Monitoreo (A09)](/blog/owasp-a09-security-logging), cerramos nuestra serie del OWASP Top 10 con una de las vulnerabilidades más modernas, elegantes y destructivas de la era del *Cloud Computing*.

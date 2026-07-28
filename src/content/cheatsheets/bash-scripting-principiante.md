@@ -8,13 +8,13 @@ tags: ["Linux", "Bash", "Scripting", "Automatización", "Terminal", "Básico"]
 icon: "🐚"
 pubDate: 2026-03-23
 author: "Luis Pereida"
-image: "/images/cheatsheets/bash-scripting-principiante.png"
+image: "../../assets/images/cheatsheets/bash-scripting-principiante.png"
 printable: true
 ---
 
 ## 🚀 Introducción: De copiar comandos a escribir magia
 
-<img src="/images/cheatsheets/bash-scripting-principiante.png" alt="Bash Scripting para principiantes" style="float: right; width: 35%; margin: 0 0 20px 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+![Bash Scripting para principiantes](../../assets/images/cheatsheets/bash-scripting-principiante.png)
 
 **¡Felicidades por llegar hasta aquí!** Si ya sabes moverte por la terminal (o te sobreviviste al [cheatsheet de Linux](/cheatsheets/linux-principiante)), estás listo para dar el siguiente salto: dejar de escribir comandos uno por uno y empezar a **automatizar todo lo que te aburre**.
 
