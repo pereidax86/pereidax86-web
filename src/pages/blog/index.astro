@@ -6,10 +6,17 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 // Le decimos a TS que 'a' y 'b' son entradas del blog
-const posts = (await getCollection("blog")).sort(
-    (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-        b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection("blog"))
+    .filter((post: CollectionEntry<"blog">) => !post.data.draft)
+    .sort(
+        (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+            b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    );
+
+// Obtenemos la lista única de etiquetas (tags) ordenadas
+const allTags = Array.from(
+    new Set(posts.flatMap((post: CollectionEntry<"blog">) => post.data.tags || []))
+).sort();
 
 const pageTitle = "Blog | Luis Pereida";
 const pageDesc =
@@ -20,7 +27,7 @@ const pageDesc =
     <main class="w-full max-w-5xl px-6 py-12 mx-auto animate-fade-in">
         <a href="/" class="inline-flex items-center gap-2 group">
             <button
-                class="flex items-center gap-2 px-4 py-2 bg-neutral-900/50 hover:bg-neutral-800 text-gray-400 hover:text-white rounded-lg font-mono text-sm transition-all border border-neutral-800 hover:border-blue-500/50 shadow-sm group-hover:shadow-blue-500/10"
+                class="flex items-center gap-2 px-4 py-2 bg-neutral-900/50 hover:bg-neutral-800 text-gray-400 hover:text-white rounded-lg font-mono text-sm transition-all border border-neutral-800 hover:border-blue-500/50 shadow-sm group-hover:shadow-blue-500/10 cursor-pointer"
             >
                 <span class="group-hover:-translate-x-1 transition-transform"
                     >←</span
@@ -29,7 +36,7 @@ const pageDesc =
             </button>
         </a>
 
-        <div class="text-center mb-16 space-y-4">
+        <div class="text-center mb-12 space-y-4">
             <h1
                 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight"
             >
@@ -61,12 +68,70 @@ const pageDesc =
             </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Buscador e Interacción de Etiquetas -->
+        <div class="mb-12 space-y-6 max-w-3xl mx-auto">
+            <!-- Barra de búsqueda -->
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input
+                    type="text"
+                    id="blog-search"
+                    placeholder="Buscar por título, descripción o etiqueta (Esc para limpiar)..."
+                    class="w-full pl-11 pr-10 py-3.5 bg-neutral-900/80 border border-neutral-800 rounded-xl text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/70 focus:ring-2 focus:ring-blue-500/20 transition-all font-mono text-sm shadow-inner"
+                    autocomplete="off"
+                />
+                <button
+                    id="clear-search"
+                    class="hidden absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white transition-colors cursor-pointer"
+                    title="Limpiar búsqueda"
+                    type="button"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Botones de etiquetas (Tag Pills) -->
+            {allTags.length > 0 && (
+                <div class="flex flex-wrap items-center justify-center gap-2" id="tag-filters">
+                    <button
+                        data-tag="all"
+                        class="tag-btn active-tag px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all bg-blue-600 text-white border border-blue-500 shadow-sm shadow-blue-500/20 cursor-pointer"
+                    >
+                        Todos ({posts.length})
+                    </button>
+                    {allTags.map((tag) => (
+                        <button
+                            data-tag={tag.toLowerCase()}
+                            class="tag-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all bg-neutral-900/60 hover:bg-neutral-800 text-gray-400 hover:text-white border border-neutral-800 hover:border-neutral-700 cursor-pointer"
+                        >
+                            #{tag}
+                        </button>
+                    ))}
+                </div>
+            )}
+
+            <!-- Contador de publicaciones encontradas -->
+            <div class="text-center font-mono text-xs text-gray-500" id="search-counter">
+                Mostrando <span id="visible-count" class="text-blue-400 font-bold">{posts.length}</span> de {posts.length} artículos
+            </div>
+        </div>
+
+        <!-- Grid de Artículos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
             {
                 posts.map((post: any) => (
                     <a
                         href={`/blog/${post.slug}`}
-                        class="group relative flex flex-col bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1"
+                        class="post-card group relative flex flex-col bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1"
+                        data-title={post.data.title.toLowerCase()}
+                        data-description={post.data.description.toLowerCase()}
+                        data-tags={(post.data.tags || []).map((t: string) => t.toLowerCase()).join(",")}
                     >
                         <div class="aspect-video w-full overflow-hidden bg-neutral-950 relative">
                             {post.data.image ? (
@@ -91,7 +156,7 @@ const pageDesc =
                         </div>
 
                         <div class="p-6 flex flex-col flex-1">
-                            <div class="flex gap-2 mb-3">
+                            <div class="flex flex-wrap gap-2 mb-3">
                                 {post.data.tags
                                     .slice(0, 2)
                                     .map((tag: string) => (
@@ -118,6 +183,22 @@ const pageDesc =
             }
         </div>
 
+        <!-- Estado cuando no hay resultados de búsqueda -->
+        <div id="no-results" class="hidden text-center py-16 border border-dashed border-neutral-800 rounded-2xl space-y-4">
+            <p class="text-gray-300 font-mono text-lg">
+                🔍 /var/log/messages: 0 resultados encontrados
+            </p>
+            <p class="text-gray-500 text-sm max-w-md mx-auto">
+                No se encontraron publicaciones que coincidan con los criterios de búsqueda. Intenta con otras palabras clave o selecciona otra etiqueta.
+            </p>
+            <button
+                id="reset-search-btn"
+                class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-blue-400 hover:text-blue-300 rounded-lg font-mono text-xs transition-all border border-neutral-700 inline-flex items-center gap-2 cursor-pointer"
+            >
+                🔄 Restablecer filtros
+            </button>
+        </div>
+
         {
             posts.length === 0 && (
                 <div class="text-center py-20 border border-dashed border-neutral-800 rounded-2xl">
@@ -129,3 +210,147 @@ const pageDesc =
         }
     </main>
 </Layout>
+
+<script>
+    function initBlogSearch() {
+        const searchInput = document.getElementById("blog-search") as HTMLInputElement | null;
+        const clearBtn = document.getElementById("clear-search") as HTMLButtonElement | null;
+        const postCards = document.querySelectorAll<HTMLElement>(".post-card");
+        const tagBtns = document.querySelectorAll<HTMLButtonElement>(".tag-btn");
+        const visibleCountEl = document.getElementById("visible-count");
+        const noResultsEl = document.getElementById("no-results");
+        const resetBtn = document.getElementById("reset-search-btn");
+
+        let activeTag = "all";
+        let searchQuery = "";
+
+        function filterPosts() {
+            let visibleCount = 0;
+
+            postCards.forEach((card) => {
+                const title = card.dataset.title || "";
+                const description = card.dataset.description || "";
+                const tags = (card.dataset.tags || "").split(",");
+
+                const matchesQuery =
+                    !searchQuery ||
+                    title.includes(searchQuery) ||
+                    description.includes(searchQuery) ||
+                    tags.some((t) => t.includes(searchQuery));
+
+                const matchesTag =
+                    activeTag === "all" || tags.includes(activeTag);
+
+                if (matchesQuery && matchesTag) {
+                    card.style.display = "";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            if (visibleCountEl) {
+                visibleCountEl.textContent = visibleCount.toString();
+            }
+
+            if (noResultsEl) {
+                if (visibleCount === 0 && postCards.length > 0) {
+                    noResultsEl.classList.remove("hidden");
+                } else {
+                    noResultsEl.classList.add("hidden");
+                }
+            }
+
+            if (clearBtn) {
+                if (searchQuery.length > 0) {
+                    clearBtn.classList.remove("hidden");
+                } else {
+                    clearBtn.classList.add("hidden");
+                }
+            }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener("input", (e) => {
+                searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+                filterPosts();
+            });
+
+            searchInput.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    searchInput.value = "";
+                    searchQuery = "";
+                    filterPosts();
+                }
+            });
+        }
+
+        if (clearBtn) {
+            clearBtn.addEventListener("click", () => {
+                if (searchInput) {
+                    searchInput.value = "";
+                    searchQuery = "";
+                    searchInput.focus();
+                    filterPosts();
+                }
+            });
+        }
+
+        tagBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                tagBtns.forEach((b) => {
+                    b.classList.remove(
+                        "bg-blue-600",
+                        "text-white",
+                        "border-blue-500",
+                        "shadow-sm",
+                        "shadow-blue-500/20",
+                        "active-tag"
+                    );
+                    b.classList.add(
+                        "bg-neutral-900/60",
+                        "text-gray-400",
+                        "border-neutral-800"
+                    );
+                });
+
+                btn.classList.remove(
+                    "bg-neutral-900/60",
+                    "text-gray-400",
+                    "border-neutral-800"
+                );
+                btn.classList.add(
+                    "bg-blue-600",
+                    "text-white",
+                    "border-blue-500",
+                    "shadow-sm",
+                    "shadow-blue-500/20",
+                    "active-tag"
+                );
+
+                activeTag = btn.dataset.tag || "all";
+                filterPosts();
+            });
+        });
+
+        if (resetBtn) {
+            resetBtn.addEventListener("click", () => {
+                if (searchInput) searchInput.value = "";
+                searchQuery = "";
+                activeTag = "all";
+
+                const allBtn = document.querySelector<HTMLButtonElement>('.tag-btn[data-tag="all"]');
+                if (allBtn) {
+                    allBtn.click();
+                } else {
+                    filterPosts();
+                }
+            });
+        }
+    }
+
+    // Inicializar tanto al cargar la página como en navegaciones
+    initBlogSearch();
+    document.addEventListener("astro:page-load", initBlogSearch);
+</script>
+
