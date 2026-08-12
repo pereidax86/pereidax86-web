@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import SocialShare from "../../components/SocialShare.astro";
 
 export async function getStaticPaths() {
     const cheatsheetEntries = await getCollection("cheatsheets");
@@ -15,6 +17,11 @@ const { Content } = await entry.render();
 
 const GRAVATAR_HASH = "4949755b64eb223f0fa2b210aaf9707c";
 const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=100`;
+
+const breadcrumbItems = [
+  { label: "Cheatsheets", href: "/cheatsheets" },
+  { label: entry.data.title, href: `/cheatsheets/${entry.slug}` },
+];
 ---
 
 <Layout
@@ -22,7 +29,10 @@ const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=100`;
     description={entry.data.description}
     image={entry.data.image?.src}
     type="article"
+    pubDate={entry.data.pubDate}
 >
+    <SocialShare title={entry.data.title} />
+
     <!-- Print Header (solo visible al imprimir) -->
     <div class="print-header">
         <div
@@ -46,20 +56,7 @@ const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=100`;
     </div>
 
     <main class="w-full max-w-4xl px-6 py-8 mx-auto">
-        <!-- Botón Volver -->
-        <a
-            href="/cheatsheets"
-            class="inline-flex items-center gap-2 group mb-6"
-        >
-            <button
-                class="flex items-center gap-2 px-4 py-2 bg-neutral-900/50 hover:bg-neutral-800 text-gray-400 hover:text-white rounded-lg font-mono text-sm transition-all border border-neutral-800 hover:border-blue-500/50 shadow-sm group-hover:shadow-blue-500/10"
-            >
-                <span class="group-hover:-translate-x-1 transition-transform"
-                    >←</span
-                >
-                Volver a las guías
-            </button>
-        </a>
+        <Breadcrumbs items={breadcrumbItems} />
 
         <!-- Header -->
         <header class="mb-2 space-y-6">

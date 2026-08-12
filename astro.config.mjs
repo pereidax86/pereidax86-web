@@ -9,6 +9,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site: 'https://pereidax86.com',
+  trailingSlash: 'never',
   integrations: [sitemap(), robotsTxt()],
   
   build: {

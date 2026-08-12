@@ -8,6 +8,7 @@ interface Props {
 	robots?: string;
 	image?: string;
 	type?: string;
+	pubDate?: Date;
 }
 
 const {
@@ -16,19 +17,26 @@ const {
 	robots = "index, follow",
 	image = "/og-image.png",
 	type = "profile",
+	pubDate,
 } = Astro.props;
 
 const GA_MEASUREMENT_ID = "G-VV212086YH";
 
+const cleanPathname =
+	Astro.url.pathname.endsWith("/") && Astro.url.pathname !== "/"
+		? Astro.url.pathname.slice(0, -1)
+		: Astro.url.pathname;
+
 const canonicalURL = new URL(
-	Astro.url.pathname,
+	cleanPathname,
 	Astro.site || "https://pereidax86.com",
 );
 
-// --- SCHEMA JSON-LD (Datos Estructurados para Google) ---
-const schemaData = {
-	"@context": "https://schema.org",
+const fullImageURL = new URL(image, Astro.site || Astro.url).href;
+
+const personSchema = {
 	"@type": "Person",
+	"@id": "https://pereidax86.com/#person",
 	name: "Luis Pereida",
 	url: "https://pereidax86.com",
 	image: "https://pereidax86.com/og-image.png",
@@ -48,6 +56,47 @@ const schemaData = {
 		"https://www.facebook.com/people/pereidax86/61559816602008",
 	],
 	description: description,
+};
+
+const schemaGraph =
+	type === "article"
+		? [
+				personSchema,
+				{
+					"@type": "BlogPosting",
+					"@id": `${canonicalURL.href}#article`,
+					isPartOf: {
+						"@type": "WebPage",
+						"@id": canonicalURL.href,
+					},
+					headline: title,
+					description: description,
+					image: fullImageURL,
+					datePublished: pubDate ? pubDate.toISOString() : undefined,
+					author: {
+						"@type": "Person",
+						name: "Luis Pereida",
+						url: "https://pereidax86.com",
+						sameAs: personSchema.sameAs,
+					},
+					publisher: {
+						"@type": "Person",
+						name: "Luis Pereida",
+						url: "https://pereidax86.com",
+						image: "https://pereidax86.com/og-image.png",
+					},
+					mainEntityOfPage: {
+						"@type": "WebPage",
+						"@id": canonicalURL.href,
+					},
+				},
+		  ]
+		: [personSchema];
+
+// --- SCHEMA JSON-LD (Datos Estructurados para Google) ---
+const schemaData = {
+	"@context": "https://schema.org",
+	"@graph": schemaGraph,
 };
 ---
 
@@ -77,11 +126,18 @@ const schemaData = {
 		<meta property="og:description" content={description} />
 		<meta
 			property="og:image"
-			content={new URL(image, Astro.site || Astro.url)}
+			content={fullImageURL}
 		/>
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content={title} />
+
+		{type === "article" && pubDate && (
+			<meta property="article:published_time" content={pubDate.toISOString()} />
+		)}
+		{type === "article" && (
+			<meta property="article:author" content="https://pereidax86.com" />
+		)}
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:creator" content="@pereidax86" />
@@ -89,7 +145,7 @@ const schemaData = {
 		<meta name="twitter:description" content={description} />
 		<meta
 			name="twitter:image"
-			content={new URL(image, Astro.site || Astro.url)}
+			content={fullImageURL}
 		/>
 
 		<script
@@ -121,7 +177,8 @@ const schemaData = {
 		<script
 			async
 			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2399791481519972"
-			crossorigin="anonymous"></script>
+			crossorigin="anonymous"
+			defer></script>
 
 		{/* METRICOOL TRACKER */}
 		<script is:inline>

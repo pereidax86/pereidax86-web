@@ -9,6 +9,16 @@ export interface Props {
 }
 
 const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+
+const cleanPathname =
+    Astro.url.pathname.endsWith("/") && Astro.url.pathname !== "/"
+        ? Astro.url.pathname.slice(0, -1)
+        : Astro.url.pathname;
+
+const canonicalURL = new URL(
+    cleanPathname,
+    Astro.site || "https://pereidax86.com",
+);
 ---
 
 <!doctype html>
@@ -21,6 +31,8 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.png" />
         <meta name="generator" content={Astro.generator} />
+        <link rel="canonical" href={canonicalURL} />
+        <meta property="og:url" content={canonicalURL} />
         <title>{title}</title>
         <meta name="description" content={description} />
 
