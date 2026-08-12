@@ -46,9 +46,6 @@ const breadcrumbItems = [
   type="article"
   pubDate={post.data.pubDate}
 >
-  {/* Componente de compartición flotante lateral en Desktop */}
-  <SocialShare title={post.data.title} />
-
   <main class="w-full max-w-5xl px-4 py-8 mx-auto animate-fade-in">
     {/* Migas de pan (Breadcrumbs) */}
     <Breadcrumbs items={breadcrumbItems} />
@@ -100,6 +97,9 @@ const breadcrumbItems = [
         <Content />
       </div>
     </article>
+
+    {/* --- BLOQUE DE COMPARTIR Y BARRA LATERAL FLOTANTE --- */}
+    <SocialShare title={post.data.title} />
 
     {/* --- ARTÍCULOS RELACIONADOS --- */}
     <RelatedPosts

@@ -31,8 +31,6 @@ const breadcrumbItems = [
     type="article"
     pubDate={entry.data.pubDate}
 >
-    <SocialShare title={entry.data.title} />
-
     <!-- Print Header (solo visible al imprimir) -->
     <div class="print-header">
         <div
@@ -233,6 +231,9 @@ const breadcrumbItems = [
                 </nav>
             </aside>
         </div>
+
+        <!-- Bloque de Compartir (Desktop/Mobile) & Barra Lateral Flotante -->
+        <SocialShare title={entry.data.title} />
 
         <!-- Footer -->
         <footer

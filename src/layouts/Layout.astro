@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import FloatingBanner from "../components/FloatingBanner.astro";
+import SocialShareSidebar from "../components/SocialShareSidebar.astro";
 
 interface Props {
 	title: string;
@@ -205,6 +206,10 @@ const schemaData = {
 		>
 		</div>
 
+		{type === "article" && (
+			<SocialShareSidebar title={title} url={canonicalURL.href} />
+		)}
+
 		<slot />
 
 		<footer class="w-full text-gray-500 text-xs font-mono text-center py-8 mt-auto">
@@ -280,13 +285,17 @@ const schemaData = {
 	}
 
 	@keyframes fadeIn {
-		from {
+		0% {
 			opacity: 0;
 			transform: translateY(10px);
 		}
-		to {
+		99% {
 			opacity: 1;
 			transform: translateY(0);
+		}
+		100% {
+			opacity: 1;
+			transform: none;
 		}
 	}
 	.animate-fade-in {
