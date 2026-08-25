@@ -1,0 +1,134 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  seriesId: string;
+  seriesTitle?: string;
+  currentSlug: string;
+}
+
+const { seriesId, seriesTitle, currentSlug } = Astro.props;
+
+const allPosts: CollectionEntry<"blog">[] = await getCollection("blog");
+const seriesPosts = allPosts
+  .filter((post) => post.data.series === seriesId)
+  .sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0));
+
+if (seriesPosts.length === 0) return null;
+
+const currentIndex = seriesPosts.findIndex((p) => p.slug === currentSlug);
+const currentPostNumber = currentIndex !== -1 ? currentIndex + 1 : 1;
+const totalPosts = seriesPosts.length;
+const displayTitle = seriesTitle || seriesPosts[0]?.data.seriesTitle || "Serie de Artículos";
+
+const prevPost = currentIndex > 0 ? seriesPosts[currentIndex - 1] : null;
+const nextPost = currentIndex >= 0 && currentIndex < totalPosts - 1 ? seriesPosts[currentIndex + 1] : null;
+---
+
+<div class="my-10 p-6 md:p-8 rounded-2xl bg-neutral-900/90 border border-purple-900/40 shadow-xl backdrop-blur-md relative overflow-hidden group">
+  <!-- Glow decorativo superior -->
+  <div class="absolute -top-24 -left-24 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 space-y-5">
+    <!-- Header de la serie -->
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-800 pb-4">
+      <div class="space-y-1">
+        <span class="inline-block text-[11px] font-mono font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-md bg-purple-950/80 text-purple-300 border border-purple-800/50">
+          📚 SERIE DE ARTÍCULOS
+        </span>
+        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">
+          {displayTitle}
+        </h3>
+      </div>
+      <div class="text-xs font-mono font-semibold px-3 py-1.5 rounded-full bg-neutral-800/80 text-gray-300 border border-neutral-700">
+        Entrega <span class="text-purple-400 font-bold">{currentPostNumber}</span> de <span class="text-purple-400 font-bold">{totalPosts}</span>
+      </div>
+    </div>
+
+    <!-- Lista de entregas de la serie -->
+    <details class="group/details" open>
+      <summary class="cursor-pointer text-xs font-mono text-gray-400 hover:text-purple-300 transition-colors flex items-center justify-between py-1 select-none">
+        <span>Índice de la serie</span>
+        <span class="text-purple-400 group-open/details:rotate-180 transition-transform duration-300">▼</span>
+      </summary>
+
+      <ol class="mt-3 space-y-2 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+        {
+          seriesPosts.map((post, index: number) => {
+            const isCurrent = post.slug === currentSlug;
+            const itemNum = String(index + 1).padStart(2, "0");
+            return (
+              <li>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class={`flex items-center gap-3 p-2.5 rounded-xl text-sm transition-all duration-200 ${
+                    isCurrent
+                      ? "bg-purple-950/60 border border-purple-500/50 text-white font-medium shadow-sm"
+                      : "hover:bg-neutral-800/60 text-gray-300 hover:text-white"
+                  }`}
+                >
+                  <span
+                    class={`font-mono text-xs font-bold px-2 py-0.5 rounded-md ${
+                      isCurrent
+                        ? "bg-purple-600 text-white"
+                        : "bg-neutral-800 text-gray-400"
+                    }`}
+                  >
+                    {itemNum}
+                  </span>
+                  <span class="truncate flex-1">{post.data.title}</span>
+                  {isCurrent && (
+                    <span class="text-xs font-mono text-purple-400 font-semibold shrink-0">
+                      ← Leyendo
+                    </span>
+                  )}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ol>
+    </details>
+
+    <!-- Navegación Rápida (Anterior / Siguiente) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+      {
+        prevPost ? (
+          <a
+            href={`/blog/${prevPost.slug}`}
+            class="flex flex-col p-3 rounded-xl bg-neutral-800/40 hover:bg-neutral-800 border border-neutral-800 hover:border-purple-800/50 transition-all group/prev"
+          >
+            <span class="text-[11px] font-mono text-gray-400 group-hover/prev:text-purple-300 flex items-center gap-1">
+              ← Entrega Anterior
+            </span>
+            <span class="text-xs font-medium text-gray-200 truncate mt-1">
+              {prevPost.data.title}
+            </span>
+          </a>
+        ) : (
+          <div class="hidden sm:block"></div>
+        )
+      }
+
+      {
+        nextPost ? (
+          <a
+            href={`/blog/${nextPost.slug}`}
+            class="flex flex-col p-3 rounded-xl bg-neutral-800/40 hover:bg-neutral-800 border border-neutral-800 hover:border-purple-800/50 transition-all text-right group/next"
+          >
+            <span class="text-[11px] font-mono text-gray-400 group-hover/next:text-purple-300 flex items-center justify-end gap-1">
+              Siguiente Entrega →
+            </span>
+            <span class="text-xs font-medium text-gray-200 truncate mt-1">
+              {nextPost.data.title}
+            </span>
+          </a>
+        ) : (
+          <div class="hidden sm:block"></div>
+        )
+      }
+    </div>
+  </div>
+</div>

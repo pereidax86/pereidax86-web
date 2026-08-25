@@ -6,6 +6,7 @@ import Layout from "../../layouts/Layout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import SocialShare from "../../components/SocialShare.astro";
 import RelatedPosts from "../../components/RelatedPosts.astro";
+import SeriesBox from "../../components/SeriesBox.astro";
 import { getReadingTime } from "../../utils/readingTime";
 
 export async function getStaticPaths() {
@@ -91,11 +92,37 @@ const breadcrumbItems = [
         )
       }
 
+      {/* --- NAVEGACIÓN DE SERIE (SUPERIOR) --- */}
+      {
+        post.data.series && (
+          <div class="max-w-4xl mx-auto mb-8">
+            <SeriesBox
+              seriesId={post.data.series}
+              seriesTitle={post.data.seriesTitle}
+              currentSlug={post.slug}
+            />
+          </div>
+        )
+      }
+
       <div
         class="markdown-content max-w-4xl mx-auto text-gray-300 leading-relaxed text-lg"
       >
         <Content />
       </div>
+
+      {/* --- NAVEGACIÓN DE SERIE (INFERIOR) --- */}
+      {
+        post.data.series && (
+          <div class="max-w-4xl mx-auto mt-10">
+            <SeriesBox
+              seriesId={post.data.series}
+              seriesTitle={post.data.seriesTitle}
+              currentSlug={post.slug}
+            />
+          </div>
+        )
+      }
     </article>
 
     {/* --- BLOQUE DE COMPARTIR Y BARRA LATERAL FLOTANTE --- */}
