@@ -1,0 +1,43 @@
+---
+// ScrollToTop Component
+---
+
+<button
+	id="scroll-top-btn"
+	aria-label="Volver arriba"
+	class="fixed bottom-8 right-8 p-3 bg-neutral-900/80 hover:bg-blue-600 text-white rounded-full shadow-lg border border-neutral-700 hover:border-blue-500 transition-all duration-300 transform translate-y-20 opacity-0 z-50 backdrop-blur-sm group"
+>
+	<svg
+		class="w-6 h-6 group-hover:-translate-y-1 transition-transform"
+		fill="none"
+		stroke="currentColor"
+		viewBox="0 0 24 24"
+	>
+		<path
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			stroke-width="2"
+			d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+	</svg>
+</button>
+
+<script>
+	const scrollBtn = document.getElementById("scroll-top-btn");
+
+	window.addEventListener("scroll", () => {
+		if (window.scrollY > 300) {
+			scrollBtn?.classList.remove("translate-y-20", "opacity-0");
+			scrollBtn?.classList.add("translate-y-0", "opacity-100");
+		} else {
+			scrollBtn?.classList.add("translate-y-20", "opacity-0");
+			scrollBtn?.classList.remove("translate-y-0", "opacity-100");
+		}
+	});
+
+	scrollBtn?.addEventListener("click", () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	});
+</script>

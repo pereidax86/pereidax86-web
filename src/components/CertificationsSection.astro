@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+
+interface CertMeta {
+	id: string;
+	label: string;
+}
+
+interface CertItem {
+	name: string;
+	image: ImageMetadata;
+	url: string;
+	isCredly?: boolean;
+	meta?: CertMeta;
+}
+
+interface Props {
+	certTop: CertItem;
+	certsMiddle: CertItem[];
+	certBottom: CertItem;
+}
+
+const { certTop, certsMiddle, certBottom } = Astro.props;
+---
+
+<div class="w-full flex flex-col items-center gap-6">
+	<h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+		Certificaciones Oficiales
+	</h2>
+
+	{/* TOP */}
+	<div class="w-full flex justify-center">
+		<div class="flex flex-col items-center gap-2 group relative">
+			<a
+				href={certTop.url}
+				target="_blank"
+				class="relative w-32 h-32 flex items-center justify-center rounded-full transition-all duration-300 z-10"
+			>
+				<div
+					class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)] transition-all duration-500"
+				>
+				</div>
+				<Image
+					src={certTop.image}
+					alt={certTop.name}
+					class="w-full h-full object-contain p-4 drop-shadow-xl transform group-hover:scale-110 transition-transform duration-300"
+				/>
+			</a>
+			<div class="flex flex-col items-center z-20">
+				<span class="text-xs font-bold text-gray-200 group-hover:text-blue-400 transition-colors">
+					{certTop.name}
+				</span>
+				{
+					certTop.meta && (
+						<div class="flex flex-col items-center mt-1 bg-neutral-950 px-3 py-1.5 rounded border border-neutral-800 group-hover:border-blue-500/30 transition-colors shadow-lg">
+							<span class="text-[9px] text-gray-500 uppercase tracking-wider">
+								{certTop.meta.label}
+							</span>
+							<span class="text-[11px] font-mono text-blue-400 select-all cursor-text">
+								{certTop.meta.id}
+							</span>
+						</div>
+					)
+				}
+			</div>
+		</div>
+	</div>
+
+	{/* MIDDLE */}
+	<div class="w-full grid grid-cols-3 gap-4 md:gap-8 justify-items-center max-w-lg">
+		{
+			certsMiddle.map((cert) => (
+				<div class="flex flex-col items-center gap-2 group relative w-full">
+					<a
+						href={cert.url}
+						target="_blank"
+						class="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-full transition-all duration-300"
+					>
+						<div class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(147,51,234,0.3)] transition-all duration-500" />
+						<Image
+							src={cert.image}
+							alt={cert.name}
+							class="w-full h-full object-contain p-3 drop-shadow-md transform group-hover:scale-110 transition-transform duration-300"
+						/>
+					</a>
+					<span class="text-xs font-medium text-gray-400 group-hover:text-white transition-colors text-center leading-tight">
+						{cert.name}
+					</span>
+				</div>
+			))
+		}
+	</div>
+
+	{/* BOTTOM */}
+	<div class="w-full flex justify-center">
+		<div class="flex flex-col items-center gap-2 group relative">
+			<a
+				href={certBottom.url}
+				target="_blank"
+				class="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-full transition-all duration-300"
+			>
+				<div
+					class="absolute inset-0 rounded-full border border-neutral-800 bg-neutral-900/40 group-hover:border-blue-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.3)] transition-all duration-500"
+				>
+				</div>
+				<Image
+					src={certBottom.image}
+					alt={certBottom.name}
+					class="w-full h-full object-contain p-3 drop-shadow-md transform group-hover:scale-110 transition-transform duration-300"
+				/>
+			</a>
+			<span class="text-xs font-medium text-gray-400 group-hover:text-white transition-colors text-center leading-tight">
+				{certBottom.name}
+			</span>
+		</div>
+	</div>
+</div>

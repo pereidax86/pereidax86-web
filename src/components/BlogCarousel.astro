@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="w-full pt-2 pb-8 flex flex-col items-center gap-6">
+	<h2 class="text-2xl md:text-3xl font-bold text-white text-center">Bitácora de sysadmin</h2>
+
+	<div class="w-full relative group px-4 md:px-12">
+		{/* Botón Izquierdo */}
+		<button
+			id="carousel-prev"
+			class="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-neutral-900/80 border border-neutral-700 rounded-full text-white hover:bg-blue-600 hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-lg backdrop-blur-sm"
+			aria-label="Anterior"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="w-6 h-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+				></path>
+			</svg>
+		</button>
+
+		{/* Scroll Container */}
+		<div
+			id="carousel-container"
+			class="flex overflow-x-auto gap-4 py-4 px-2 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+		>
+			{
+				posts.map((post) => (
+					<a
+						href={`/blog/${post.slug}`}
+						class="snap-center shrink-0 w-80 md:w-96 first:pl-2 last:pr-2 block hover:scale-[1.02] transition-transform duration-300"
+					>
+						<article class="h-full bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden hover:border-blue-500/30 transition-colors flex flex-col">
+							<div class="relative aspect-video overflow-hidden">
+								{post.data.image ? (
+									<Image
+										src={post.data.image}
+										alt={post.data.title}
+										class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+									/>
+								) : (
+									<div class="w-full h-full flex items-center justify-center bg-neutral-900">
+										<span class="text-4xl">🐧</span>
+									</div>
+								)}
+								<div class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 to-transparent" />
+							</div>
+							<div class="p-4 flex flex-col flex-1 gap-2">
+								<h4 class="text-white font-bold leading-tight line-clamp-2">
+									{post.data.title}
+								</h4>
+								<p class="text-gray-400 text-sm line-clamp-2 flex-1">
+									{post.data.description}
+								</p>
+								<div class="flex items-center justify-between mt-auto pt-2 text-xs font-mono text-blue-400">
+									<span>{post.data.pubDate.toLocaleDateString()}</span>
+									<span class="group-hover:translate-x-1 transition-transform">
+										Leer más →
+									</span>
+								</div>
+							</div>
+						</article>
+					</a>
+				))
+			}
+		</div>
+
+		{/* Botón Derecho */}
+		<button
+			id="carousel-next"
+			class="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-neutral-900/80 border border-neutral-700 rounded-full text-white hover:bg-blue-600 hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-lg backdrop-blur-sm"
+			aria-label="Siguiente"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="w-6 h-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+				></path>
+			</svg>
+		</button>
+	</div>
+</div>
+
+<script>
+	const container = document.getElementById("carousel-container");
+	const prevBtn = document.getElementById("carousel-prev");
+	const nextBtn = document.getElementById("carousel-next");
+
+	if (container && prevBtn && nextBtn) {
+		const scrollAmount = 400;
+
+		prevBtn.addEventListener("click", () => {
+			container.scrollBy({
+				left: -scrollAmount,
+				behavior: "smooth",
+			});
+		});
+
+		nextBtn.addEventListener("click", () => {
+			container.scrollBy({
+				left: scrollAmount,
+				behavior: "smooth",
+			});
+		});
+	}
+</script>

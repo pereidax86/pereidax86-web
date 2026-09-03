@@ -1,0 +1,16 @@
+---
+interface Props {
+	philosophy: string;
+}
+
+const { philosophy } = Astro.props;
+---
+
+<div
+	class="w-full bg-neutral-900/30 border-l-4 border-purple-600 rounded-r-xl p-6 italic text-gray-400 text-sm leading-relaxed"
+>
+	<span class="block text-purple-400 font-bold text-xs not-italic mb-1 uppercase tracking-wider">
+		Mi Filosofía
+	</span>
+	"{philosophy}"
+</div>
