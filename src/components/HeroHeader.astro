@@ -1,7 +1,23 @@
 ---
+import PhilosophyCard from "./PhilosophyCard.astro";
+import CertificationsList from "./CertificationsList.astro";
+
 interface TechItem {
 	name: string;
 	icon: string;
+}
+
+interface CertMeta {
+	id: string;
+	label: string;
+}
+
+interface CertItem {
+	name: string;
+	image: ImageMetadata;
+	url: string;
+	isCredly?: boolean;
+	meta?: CertMeta;
 }
 
 interface Props {
@@ -9,76 +25,97 @@ interface Props {
 	bioText: string;
 	techStack: TechItem[];
 	currentStatus: string;
+	philosophy: string;
+	certTop: CertItem;
+	certsMiddle: CertItem[];
+	certBottom: CertItem;
 }
 
-const { gravatarUrl, bioText, techStack, currentStatus } = Astro.props;
+const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, certsMiddle, certBottom } = Astro.props;
 ---
 
-<div class="text-center space-y-6 w-full">
-	<div class="relative w-40 h-40 mx-auto group">
-		<div
-			class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
-		>
+<div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
+	{/* COLUMNA 1: PERFIL E IDENTIDAD */}
+	<div class="flex flex-col items-center justify-center text-center space-y-5 bg-neutral-900/30 border border-neutral-800/60 rounded-2xl p-6 lg:p-8 backdrop-blur-sm shadow-xl">
+		{/* GRAVATAR AVATAR */}
+		<div class="relative w-44 h-44 lg:w-56 lg:h-56 group">
+			<div
+				class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+			>
+			</div>
+			<img
+				src={gravatarUrl}
+				alt="Luis Pereida"
+				class="relative w-full h-full rounded-full object-cover bg-neutral-900 border-4 border-neutral-950 shadow-2xl"
+			/>
+			<div
+				class="absolute bottom-3 right-3 bg-neutral-900 rounded-full p-1.5 border border-neutral-800"
+				title="SysAdmin Active"
+			>
+				<div class="w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
+			</div>
 		</div>
-		<img
-			src={gravatarUrl}
-			alt="Luis Pereida"
-			class="relative w-full h-full rounded-full object-cover bg-neutral-900 border-4 border-neutral-950 shadow-2xl"
-		/>
-		<div
-			class="absolute bottom-2 right-2 bg-neutral-900 rounded-full p-1 border border-neutral-800"
-			title="SysAdmin Active"
-		>
-			<div class="w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
+
+		{/* NOMBRES Y TITULOS */}
+		<div class="space-y-2 flex flex-col items-center">
+			<p class="text-base lg:text-xl text-blue-400 font-mono font-bold text-center">
+				Yo soy
+			</p>
+			<h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">
+				Luis Pereida
+			</h1>
+			<p
+				class="text-lg md:text-xl lg:text-2xl text-blue-400 font-mono font-bold text-center hover:text-white transition-colors duration-500 cursor-default mt-1"
+				style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);"
+			>
+				y hago ciberseguridad para todos
+			</p>
+			<p class="text-base lg:text-lg text-gray-300 font-mono mt-1 tracking-wide h-7 flex items-center gap-1">
+				<span id="typewriter" class="text-gray-200"></span>
+				<span class="animate-pulse bg-gray-200 w-2.5 h-5 block"></span>
+			</p>
+
+			{/* STATUS BAR */}
+			<div
+				class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-green-500/30 text-green-400 text-xs lg:text-sm font-mono mt-3 shadow-md"
+			>
+				<span class="relative flex h-2.5 w-2.5">
+					<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+					<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+				</span>
+				{currentStatus}
+			</div>
 		</div>
 	</div>
 
-	<div class="space-y-2 flex flex-col items-center">
-		<p class="text-lg md:text-2xl text-blue-400 font-mono font-bold text-center mt-2">
-			Yo soy
-		</p>
-		<h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
-			Luis Pereida
-		</h1>
-		<p
-			class="text-lg md:text-2xl text-blue-400 font-mono font-bold text-center mt-2 hover:text-white transition-colors duration-500 cursor-default"
-			style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);"
-		>
-			y hago ciberseguridad para todos
-		</p>
-		<p class="text-base text-gray-400/80 font-mono mt-2 tracking-wide h-6 flex items-center gap-1">
-			<span id="typewriter" class="text-gray-300"></span>
-			<span class="animate-pulse bg-gray-300 w-2 h-4 block"></span>
-		</p>
-
-		{/* STATUS BAR */}
+	{/* COLUMNA 2: BIO Y FILOSOFÍA (CENTRADAS) */}
+	<div class="flex flex-col justify-between gap-6 w-full text-center">
+		{/* TARJETA DE BIO Y TECH STACK */}
 		<div
-			class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900/80 border border-green-500/20 text-green-400/90 text-xs font-mono mt-2"
+			class="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-6 lg:p-8 text-gray-200 leading-relaxed text-base lg:text-lg font-mono text-center flex-1 flex flex-col justify-between items-center shadow-xl"
 		>
-			<span class="relative flex h-2 w-2">
-				<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-				<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-			</span>
-			{currentStatus}
+			<p class="text-center">{bioText}</p>
+
+			{/* TECH STACK PILLS */}
+			<div class="flex flex-wrap justify-center gap-2 mt-6 pt-6 border-t border-neutral-800/60 w-full">
+				{
+					techStack.map((tech) => (
+						<span class="px-3 py-1.5 rounded-lg bg-neutral-950 border border-neutral-800 text-xs lg:text-sm text-blue-300 font-bold hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default flex items-center gap-2">
+							<span>{tech.icon}</span>
+							{tech.name}
+						</span>
+					))
+				}
+			</div>
 		</div>
+
+		{/* TARJETA DE FILOSOFÍA */}
+		<PhilosophyCard philosophy={philosophy} />
 	</div>
 
-	<div
-		class="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 text-gray-300 leading-relaxed text-sm md:text-base max-w-xl mx-auto font-mono text-pretty"
-	>
-		<p>{bioText}</p>
-
-		{/* TECH STACK PILLS */}
-		<div class="flex flex-wrap justify-center gap-2 mt-4 pt-4 border-t border-neutral-800/50">
-			{
-				techStack.map((tech) => (
-					<span class="px-2.5 py-1 rounded-md bg-neutral-950 border border-neutral-800 text-xs text-blue-300 font-bold hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default flex items-center gap-1.5">
-						<span>{tech.icon}</span>
-						{tech.name}
-					</span>
-				))
-			}
-		</div>
+	{/* COLUMNA 3: CERTIFICACIONES OFICIALES */}
+	<div class="w-full">
+		<CertificationsList certTop={certTop} certsMiddle={certsMiddle} certBottom={certBottom} />
 	</div>
 </div>
 

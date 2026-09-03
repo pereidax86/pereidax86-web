@@ -3,13 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 import HeroHeader from "../components/HeroHeader.astro";
-import PhilosophyCard from "../components/PhilosophyCard.astro";
-import CertificationsSection from "../components/CertificationsSection.astro";
 import SocialGrid from "../components/SocialGrid.astro";
-import CheatsheetsSection from "../components/CheatsheetsSection.astro";
 import BlogCarousel from "../components/BlogCarousel.astro";
-import NavigationLinks from "../components/NavigationLinks.astro";
-import GithubSnake from "../components/GithubSnake.astro";
+import CheatsheetsSection from "../components/CheatsheetsSection.astro";
+import PresentationsSection from "../components/PresentationsSection.astro";
+import Footer from "../components/Footer.astro";
 
 import cehBadge from "../assets/badges/CEH_2E345519D3F7.png";
 import rhcsaBadge from "../assets/badges/rhcsa.png";
@@ -29,10 +27,15 @@ const sortedCheatsheets = allCheatsheets
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
 
+// --- PRESENTATIONS DATA ---
+const allPresentations = await getCollection("presentations");
+const sortedPresentations = allPresentations
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+
 // --- CONFIGURACIÓN ---
 const GRAVATAR_HASH = "4949755b64eb223f0fa2b210aaf9707c";
 const GRAVATAR_URL = `https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=400`;
-const EMAIL_CONTACTO = "luis@pereidax86.com";
 
 // --- DATOS DEL PERFIL ---
 const pageTitle = "Luis Pereida | @pereidax86";
@@ -94,32 +97,38 @@ const certBottom = {
 ---
 
 <Layout title={pageTitle} description={bioText}>
-	<main class="w-full max-w-2xl px-6 py-12 flex flex-col items-center gap-8 animate-fade-in">
-		<HeroHeader
-			gravatarUrl={GRAVATAR_URL}
-			bioText={bioText}
-			techStack={techStack}
-			currentStatus={currentStatus}
-		/>
+	<div class="h-screen w-full overflow-y-auto snap-y snap-mandatory scroll-smooth relative">
+		<main class="w-full px-6 md:px-12 lg:px-16 mx-auto flex flex-col animate-fade-in pb-24">
+			{/* SECCIÓN 1: PRESENTACIÓN (HERO 3 COLUMNAS) */}
+			<section class="min-h-screen w-full snap-start flex items-center justify-center py-12">
+				<HeroHeader
+					gravatarUrl={GRAVATAR_URL}
+					bioText={bioText}
+					techStack={techStack}
+					currentStatus={currentStatus}
+					philosophy={philosophy}
+					certTop={certTop}
+					certsMiddle={certsMiddle}
+					certBottom={certBottom}
+				/>
+			</section>
 
-		<hr class="w-full border-neutral-800/50" />
+			{/* SECCIÓN 2: REDES SOCIALES & BITÁCORA DEL SYSADMIN */}
+			<section class="min-h-screen w-full snap-start flex flex-col justify-center gap-12 py-12">
+				<SocialGrid />
+				<BlogCarousel posts={sortedPosts} />
+			</section>
 
-		<PhilosophyCard philosophy={philosophy} />
+			{/* SECCIÓN 3: RECURSOS & CONOCIMIENTO (GUÍAS RÁPIDAS & PRESENTACIONES SIMÉTRICAS) */}
+			<section class="min-h-screen w-full snap-start flex flex-col justify-center py-12">
+				<div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+					<CheatsheetsSection cheatsheets={sortedCheatsheets} />
+					<PresentationsSection presentations={sortedPresentations} />
+				</div>
+			</section>
+		</main>
 
-		<CertificationsSection certTop={certTop} certsMiddle={certsMiddle} certBottom={certBottom} />
-
-		<SocialGrid />
-
-		<hr class="w-full border-neutral-800/50" />
-
-		<CheatsheetsSection cheatsheets={sortedCheatsheets} />
-
-		<hr class="w-full border-neutral-800/50" />
-
-		<BlogCarousel posts={sortedPosts} />
-
-		<NavigationLinks emailContacto={EMAIL_CONTACTO} />
-	</main>
-
-	<GithubSnake />
+		{/* FOOTER DINÁMICO (Aparece a partir de la 2ª sección) */}
+		<Footer />
+	</div>
 </Layout>

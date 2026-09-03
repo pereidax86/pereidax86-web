@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	presentations: CollectionEntry<"presentations">[];
+}
+
+const { presentations } = Astro.props;
+---
+
+<div class="w-full bg-neutral-900/40 backdrop-blur-sm border border-neutral-800 rounded-2xl p-6 lg:p-8 flex flex-col justify-between h-full shadow-xl gap-6">
+	<div class="text-center space-y-1">
+		<h2 class="text-2xl md:text-3xl font-bold text-white text-center">
+			📽️ Presentaciones Tech
+		</h2>
+		<p class="text-sm text-gray-400 font-mono">
+			Charlas y conferencias públicas sobre tecnología
+		</p>
+	</div>
+
+	<div class="w-full flex flex-col gap-4 flex-1 justify-start">
+		{
+			presentations.map((pres) => (
+				<a
+					href={`/presentations/${pres.slug}`}
+					class="group flex items-center justify-between p-4 bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl hover:border-purple-500/50 hover:bg-neutral-900/80 transition-all duration-300"
+				>
+					<div class="flex items-center gap-3 min-w-0">
+						<span class="text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">
+							📽️
+						</span>
+						<div class="min-w-0">
+							<h3 class="text-sm font-bold text-gray-200 group-hover:text-purple-400 transition-colors truncate">
+								{pres.data.title}
+							</h3>
+							<p class="text-xs text-gray-400 line-clamp-1">
+								{pres.data.description}
+							</p>
+						</div>
+					</div>
+					<span class="text-xs font-mono text-purple-400 flex-shrink-0 ml-2 group-hover:translate-x-1 transition-transform">
+						Ver →
+					</span>
+				</a>
+			))
+		}
+
+		{
+			presentations.length === 0 && (
+				<div class="p-6 text-center border border-dashed border-neutral-800 rounded-xl text-gray-500 font-mono text-xs">
+					Próximamente más presentaciones tech.
+				</div>
+			)
+		}
+	</div>
+
+	<div class="text-center pt-2 border-t border-neutral-800/60">
+		<a href="/presentations" class="text-xs lg:text-sm font-mono text-purple-400 hover:text-purple-300 hover:underline">
+			Ver todas las presentaciones →
+		</a>
+	</div>
+</div>

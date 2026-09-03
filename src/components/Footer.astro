@@ -1,18 +1,86 @@
 ---
-// Footer Component
+// Footer Component con aparición dinámica flotante desde la 2ª pantalla
 ---
 
-<footer class="w-full text-gray-500 text-xs font-mono text-center py-8 mt-auto">
-	<p>© 2026 Luis Pereida.</p>
-	<p class="mt-1">Hecho con Astro 🚀 & Tailwind 🎨</p>
-	<p class="mt-2">
-		Desarrollado y mantenido por
-		<a
-			href="https://sysadminctl.services"
-			target="_blank"
-			class="text-blue-500/80 hover:text-blue-400 underline decoration-dotted transition-colors font-bold"
-		>
-			sysadminctl.services🛡️
-		</a>
-	</p>
+<footer
+	id="global-footer"
+	class="fixed bottom-4 left-4 right-4 md:left-8 md:right-8 lg:left-12 lg:right-12 z-50 bg-neutral-950/90 backdrop-blur-md border border-neutral-800/80 rounded-2xl px-6 py-3 transition-all duration-500 transform translate-y-28 opacity-0 pointer-events-none shadow-2xl"
+>
+	<div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+		{/* LADO IZQUIERDO: DERECHOS Y ENLACES OFICIALES (DOS LÍNEAS, SIN EMOJIS) */}
+		<div class="text-gray-400 text-xs font-mono text-center md:text-left space-y-1">
+			<p class="text-gray-300">
+				© 2026 Luis Pereida - Hecho con
+				<a
+					href="https://astro.build"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-gray-200 hover:text-blue-400 underline decoration-dotted transition-colors font-semibold"
+				>
+					Astro
+				</a>
+				y
+				<a
+					href="https://tailwindcss.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-gray-200 hover:text-blue-400 underline decoration-dotted transition-colors font-semibold"
+				>
+					Tailwind
+				</a>
+			</p>
+			<p class="text-gray-400">
+				Desarrollado y mantenido por
+				<a
+					href="https://sysadminctl.services"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-blue-400 hover:text-blue-300 underline decoration-dotted transition-colors font-bold"
+				>
+					sysadminctl.services
+				</a>
+			</p>
+		</div>
+
+		{/* LADO DERECHO: GITHUB ACTIVITY SNAKE */}
+		<div class="flex items-center gap-3">
+			<div class="bg-neutral-900/90 border border-neutral-800 rounded-xl p-2 flex items-center gap-3 shadow-inner">
+				<div class="flex flex-col gap-0.5 text-[10px] font-mono text-gray-400 flex-shrink-0 border-r border-neutral-800/80 pr-3">
+					<span class="text-blue-400 font-bold">/var/log/github</span>
+					<span class="text-green-400 font-semibold">ACTIVE</span>
+				</div>
+				<img
+					src="https://raw.githubusercontent.com/pereidax86/pereidax86/output/github-contribution-grid-snake-dark.svg"
+					alt="GitHub Snake Activity"
+					class="h-7 md:h-9 object-contain opacity-90 hover:opacity-100 transition-opacity"
+				/>
+			</div>
+		</div>
+	</div>
 </footer>
+
+<script>
+	const globalFooter = document.getElementById("global-footer");
+	const heroSection = document.querySelector("section");
+
+	if (globalFooter && heroSection) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						// Estamos en la 1ª pantalla (Hero) -> ocultar footer
+						globalFooter.classList.add("translate-y-28", "opacity-0", "pointer-events-none");
+						globalFooter.classList.remove("translate-y-0", "opacity-100", "pointer-events-auto");
+					} else {
+						// Pasamos a la 2ª pantalla o posterior -> mostrar footer
+						globalFooter.classList.remove("translate-y-28", "opacity-0", "pointer-events-none");
+						globalFooter.classList.add("translate-y-0", "opacity-100", "pointer-events-auto");
+					}
+				});
+			},
+			{ threshold: 0.3 }
+		);
+
+		observer.observe(heroSection);
+	}
+</script>
