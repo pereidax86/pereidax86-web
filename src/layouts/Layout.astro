@@ -12,6 +12,7 @@ interface Props {
 	image?: string;
 	type?: string;
 	pubDate?: Date;
+	hideFooter?: boolean;
 }
 
 const {
@@ -21,7 +22,11 @@ const {
 	image = "/og-image.png",
 	type = "profile",
 	pubDate,
+	hideFooter = false,
 } = Astro.props;
+
+const isPresentationPage = Astro.url.pathname.startsWith("/presentations");
+const shouldHideFooter = hideFooter || isPresentationPage;
 
 const GA_MEASUREMENT_ID = "G-VV212086YH";
 
@@ -202,7 +207,7 @@ const schemaData = {
 	</head>
 
 	<body
-		class="bg-neutral-950 text-gray-200 font-sans antialiased min-h-screen flex flex-col items-center selection:bg-blue-500 selection:text-white"
+		class="bg-neutral-950 text-gray-200 font-sans antialiased min-h-screen w-full flex flex-col selection:bg-blue-500 selection:text-white"
 	>
 		<div
 			class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
@@ -215,7 +220,7 @@ const schemaData = {
 
 		<slot />
 
-		<Footer />
+		{!shouldHideFooter && <Footer />}
 
 		<FloatingBanner />
 

@@ -54,7 +54,7 @@ const techStack = [
 	{ name: "Tailwind", icon: "🎨" },
 ];
 
-const currentStatus = "🌱 Learning: CISSP & Advanced Red Teaming";
+const currentStatus = "Learning: CISSP & Advanced Red Teaming";
 const philosophy =
 	"Creo que cualquier concepto técnico complejo puede explicarse con una analogía simple. Mi meta es romper barreras y hacer el conocimiento accesible para todos.";
 
@@ -96,11 +96,11 @@ const certBottom = {
 };
 ---
 
-<Layout title={pageTitle} description={bioText}>
-	<div class="h-screen w-full overflow-y-auto snap-y snap-mandatory scroll-smooth relative">
-		<main class="w-full px-6 md:px-12 lg:px-16 mx-auto flex flex-col animate-fade-in pb-24">
-			{/* SECCIÓN 1: PRESENTACIÓN (HERO 3 COLUMNAS) */}
-			<section class="min-h-screen w-full snap-start flex items-center justify-center py-12">
+<Layout title={pageTitle} description={bioText} hideFooter={true}>
+	<div class="h-screen w-full overflow-y-auto snap-y snap-mandatory scroll-smooth relative flex flex-col animate-fade-in">
+		{/* SECCIÓN 1: PRESENTACIÓN (HERO 3 COLUMNAS) */}
+		<section class="min-h-screen w-full snap-start flex items-center justify-center px-6 md:px-12 lg:px-16 py-6 sm:py-8 lg:py-10 2xl:py-12">
+			<div class="w-full max-w-7xl mx-auto">
 				<HeroHeader
 					gravatarUrl={GRAVATAR_URL}
 					bioText={bioText}
@@ -111,24 +111,24 @@ const certBottom = {
 					certsMiddle={certsMiddle}
 					certBottom={certBottom}
 				/>
-			</section>
+			</div>
+		</section>
 
-			{/* SECCIÓN 2: REDES SOCIALES & BITÁCORA DEL SYSADMIN */}
-			<section class="min-h-screen w-full snap-start flex flex-col justify-center gap-12 py-12">
+		{/* SECCIÓN 2: REDES SOCIALES & BITÁCORA DEL SYSADMIN */}
+		<section class="min-h-screen w-full snap-start flex flex-col justify-center gap-12 px-6 md:px-12 lg:px-16 py-12">
+			<div class="w-full max-w-7xl mx-auto flex flex-col justify-center gap-12">
 				<SocialGrid />
 				<BlogCarousel posts={sortedPosts} />
-			</section>
+			</div>
+		</section>
 
-			{/* SECCIÓN 3: RECURSOS & CONOCIMIENTO (GUÍAS RÁPIDAS & PRESENTACIONES SIMÉTRICAS) */}
-			<section class="min-h-screen w-full snap-start flex flex-col justify-center py-12">
-				<div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-					<CheatsheetsSection cheatsheets={sortedCheatsheets} />
-					<PresentationsSection presentations={sortedPresentations} />
-				</div>
-			</section>
-		</main>
-
-		{/* FOOTER DINÁMICO (Aparece a partir de la 2ª sección) */}
-		<Footer />
+		{/* SECCIÓN 3: RECURSOS & CONOCIMIENTO + FOOTER (100% BORDE A BORDE) */}
+		<section class="min-h-screen w-full snap-start flex flex-col justify-between pt-6 sm:pt-8 2xl:pt-10 pb-0">
+			<div class="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch my-auto py-2">
+				<CheatsheetsSection cheatsheets={sortedCheatsheets} />
+				<PresentationsSection presentations={sortedPresentations} />
+			</div>
+			<Footer />
+		</section>
 	</div>
 </Layout>

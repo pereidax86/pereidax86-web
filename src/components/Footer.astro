@@ -1,14 +1,11 @@
 ---
-// Footer Component con aparición dinámica flotante desde la 2ª pantalla
+// Footer Component (Estático al final del flujo de página)
 ---
 
-<footer
-	id="global-footer"
-	class="fixed bottom-4 left-4 right-4 md:left-8 md:right-8 lg:left-12 lg:right-12 z-50 bg-neutral-950/90 backdrop-blur-md border border-neutral-800/80 rounded-2xl px-6 py-3 transition-all duration-500 transform translate-y-28 opacity-0 pointer-events-none shadow-2xl"
->
+<footer class="w-full bg-neutral-950 border-t border-neutral-800/80 px-6 md:px-12 py-6 z-40">
 	<div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 		{/* LADO IZQUIERDO: DERECHOS Y ENLACES OFICIALES (DOS LÍNEAS, SIN EMOJIS) */}
-		<div class="text-gray-400 text-xs font-mono text-center md:text-left space-y-1">
+		<div class="text-gray-400 text-xs md:text-sm font-mono text-center md:text-left space-y-1">
 			<p class="text-gray-300">
 				© 2026 Luis Pereida - Hecho con
 				<a
@@ -42,45 +39,22 @@
 			</p>
 		</div>
 
-		{/* LADO DERECHO: GITHUB ACTIVITY SNAKE */}
+		{/* LADO DERECHO: GITHUB ACTIVITY SNAKE (AMPLIADO) */}
 		<div class="flex items-center gap-3">
-			<div class="bg-neutral-900/90 border border-neutral-800 rounded-xl p-2 flex items-center gap-3 shadow-inner">
-				<div class="flex flex-col gap-0.5 text-[10px] font-mono text-gray-400 flex-shrink-0 border-r border-neutral-800/80 pr-3">
+			<div class="bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2 flex items-center gap-4 shadow-inner">
+				<div class="flex flex-col gap-0.5 text-xs font-mono text-gray-400 flex-shrink-0 border-r border-neutral-800 pr-4">
 					<span class="text-blue-400 font-bold">/var/log/github</span>
-					<span class="text-green-400 font-semibold">ACTIVE</span>
+					<span class="inline-flex items-center gap-1.5 text-green-400 font-semibold text-[11px]">
+						<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+						ACTIVE
+					</span>
 				</div>
 				<img
 					src="https://raw.githubusercontent.com/pereidax86/pereidax86/output/github-contribution-grid-snake-dark.svg"
 					alt="GitHub Snake Activity"
-					class="h-7 md:h-9 object-contain opacity-90 hover:opacity-100 transition-opacity"
+					class="h-10 md:h-12 lg:h-14 object-contain opacity-95 hover:opacity-100 transition-opacity"
 				/>
 			</div>
 		</div>
 	</div>
 </footer>
-
-<script>
-	const globalFooter = document.getElementById("global-footer");
-	const heroSection = document.querySelector("section");
-
-	if (globalFooter && heroSection) {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						// Estamos en la 1ª pantalla (Hero) -> ocultar footer
-						globalFooter.classList.add("translate-y-28", "opacity-0", "pointer-events-none");
-						globalFooter.classList.remove("translate-y-0", "opacity-100", "pointer-events-auto");
-					} else {
-						// Pasamos a la 2ª pantalla o posterior -> mostrar footer
-						globalFooter.classList.remove("translate-y-28", "opacity-0", "pointer-events-none");
-						globalFooter.classList.add("translate-y-0", "opacity-100", "pointer-events-auto");
-					}
-				});
-			},
-			{ threshold: 0.3 }
-		);
-
-		observer.observe(heroSection);
-	}
-</script>
