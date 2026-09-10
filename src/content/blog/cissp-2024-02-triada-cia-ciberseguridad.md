@@ -3,7 +3,7 @@ title: "La Tríada CIA: El Santo Grial de la Ciberseguridad (Guía CISSP 2024)"
 description: "¿Qué tienen en común un hacker en el este de Europa, la pizza de tu cena y tu banco? Descubre qué es la Tríada CIA (Confidencialidad, Integridad y Disponibilidad), la Tríada DAD y la mentalidad CISO necesaria para dominar el examen CISSP."
 pubDate: 2026-07-29
 author: "Luis Pereida"
-tags: ["Ciberseguridad", "CIA", "Confidencialidad", "Integridad", "Disponibilidad", "Fundamentos", "Seguridad", "CISSP", "Sybex", "DAD"]
+tags: ["Ciberseguridad", "CISSP", "CISSP 2024", "Guía CISSP", "CIA", "Confidencialidad", "Integridad", "Disponibilidad", "Fundamentos", "Seguridad", "Sybex", "DAD"]
 image: "../../assets/images/blog/cissp-2024-triada-cia-ciberseguridad.png"
 series: "cissp-2024"
 seriesTitle: "Guía de Estudio CISSP 2024"
@@ -37,7 +37,7 @@ Para el examen CISSP de (ISC)², es igualmente crítico dominar el concepto opue
 Para ubicarnos exactamente en la mapa de ruta de la certificación:
 
 *   **Dominio ISC2:** Domain 1: Security and Risk Management
-*   **Subdominio Sybex (10th Ed):** Subdomain 1.2: Understand and apply security concepts (Confidentiality, Integrity, and Availability) / Chapter 1: Security Governance Through Principles and Policies
+*   **Subdominio:** Subdomain 1.2: Understand and apply security concepts (Confidentiality, Integrity, and Availability) / Chapter 1: Security Governance Through Principles and Policies
 *   **Objetivo de Examen:** Evaluar, diseñar e implementar principios de seguridad fundamentales alineados con los requisitos de negocio, gobernanza, gestión de riesgos y marcos regulatorios aplicables.
 
 ---
@@ -305,9 +305,4 @@ Recuerda que en ciberseguridad no existen las soluciones mágicas ni los parches
 
 Y como siempre... **lo más importante es nunca dejar de preguntar** (y nunca dejar de verificar la Tríada).
 
-¡Nos leemos en el próximo post!
-tos.
-
-Y como siempre... **lo más importante es nunca dejar de preguntar** (y nunca dejar de verificar la Tríada).
-
-¡Nos leemos en el próximo post!
+¡Nos leemos en la siguiente entrega sobre [Mecanismos de Protección y Límites de Seguridad](/blog/cissp-2024-03-mecanismos-proteccion-limites-seguridad)!

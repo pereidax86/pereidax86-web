@@ -3,7 +3,7 @@ title: "Certificación CISSP 2024: ¿Vale la pena en el mundo real y qué cubre 
 description: "Analizamos el temario actualizado de la certificación CISSP (versión 2024) basado en la guía oficial Sybex 10th Edition. Una reflexión honesta sobre el valor de las certificaciones en el mundo corporativo y sus 8 dominios fundamentales."
 pubDate: 2026-07-28
 author: "Luis Pereida"
-tags: ["Ciberseguridad", "CISSP", "Certificaciones", "CEH", "Sybex", "Seguridad", "Liderazgo", "Carrera Tech"]
+tags: ["Ciberseguridad", "CISSP", "CISSP 2024", "Guía CISSP", "Certificaciones", "CEH", "Sybex", "Seguridad", "Liderazgo", "Carrera Tech"]
 image: "../../assets/images/blog/cissp-2024-certificacion.png"
 series: "cissp-2024"
 seriesTitle: "Guía de Estudio CISSP 2024"
@@ -104,10 +104,14 @@ El eslabón fundamental para construir código resistente desde el primer día.
 
 Aprender ciberseguridad a nivel profesional no es una carrera de velocidad, es un maratón de resistencia. Obtener certificaciones como el **CEH** o preparar el **CISSP** no se trata solo de añadir acrónimos a tu perfil de LinkedIn; se trata de obligarte a estudiar rigurosamente, salir de tu zona de confort técnica y comprender el impacto que cada decisión tiene en la continuidad de un negocio.
 
-Con este post abrimos oficialmente el camino. A partir de mañana empezaremos a publicar artículos donde analizaremos en detalle cada uno de estos dominios, comenzando con el concepto más fundamental del Dominio 1: [La Tríada CIA (Confidencialidad, Integridad y Disponibilidad)](/blog/cissp-2024-02-triada-cia-ciberseguridad).
+Con este post abrimos oficialmente el camino. Puedes continuar con los siguientes temas del Dominio 1:
+1. [La Tríada CIA (Confidencialidad, Integridad y Disponibilidad)](/blog/cissp-2024-02-triada-cia-ciberseguridad)
+2. [Mecanismos de Protección y Límites de Seguridad](/blog/cissp-2024-03-mecanismos-proteccion-limites-seguridad)
+3. [Gobernanza de Seguridad, Roles y Due Care](/blog/cissp-2024-04-gobernanza-seguridad-roles-due-care)
+4. [Marcos de Control de Seguridad y Gobernanza de Terceros](/blog/cissp-2024-05-marcos-control-gobernanza-terceros)
 
 Tanto si tu meta es presentar la certificación en el futuro como si solo quieres entender las entrañas de la seguridad informática para ser un mejor desarrollador, sysadmin o arquitecto, te invito a acompañarme en este viaje.
 
 Y recuerda, como siempre... **lo más importante es nunca dejar de preguntar**.
 
-¡Nos vemos en la entrega de mañana!
+¡Nos vemos en la siguiente entrega!

@@ -3,7 +3,7 @@ title: "Mecanismos de Protección y Límites de Seguridad: Tu Segunda Línea de 
 description: "¿Qué pasa cuando el perímetro principal cae? Descubre cómo funciona la Defensa en Profundidad, el aislamiento de procesos (Ring 0 vs Ring 3) y los límites de seguridad primarios y secundarios para dominar el examen CISSP."
 pubDate: 2026-07-31
 author: "Luis Pereida"
-tags: ["Ciberseguridad", "CISSP", "Sybex", "Defense in Depth", "Aislamiento de Procesos", "Arquitectura de Seguridad", "Fundamentos", "Ring Architecture"]
+tags: ["Ciberseguridad", "CISSP", "CISSP 2024", "Guía CISSP", "Sybex", "Defense in Depth", "Aislamiento de Procesos", "Arquitectura de Seguridad", "Fundamentos", "Ring Architecture"]
 image: "../../assets/images/blog/cissp-2024-mecanismos-proteccion.png"
 series: "cissp-2024"
 seriesTitle: "Guía de Estudio CISSP 2024"
@@ -40,7 +40,7 @@ El objetivo supremo de estos mecanismos es:
 Ubicándonos exactamente en la hoja de ruta del examen:
 
 *   **Dominio ISC2:** Domain 1: Security and Risk Management
-*   **Subdominio Sybex (10th Ed):** Subdomain 1.2: Understand and apply security concepts (Fundamental Protection Mechanisms & Security Boundaries) / Chapter 1: Security Governance Through Principles and Policies
+*   **Subdominio:** Subdomain 1.2: Understand and apply security concepts (Fundamental Protection Mechanisms & Security Boundaries) / Chapter 1: Security Governance Through Principles and Policies
 *   **Objetivo de Examen:** Evaluar, diseñar e implementar mecanismos fundamentales de protección y establecer límites de seguridad adecuados para aislar recursos y proteger los activos organizacionales.
 
 ---
@@ -332,4 +332,4 @@ Si tienes claro el mapa de límites y mecanismos de protección, vas por el cami
 
 Y como siempre... **lo más importante es nunca dejar de preguntar** (y nunca dejar de verificar tus límites de seguridad).
 
-¡Nos leemos en el próximo post de la serie!
+¡Nos leemos en la siguiente entrega sobre [Gobernanza de Seguridad, Roles y Due Care](/blog/cissp-2024-04-gobernanza-seguridad-roles-due-care)!
