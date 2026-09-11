@@ -24,17 +24,37 @@
 <script>
 	const scrollBtn = document.getElementById("scroll-top-btn");
 
-	window.addEventListener("scroll", () => {
-		if (window.scrollY > 300) {
+	function getScrollPos() {
+		const mainContainer = document.getElementById("main-scroll-container");
+		return mainContainer ? mainContainer.scrollTop : window.scrollY;
+	}
+
+	function updateBtnVisibility() {
+		if (getScrollPos() > 300) {
 			scrollBtn?.classList.remove("translate-y-20", "opacity-0");
 			scrollBtn?.classList.add("translate-y-0", "opacity-100");
 		} else {
 			scrollBtn?.classList.add("translate-y-20", "opacity-0");
 			scrollBtn?.classList.remove("translate-y-0", "opacity-100");
 		}
+	}
+
+	window.addEventListener("scroll", updateBtnVisibility, { passive: true });
+	document.addEventListener("DOMContentLoaded", () => {
+		const mainContainer = document.getElementById("main-scroll-container");
+		if (mainContainer) {
+			mainContainer.addEventListener("scroll", updateBtnVisibility, { passive: true });
+		}
 	});
 
 	scrollBtn?.addEventListener("click", () => {
+		const mainContainer = document.getElementById("main-scroll-container");
+		if (mainContainer) {
+			mainContainer.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 		window.scrollTo({
 			top: 0,
 			behavior: "smooth",

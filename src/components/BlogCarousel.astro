@@ -121,6 +121,16 @@ const { posts } = Astro.props;
 			</svg>
 		</button>
 	</div>
+
+	{/* Enlace para ver todas las publicaciones */}
+	<div class="text-center pt-1">
+		<a
+			href="/blog"
+			class="inline-flex items-center gap-2 text-sm font-mono font-bold text-blue-400 hover:text-blue-300 hover:underline transition-colors"
+		>
+			Ver todas las publicaciones →
+		</a>
+	</div>
 </div>
 
 <script>
@@ -129,7 +139,8 @@ const { posts } = Astro.props;
 	const nextBtn = document.getElementById("carousel-next");
 
 	if (container && prevBtn && nextBtn) {
-		const scrollAmount = 400;
+		const scrollAmount = 380;
+		let isUserInteracting = false;
 
 		prevBtn.addEventListener("click", () => {
 			container.scrollBy({
@@ -144,5 +155,24 @@ const { posts } = Astro.props;
 				behavior: "smooth",
 			});
 		});
+
+		// Auto-play timer (advance every 4 seconds unless hovered/touched)
+		container.addEventListener("mouseenter", () => (isUserInteracting = true));
+		container.addEventListener("mouseleave", () => (isUserInteracting = false));
+		container.addEventListener("touchstart", () => (isUserInteracting = true), { passive: true });
+		container.addEventListener("touchend", () => {
+			setTimeout(() => (isUserInteracting = false), 2000);
+		});
+
+		setInterval(() => {
+			if (!isUserInteracting) {
+				const maxScrollLeft = container.scrollWidth - container.clientWidth;
+				if (container.scrollLeft >= maxScrollLeft - 10) {
+					container.scrollTo({ left: 0, behavior: "smooth" });
+				} else {
+					container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+				}
+			}
+		}, 4000);
 	}
 </script>

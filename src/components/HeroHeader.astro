@@ -34,88 +34,101 @@ interface Props {
 const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, certsMiddle, certBottom } = Astro.props;
 ---
 
-<div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6 xl:gap-8 2xl:gap-10 items-stretch">
-	{/* COLUMNA 1: PERFIL E IDENTIDAD */}
-	<div class="flex flex-col items-center justify-center gap-4 sm:gap-6 text-center bg-neutral-900/30 border border-neutral-800/60 rounded-2xl p-5 sm:p-6 2xl:p-8 backdrop-blur-sm shadow-xl h-full">
-		{/* GRAVATAR AVATAR */}
-		<div class="relative w-36 h-36 sm:w-40 sm:h-40 xl:w-44 xl:h-44 2xl:w-52 2xl:h-52 group flex-shrink-0">
-			<div
-				class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
-			>
+{/* CONTENEDOR HERO PRINCIPAL RESPONSIVO */}
+<div class="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 xl:gap-8 2xl:gap-10 items-stretch justify-center">
+
+	{/* PANTALLA 1 (MÓVIL & TABLET SNAP 1): PERFIL E IDENTIDAD HERO */}
+	<section class="min-h-[100dvh] snap-start md:min-h-[100dvh] md:snap-start lg:min-h-0 lg:snap-none w-full lg:w-1/3 flex items-center justify-center p-2 sm:p-4 lg:p-0">
+		<div class="w-full max-w-md md:max-w-xl lg:max-w-none flex flex-col items-center justify-center gap-4 sm:gap-6 text-center bg-neutral-900/30 border border-neutral-800/60 rounded-2xl p-5 sm:p-6 2xl:p-8 backdrop-blur-sm shadow-xl h-full">
+			{/* GRAVATAR AVATAR */}
+			<div class="relative w-36 h-36 sm:w-40 sm:h-40 xl:w-44 xl:h-44 2xl:w-52 2xl:h-52 group flex-shrink-0">
+				<div
+					class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+				>
+				</div>
+				<img
+					src={gravatarUrl}
+					alt="Luis Pereida"
+					class="relative w-full h-full rounded-full object-cover bg-neutral-900 border-4 border-neutral-950 shadow-2xl"
+				/>
+				<div
+					class="absolute bottom-2 right-2 bg-neutral-900 rounded-full p-1.5 border border-neutral-800"
+					title="SysAdmin Active"
+				>
+					<div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+				</div>
 			</div>
-			<img
-				src={gravatarUrl}
-				alt="Luis Pereida"
-				class="relative w-full h-full rounded-full object-cover bg-neutral-900 border-4 border-neutral-950 shadow-2xl"
-			/>
-			<div
-				class="absolute bottom-2 right-2 bg-neutral-900 rounded-full p-1.5 border border-neutral-800"
-				title="SysAdmin Active"
-			>
-				<div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-			</div>
-		</div>
 
-		{/* NOMBRES Y TITULOS */}
-		<div class="space-y-1.5 flex flex-col items-center">
-			<p class="text-sm sm:text-base xl:text-lg text-blue-400 font-mono font-bold text-center">
-				Yo soy
-			</p>
-			<h1 class="text-3xl sm:text-4xl xl:text-4xl 2xl:text-6xl font-extrabold text-white tracking-tight leading-none">
-				Luis Pereida
-			</h1>
-			<p
-				class="text-sm sm:text-base xl:text-base 2xl:text-xl text-blue-400 font-mono font-bold text-center hover:text-white transition-colors duration-500 cursor-default mt-1"
-				style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);"
-			>
-				y hago ciberseguridad para todos
-			</p>
-			<p class="text-xs sm:text-sm xl:text-base text-gray-300 font-mono mt-0.5 tracking-wide h-6 flex items-center gap-1">
-				<span id="typewriter" class="text-gray-200"></span>
-				<span class="animate-pulse bg-gray-200 w-2 h-4 block"></span>
-			</p>
+			{/* NOMBRES Y TITULOS */}
+			<div class="space-y-1.5 flex flex-col items-center">
+				<p class="text-sm sm:text-base xl:text-lg text-blue-400 font-mono font-bold text-center">
+					Yo soy
+				</p>
+				<h1 class="text-3xl sm:text-4xl xl:text-4xl 2xl:text-6xl font-extrabold text-white tracking-tight leading-none">
+					Luis Pereida
+				</h1>
+				<p
+					class="text-sm sm:text-base xl:text-base 2xl:text-xl text-blue-400 font-mono font-bold text-center hover:text-white transition-colors duration-500 cursor-default mt-1"
+					style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);"
+				>
+					y hago ciberseguridad para todos
+				</p>
+				<p class="text-xs sm:text-sm xl:text-base text-gray-300 font-mono mt-0.5 tracking-wide h-6 flex items-center gap-1">
+					<span id="typewriter" class="text-gray-200"></span>
+					<span class="animate-pulse bg-gray-200 w-2 h-4 block"></span>
+				</p>
 
-			{/* STATUS BAR */}
-			<div
-				class="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-neutral-900/90 border border-green-500/30 text-green-400 text-xs 2xl:text-sm font-mono mt-2 shadow-md"
-			>
-				<span class="relative flex h-2 w-2">
-					<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-					<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-				</span>
-				{currentStatus}
-			</div>
-		</div>
-	</div>
-
-	{/* COLUMNA 2: BIO Y FILOSOFÍA (CENTRADAS) */}
-	<div class="flex flex-col justify-between gap-4 sm:gap-6 w-full text-center h-full">
-		{/* TARJETA DE BIO Y TECH STACK */}
-		<div
-			class="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-5 sm:p-6 2xl:p-8 text-gray-200 leading-relaxed text-xs sm:text-sm xl:text-sm 2xl:text-base font-mono text-center flex-1 flex flex-col justify-center gap-4 sm:gap-6 items-center shadow-xl"
-		>
-			<p class="text-center">{bioText}</p>
-
-			{/* TECH STACK PILLS */}
-			<div class="flex flex-wrap justify-center gap-1.5 sm:gap-2 pt-4 sm:pt-6 border-t border-neutral-800/60 w-full">
-				{
-					techStack.map((tech) => (
-						<span class="px-2.5 py-1 rounded-lg bg-neutral-950 border border-neutral-800 text-xs 2xl:text-sm text-blue-300 font-bold hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default flex items-center gap-1.5">
-							<span>{tech.icon}</span>
-							{tech.name}
-						</span>
-					))
-				}
+				{/* STATUS BAR */}
+				<div
+					class="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-neutral-900/90 border border-green-500/30 text-green-400 text-xs 2xl:text-sm font-mono mt-2 shadow-md"
+				>
+					<span class="relative flex h-2 w-2">
+						<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+						<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+					</span>
+					{currentStatus}
+				</div>
 			</div>
 		</div>
+	</section>
 
-		{/* TARJETA DE FILOSOFÍA */}
-		<PhilosophyCard philosophy={philosophy} />
-	</div>
+	{/* CONTENEDOR TABLET SNAP 2 (BIO/FILOSOFÍA + CERTS): Tablet Snap 2 | Móvil Snaps 2 & 3 | Desktop Cols 2 & 3 */}
+	<div class="w-full lg:w-2/3 md:min-h-[100dvh] md:snap-start lg:snap-none lg:min-h-0 flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row gap-6 items-stretch justify-center p-2 sm:p-4 lg:p-0">
+		
+		{/* CARD 2 (BIO & FILOSOFÍA): Móvil Snap 2 | Tablet Snap 2 Col 1 | Desktop Col 2 */}
+		<section class="min-h-[100dvh] md:min-h-0 snap-start md:snap-none w-full lg:w-1/2 flex items-center justify-center">
+			<div class="w-full max-w-md md:max-w-none flex flex-col justify-between gap-4 sm:gap-6 text-center h-full">
+				{/* TARJETA DE BIO Y TECH STACK */}
+				<div
+					class="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-5 sm:p-6 2xl:p-8 text-gray-200 leading-relaxed text-xs sm:text-sm xl:text-sm 2xl:text-base font-mono text-center flex-1 flex flex-col justify-center gap-4 sm:gap-6 items-center shadow-xl"
+				>
+					<p class="text-center">{bioText}</p>
 
-	{/* COLUMNA 3: CERTIFICACIONES OFICIALES */}
-	<div class="w-full h-full">
-		<CertificationsList certTop={certTop} certsMiddle={certsMiddle} certBottom={certBottom} />
+					{/* TECH STACK PILLS */}
+					<div class="flex flex-wrap justify-center gap-1.5 sm:gap-2 pt-4 sm:pt-6 border-t border-neutral-800/60 w-full">
+						{
+							techStack.map((tech) => (
+								<span class="px-2.5 py-1 rounded-lg bg-neutral-950 border border-neutral-800 text-xs 2xl:text-sm text-blue-300 font-bold hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default flex items-center gap-1.5">
+									<span>{tech.icon}</span>
+									{tech.name}
+								</span>
+							))
+						}
+					</div>
+				</div>
+
+				{/* TARJETA DE FILOSOFÍA */}
+				<PhilosophyCard philosophy={philosophy} />
+			</div>
+		</section>
+
+		{/* CARD 3 (CERTIFICACIONES): Móvil Snap 3 | Tablet Snap 2 Col 2 | Desktop Col 3 */}
+		<section class="min-h-[100dvh] md:min-h-0 snap-start md:snap-none w-full lg:w-1/2 flex items-center justify-center">
+			<div class="w-full max-w-md md:max-w-none h-full">
+				<CertificationsList certTop={certTop} certsMiddle={certsMiddle} certBottom={certBottom} />
+			</div>
+		</section>
+
 	</div>
 </div>
 

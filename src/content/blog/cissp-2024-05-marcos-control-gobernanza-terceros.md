@@ -1,7 +1,7 @@
 ---
 title: "Marcos de Control de Seguridad y Gobernanza de Terceros: Tu Escudo Corporativo (Guía CISSP 2024)"
 description: "¿Quién responde cuando tu proveedor en la nube sufre una brecha? Descubre los marcos ISO 27001, NIST CSF 2.0, SABSA, COBIT, los reportes SOC 2 Type II y por qué la responsabilidad legal jamás se externaliza en el examen CISSP."
-pubDate: 2026-08-14
+pubDate: 2026-08-15
 author: "Luis Pereida"
 tags: ["Ciberseguridad", "CISSP", "CISSP 2024", "Guía CISSP", "Sybex", "Marcos de Control", "NIST", "ISO 27001", "SOC 2", "Gobernanza de Terceros", "SABSA", "COBIT"]
 image: "../../assets/images/blog/cissp-2024-marcos-control-gobernanza-terceros.png"
