@@ -144,3 +144,94 @@ const breadcrumbItems = [
     />
   </main>
 </Layout>
+
+<style is:global>
+  .mermaid svg {
+    overflow: visible !important;
+  }
+  .mermaid .node,
+  .mermaid .node rect,
+  .mermaid .node circle,
+  .mermaid .node polygon,
+  .mermaid .node path,
+  .mermaid .label-container,
+  .mermaid .basic.node,
+  .mermaid .basic.node rect,
+  .mermaid .block {
+    filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.95)) !important;
+    fill: #171717 !important;
+    stroke: #ffffff !important;
+    stroke-width: 1.5px !important;
+  }
+  .mermaid .edgePath .path,
+  .mermaid .flowchart-link,
+  .mermaid .edgePaths path,
+  .mermaid path.path {
+    stroke: #ffffff !important;
+    stroke-width: 2px !important;
+  }
+  .mermaid .marker,
+  .mermaid marker path,
+  .mermaid #arrowhead path,
+  .mermaid .arrowheadPath {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+  .mermaid text,
+  .mermaid .nodeLabel,
+  .mermaid .edgeLabel,
+  .mermaid p,
+  .mermaid span,
+  .mermaid div {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    font-family: inherit !important;
+  }
+</style>
+
+<script>
+  import mermaid from "mermaid";
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "base",
+    themeVariables: {
+      primaryColor: "#171717",
+      primaryTextColor: "#ffffff",
+      primaryBorderColor: "#ffffff",
+      lineColor: "#ffffff",
+      textColor: "#ffffff",
+      edgeLabelBackground: "#171717",
+      nodeBorder: "#ffffff",
+      clusterBorders: "#ffffff",
+      mainBkg: "#171717",
+      fontFamily: "inherit",
+    },
+  });
+
+  const renderMermaid = async () => {
+    const mermaidBlocks = document.querySelectorAll(
+      'pre[data-language="mermaid"], code[data-language="mermaid"], pre.language-mermaid, code.language-mermaid, [data-language="mermaid"]'
+    );
+    if (mermaidBlocks.length === 0) return;
+
+    mermaidBlocks.forEach((block, index) => {
+      const targetElement = block.tagName === "PRE" ? block : block.closest("pre") || block;
+      const content = block.textContent || "";
+      const container = document.createElement("div");
+      container.className =
+        "mermaid flex justify-center my-8 overflow-x-auto p-6 bg-neutral-900/80 border border-neutral-800 rounded-2xl shadow-2xl shadow-black/60";
+      container.id = `mermaid-${index}`;
+      container.textContent = content.trim();
+      targetElement.replaceWith(container);
+    });
+
+    await mermaid.run();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderMermaid);
+  } else {
+    renderMermaid();
+  }
+</script>

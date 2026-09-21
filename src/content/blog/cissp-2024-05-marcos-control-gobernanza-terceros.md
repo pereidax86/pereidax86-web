@@ -44,32 +44,50 @@ Ubicándonos exactamente en la hoja de ruta del examen:
 
 La relación entre la gobernanza corporativa, los marcos de control y la supervisión de proveedores se puede visualizar conceptualmente mediante el siguiente esquema arquitectónico:
 
-```text
-+-------------------------------------------------------------------------+
-|                  ENTERPRISE SECURITY GOVERNANCE                         |
-|         (Business Strategy, Legal Compliance, Risk Appetite)            |
-+-------------------------------------------------------------------------+
-                                     |
-                                     v
-+-------------------------------------------------------------------------+
-|                   SECURITY CONTROL FRAMEWORKS                           |
-|  +--------------------+  +--------------------+  +--------------------+ |
-|  |   ISO/IEC 27001    |  |    NIST CSF 2.0    |  |       COBIT        | |
-|  |     (ISMS / BSI)   |  |   (Govern Core)    |  |  (Gov vs. Mgmt)    | |
-|  +--------------------+  +--------------------+  +--------------------+ |
-|  +--------------------+  +--------------------+  +--------------------+ |
-|  |       SABSA        |  |      PCI DSS       |  |      FedRAMP       | |
-|  |  (Business Trace)  |  | (Contractual CDE)  |  |  (Cloud ATO / CSP) | |
-|  +--------------------+  +--------------------+  +--------------------+ |
-+-------------------------------------------------------------------------+
-                                     |
-                                     v
-+-------------------------------------------------------------------------+
-|                      THIRD-PARTY GOVERNANCE                             |
-|  - Due Diligence & Vetting: Document Review, On-site Assessments        |
-|  - Independent Attestation: AICPA SOC 1 / SOC 2 Type II / SOC 3         |
-|  - Enforceability: SLAs, Right-to-Audit, ISA, MOU/MOA, NDA              |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    subgraph L1["ENTERPRISE SECURITY GOVERNANCE"]
+        direction LR
+        G1["Estrategia de Negocio"] 
+        G2["Cumplimiento Legal"]
+        G3["Apetito de Riesgo"]
+        G1 ~~~ G2
+        G2 ~~~ G3
+    end
+
+    subgraph L2["SECURITY CONTROL FRAMEWORKS"]
+        direction TB
+        subgraph L2_Row1[" "]
+            direction TB
+            F1["ISO/IEC 27001<br/>(ISMS / BSI)"]
+            F2["NIST CSF 2.0<br/>(Govern Core)"]
+            F3["COBIT<br/>(Gov vs. Mgmt)"]
+            F1 ~~~ F2
+            F2 ~~~ F3
+        end
+        subgraph L2_Row2[" "]
+            direction TB
+            F4["SABSA<br/>(Business Trace)"]
+            F5["PCI DSS<br/>(Contractual CDE)"]
+            F6["FedRAMP<br/>(Cloud ATO / CSP)"]
+            F4 ~~~ F5
+            F5 ~~~ F6
+        end
+        style L2_Row1 fill:none,stroke:none
+        style L2_Row2 fill:none,stroke:none
+    end
+
+    subgraph L3["THIRD-PARTY GOVERNANCE"]
+        direction LR
+        T1["Due Diligence & Vetting<br/>• Document Review<br/>• On-site Assessments"]
+        T2["Independent Attestation<br/>• AICPA SOC 1<br/>• SOC 2 Type II / SOC 3"]
+        T3["Enforceability<br/>• SLAs / Right-to-Audit<br/>• ISA / MOU / MOA / NDA"]
+        T1 ~~~ T2
+        T2 ~~~ T3
+    end
+
+    L1 --> L2
+    L2 --> L3
 ```
 
 Desglosemos en detalle cada uno de estos componentes:
@@ -164,29 +182,25 @@ La gobernanza de terceros no es un trámite de una sola vez (*"one-and-done"*). 
 
 Uno de los temas más examinados en ISC2 para evaluar la debida diligencia de terceros son los reportes SOC definidos por el *American Institute of Certified Public Accountants* (AICPA) bajo las normas SSAE 18.
 
-```text
-+-----------------------------------------------------------------------+
-|                         AICPA SOC REPORTS                             |
-+-----------------------------------------------------------------------+
-|  SOC 1: Enfoque Financiero (ICFR / SOX Compliance)                    |
-+-----------------------------------------------------------------------+
-|  SOC 2: Enfoque Técnico y Operativo (Trust Services Criteria)         |
-|         - Distribución Restringida / Confidencial                     |
-|         - Evaluado por CISOs y Equipos de Riesgo                      |
-+-----------------------------------------------------------------------+
-|  SOC 3: Enfoque Público / Resumen Ejecutivo                           |
-|         - Sello de certificación para Marketing / Sin detalles        |
-+-----------------------------------------------------------------------+
-|                        REPORT TYPES (SOC 1 & 2)                       |
-|                                                                       |
-|  TYPE I: "Point-in-Time" (Diseño de Controles)                        |
-|          - Evalúa si el control fue diseñado adecuadamente en un día. |
-|          - NO valida la efectividad operativa a lo largo del tiempo.  |
-|                                                                       |
-|  TYPE II: "Period of Time" (Efectividad Operativa Real)               |
-|          - Evalúa el funcionamiento de los controles durante 6-12 m.  |
-|          - INDISPENSABLE para Due Diligence formal en el CISSP.       |
-+-----------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    subgraph REPORTS["AICPA SOC REPORTS"]
+        direction LR
+        SOC1["<b>SOC 1: Enfoque Financiero</b><br/>• ICFR / SOX Compliance"]
+        SOC2["<b>SOC 2: Enfoque Técnico y Operativo</b><br/>• Trust Services Criteria<br/>• Distribución Restringida / Confidencial<br/>• Evaluado por CISOs y Equipos de Riesgo"]
+        SOC3["<b>SOC 3: Enfoque Público</b><br/>• Resumen Ejecutivo<br/>• Sello para Marketing (Sin detalles)"]
+        SOC1 ~~~ SOC2
+        SOC2 ~~~ SOC3
+    end
+
+    subgraph TYPES["REPORT TYPES (Aplica a SOC 1 y SOC 2)"]
+        direction LR
+        T1["<b>TYPE I: Point-in-Time</b><br/><i>(Diseño de Controles)</i><br/>• Evalúa el diseño en un día puntual<br/>• NO valida efectividad a lo largo del tiempo"]
+        T2["<b>TYPE II: Period of Time</b><br/><i>(Efectividad Operativa Real)</i><br/>• Evalúa controles durante 6-12 meses<br/>• <b>INDISPENSABLE</b> para Due Diligence en CISSP"]
+        T1 ~~~ T2
+    end
+
+    REPORTS --> TYPES
 ```
 
 #### Los Tres Tipos de Reportes SOC:
@@ -246,22 +260,25 @@ En el examen CISSP, fallar en adoptar la perspectiva gerencial es la causa princ
 ### Escenario Corporativo
 Una institución de servicios financieros (**GlobalFin**) decide externalizar el análisis predictivo de fraudes hacia una plataforma especializada de Inteligencia Artificial en la nube operada por un tercero (**FraudAI Inc.**). La plataforma consumirá transacciones con números de cuenta bancaria y datos personales de clientes.
 
-```text
-[ GLOBALFIN CISO / RISK TEAM ]
-               |
-               | (1. Due Diligence: Exige y revisa SOC 2 Type II + Certificación ISO 27001)
-               v
-[ FRAUDAI INC. ASSESSMENT ]
-               |
-               | (2. Formalización Contractual: Right-to-Audit + SLA 99.95% + ISA técnico)
-               v
-[ NEGOCIACIÓN Y FIRMA ]
-               |
-               v
-[ INTERCONEXIÓN CONTROLADA ]
-  GlobalFin Systems <====== (mTLS / IPsec VPN) ======> FraudAI API
-         |                                                    |
-         +---- [ Monitoreo Continuo & Continuous Compliance ] -+
+```mermaid
+flowchart TB
+    subgraph PRIN[" "]
+    direction LR
+        CISO["GLOBALFIN CISO / RISK TEAM"]
+        FRAUD["FRAUDAI INC. ASSESSMENT"]
+        FIRMA["NEGOCIACIÓN Y FIRMA"]
+    
+    CISO -->|1. Due Diligence:<br/>Exige y revisa<br/>SOC 2 Type II +<br/>Certificación ISO 27001| FRAUD
+    FRAUD -->|2. Formalización Contractual:<br/>Right-to-Audit +<br/>SLA 99.95% +<br/>ISA técnico| FIRMA
+    end
+
+    subgraph CANAL["Monitoreo Continuo & Continuous Compliance"]
+            direction LR
+            GF["GlobalFin Systems"]
+            FA["FraudAI API"]
+            GF <==> |  mTLS / IPsec VPN  | FA 
+        end
+    PRIN ==> CANAL
 ```
 
 ### Ejecución de Gobernanza y Controles
