@@ -12,19 +12,19 @@ const { posts } = Astro.props;
 <div class="w-full pt-2 pb-8 flex flex-col items-center gap-6">
 	<div class="text-center space-y-2">
 		<div class="flex items-center justify-center gap-3">
-			<h2 class="text-2xl md:text-3xl font-bold text-white text-center">Bitácora del sysadmin</h2>
+			<h2 class="text-2xl md:text-3xl font-extrabold text-white text-center tracking-[-0.03em] font-display">Bitácora del sysadmin</h2>
 			<a
 				href="/rss.xml"
 				target="_blank"
 				title="Suscríbete al Feed RSS"
-				class="group relative inline-flex items-center justify-center p-2.5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-orange-500/50 transition-all hover:bg-neutral-800"
+				class="group relative inline-flex items-center justify-center p-2.5 apple-glass-interactive rounded-xl hover:border-orange-500/50 transition-all active:scale-95"
 			>
 				<div
 					class="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-amber-500 rounded-xl blur opacity-0 group-hover:opacity-75 transition duration-300"
 				>
 				</div>
 				<svg
-					class="relative w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform fill-current"
+					class="relative w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform fill-current duration-200"
 					viewBox="0 0 24 24"
 				>
 					<path
@@ -42,7 +42,7 @@ const { posts } = Astro.props;
 		{/* Botón Izquierdo */}
 		<button
 			id="carousel-prev"
-			class="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-neutral-900/80 border border-neutral-700 rounded-full text-white hover:bg-blue-600 hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-lg backdrop-blur-sm"
+			class="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2.5 apple-glass-interactive rounded-full text-white hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-xl active:scale-90"
 			aria-label="Anterior"
 		>
 			<svg
@@ -66,15 +66,15 @@ const { posts } = Astro.props;
 				posts.map((post) => (
 					<a
 						href={`/blog/${post.slug}`}
-						class="snap-center shrink-0 w-80 md:w-96 first:pl-2 last:pr-2 block hover:scale-[1.02] transition-transform duration-300"
+						class="snap-center shrink-0 w-80 md:w-96 first:pl-2 last:pr-2 block hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
 					>
-						<article class="h-full bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden hover:border-blue-500/30 transition-colors flex flex-col">
+						<article class="h-full apple-glass-interactive rounded-xl overflow-hidden hover:border-blue-500/40 flex flex-col shadow-xl">
 							<div class="relative aspect-video overflow-hidden">
 								{post.data.image ? (
 									<Image
 										src={post.data.image}
 										alt={post.data.title}
-										class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+										class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
 									/>
 								) : (
 									<div class="w-full h-full flex items-center justify-center bg-neutral-900">
@@ -106,7 +106,7 @@ const { posts } = Astro.props;
 		{/* Botón Derecho */}
 		<button
 			id="carousel-next"
-			class="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-neutral-900/80 border border-neutral-700 rounded-full text-white hover:bg-blue-600 hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-lg backdrop-blur-sm"
+			class="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2.5 apple-glass-interactive rounded-full text-white hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-xl active:scale-90"
 			aria-label="Siguiente"
 		>
 			<svg

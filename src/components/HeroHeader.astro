@@ -39,52 +39,65 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 
 	{/* PANTALLA 1 (MÓVIL & TABLET SNAP 1): PERFIL E IDENTIDAD HERO */}
 	<section class="min-h-[100dvh] snap-start md:min-h-[100dvh] md:snap-start lg:min-h-0 lg:snap-none w-full lg:w-1/3 flex items-center justify-center p-2 sm:p-4 lg:p-0">
-		<div class="w-full max-w-md md:max-w-xl lg:max-w-none flex flex-col items-center justify-center gap-4 sm:gap-6 text-center bg-neutral-900/30 border border-neutral-800/60 rounded-2xl p-5 sm:p-6 2xl:p-8 backdrop-blur-sm shadow-xl h-full">
-			{/* GRAVATAR AVATAR */}
+		<div class="w-full max-w-md md:max-w-xl lg:max-w-none flex flex-col items-center justify-center gap-4 sm:gap-6 text-center apple-glass rounded-2xl p-5 sm:p-6 2xl:p-8 shadow-2xl h-full">
+			{/* GRAVATAR AVATAR & VIDEO ANIMATION */}
 			<div class="relative w-36 h-36 sm:w-40 sm:h-40 xl:w-44 xl:h-44 2xl:w-52 2xl:h-52 group flex-shrink-0">
 				<div
-					class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+					class="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-700 ease-out"
 				>
 				</div>
-				<img
-					src={gravatarUrl}
-					alt="Luis Pereida"
-					class="relative w-full h-full rounded-full object-cover bg-neutral-900 border-4 border-neutral-950 shadow-2xl"
-				/>
+				<div class="relative w-full h-full rounded-full overflow-hidden border-4 border-neutral-950 shadow-2xl bg-neutral-900 active:scale-95 transition-transform duration-300">
+					{/* Imagen de avatar inmediata (Fallback sin esperas) */}
+					<img
+						src={gravatarUrl}
+						alt="Luis Pereida"
+						class="absolute inset-0 w-full h-full object-cover rounded-full"
+					/>
+					{/* Video animado que se reproduce 1 sola vez y regresa suavemente a la imagen */}
+					<video
+						id="hero-avatar-video"
+						src="/video/subscribete.mp4"
+						class="absolute inset-0 w-full h-full object-cover rounded-full opacity-0 transition-opacity duration-700 ease-in-out cursor-pointer"
+						autoplay
+						muted
+						playsinline
+						poster={gravatarUrl}
+					></video>
+				</div>
 				<div
-					class="absolute bottom-2 right-2 bg-neutral-900 rounded-full p-1.5 border border-neutral-800"
+					class="absolute bottom-2 right-2 bg-neutral-900/90 backdrop-blur-md rounded-full p-1.5 border border-neutral-800/80 shadow-lg z-10"
 					title="SysAdmin Active"
 				>
-					<div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+					<div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse ring-4 ring-blue-500/20"></div>
 				</div>
 			</div>
 
 			{/* NOMBRES Y TITULOS */}
 			<div class="space-y-1.5 flex flex-col items-center">
-				<p class="text-sm sm:text-base xl:text-lg text-blue-400 font-mono font-bold text-center">
+				<p class="text-sm sm:text-base xl:text-lg text-blue-400 font-mono font-bold text-center tracking-wide">
 					Yo soy
 				</p>
-				<h1 class="text-3xl sm:text-4xl xl:text-4xl 2xl:text-6xl font-extrabold text-white tracking-tight leading-none">
+				<h1 class="text-3xl sm:text-4xl xl:text-4xl 2xl:text-6xl font-extrabold text-white tracking-[-0.035em] leading-[1.05] font-display">
 					Luis Pereida
 				</h1>
 				<p
-					class="text-sm sm:text-base xl:text-base 2xl:text-xl text-blue-400 font-mono font-bold text-center hover:text-white transition-colors duration-500 cursor-default mt-1"
-					style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);"
+					class="text-sm sm:text-base xl:text-base 2xl:text-xl text-blue-400 font-mono font-bold text-center hover:text-white transition-colors duration-300 cursor-default mt-1"
+					style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.35);"
 				>
 					y hago ciberseguridad para todos
 				</p>
 				<p class="text-xs sm:text-sm xl:text-base text-gray-300 font-mono mt-0.5 tracking-wide h-6 flex items-center gap-1">
 					<span id="typewriter" class="text-gray-200"></span>
-					<span class="animate-pulse bg-gray-200 w-2 h-4 block"></span>
+					<span class="animate-pulse bg-blue-400 w-2 h-4 block"></span>
 				</p>
 
 				{/* STATUS BAR */}
 				<div
-					class="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-neutral-900/90 border border-green-500/30 text-green-400 text-xs 2xl:text-sm font-mono mt-2 shadow-md"
+					class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full apple-glass border-green-500/40 text-green-400 text-xs 2xl:text-sm font-mono mt-2 shadow-lg"
 				>
-					<span class="relative flex h-2 w-2">
+					<span class="relative flex h-2.5 w-2.5">
 						<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-						<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+						<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
 					</span>
 					{currentStatus}
 				</div>
@@ -100,15 +113,15 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 			<div class="w-full max-w-md md:max-w-none flex flex-col justify-between gap-4 sm:gap-6 text-center h-full">
 				{/* TARJETA DE BIO Y TECH STACK */}
 				<div
-					class="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-5 sm:p-6 2xl:p-8 text-gray-200 leading-relaxed text-xs sm:text-sm xl:text-sm 2xl:text-base font-mono text-center flex-1 flex flex-col justify-center gap-4 sm:gap-6 items-center shadow-xl"
+					class="apple-glass rounded-2xl p-5 sm:p-6 2xl:p-8 text-gray-200 leading-relaxed text-xs sm:text-sm xl:text-sm 2xl:text-base font-mono text-center flex-1 flex flex-col justify-center gap-4 sm:gap-6 items-center shadow-xl"
 				>
-					<p class="text-center">{bioText}</p>
+					<p class="text-center leading-relaxed text-gray-300">{bioText}</p>
 
 					{/* TECH STACK PILLS */}
-					<div class="flex flex-wrap justify-center gap-1.5 sm:gap-2 pt-4 sm:pt-6 border-t border-neutral-800/60 w-full">
+					<div class="flex flex-wrap justify-center gap-1.5 sm:gap-2 pt-4 sm:pt-6 border-t border-neutral-800/80 w-full">
 						{
 							techStack.map((tech) => (
-								<span class="px-2.5 py-1 rounded-lg bg-neutral-950 border border-neutral-800 text-xs 2xl:text-sm text-blue-300 font-bold hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default flex items-center gap-1.5">
+								<span class="px-2.5 py-1 rounded-lg apple-glass-interactive text-xs 2xl:text-sm text-blue-300 font-bold hover:text-blue-200 cursor-default flex items-center gap-1.5 active:scale-95">
 									<span>{tech.icon}</span>
 									{tech.name}
 								</span>
@@ -148,4 +161,39 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 	}
 
 	setTimeout(type, 500);
+
+	// Video Avatar Smooth Fade-In, Fade-Out al finalizar y Replay en Hover
+	const avatarVideo = document.getElementById("hero-avatar-video") as HTMLVideoElement | null;
+	const avatarContainer = avatarVideo?.parentElement;
+
+	if (avatarVideo) {
+		const showVideo = () => {
+			avatarVideo.classList.remove("opacity-0");
+			avatarVideo.classList.add("opacity-100");
+		};
+
+		const hideVideo = () => {
+			avatarVideo.classList.remove("opacity-100");
+			avatarVideo.classList.add("opacity-0");
+		};
+
+		if (avatarVideo.readyState >= 3) {
+			showVideo();
+		} else {
+			avatarVideo.addEventListener("canplaythrough", showVideo, { once: true });
+			avatarVideo.addEventListener("playing", showVideo, { once: true });
+		}
+
+		// Al finalizar la animación del video (1 sola reproducción), regresa suavemente a la imagen
+		avatarVideo.addEventListener("ended", hideVideo);
+
+		// Si el usuario pasa el mouse sobre el avatar, reproduce la animación de nuevo
+		if (avatarContainer) {
+			avatarContainer.addEventListener("mouseenter", () => {
+				avatarVideo.currentTime = 0;
+				showVideo();
+				avatarVideo.play().catch(() => {});
+			});
+		}
+	}
 </script>
