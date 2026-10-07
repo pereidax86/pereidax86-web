@@ -189,49 +189,91 @@ const breadcrumbItems = [
   }
 </style>
 
-<script>
-  import mermaid from "mermaid";
+<script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
 
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: "base",
-    themeVariables: {
-      primaryColor: "#171717",
-      primaryTextColor: "#ffffff",
-      primaryBorderColor: "#ffffff",
-      lineColor: "#ffffff",
-      textColor: "#ffffff",
-      edgeLabelBackground: "#171717",
-      nodeBorder: "#ffffff",
-      clusterBorders: "#ffffff",
-      mainBkg: "#171717",
+<script is:inline>
+  function initMermaid() {
+    if (typeof mermaid === "undefined") {
+      setTimeout(initMermaid, 100);
+      return;
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "dark",
+      securityLevel: "loose",
       fontFamily: "inherit",
-    },
-  });
-
-  const renderMermaid = async () => {
-    const mermaidBlocks = document.querySelectorAll(
-      'pre[data-language="mermaid"], code[data-language="mermaid"], pre.language-mermaid, code.language-mermaid, [data-language="mermaid"]'
-    );
-    if (mermaidBlocks.length === 0) return;
-
-    mermaidBlocks.forEach((block, index) => {
-      const targetElement = block.tagName === "PRE" ? block : block.closest("pre") || block;
-      const content = block.textContent || "";
-      const container = document.createElement("div");
-      container.className =
-        "mermaid flex justify-center my-8 overflow-x-auto p-6 bg-neutral-900/80 border border-neutral-800 rounded-2xl shadow-2xl shadow-black/60";
-      container.id = `mermaid-${index}`;
-      container.textContent = content.trim();
-      targetElement.replaceWith(container);
+      themeVariables: {
+        primaryColor: "#171717",
+        primaryTextColor: "#ffffff",
+        primaryBorderColor: "#ffffff",
+        lineColor: "#ffffff",
+        textColor: "#ffffff",
+        edgeLabelBackground: "#171717",
+        nodeBorder: "#ffffff",
+        clusterBorders: "#ffffff",
+        mainBkg: "#171717",
+        fontFamily: "inherit",
+      },
     });
 
-    await mermaid.run();
-  };
+    async function renderAllMermaid() {
+      const rawBlocks = Array.from(
+        document.querySelectorAll(
+          '[data-language="mermaid"], [data-lang="mermaid"], .language-mermaid, pre.astro-code[data-language="mermaid"]'
+        )
+      );
+
+      if (rawBlocks.length === 0) return;
+
+      const targetBlocks = Array.from(
+        new Set(
+          rawBlocks.map((el) => (el.tagName === "PRE" ? el : el.closest("pre") || el))
+        )
+      );
+
+      for (let i = 0; i < targetBlocks.length; i++) {
+        const targetPre = targetBlocks[i];
+        if (targetPre.hasAttribute("data-mermaid-rendered")) continue;
+
+        const lineElements = targetPre.querySelectorAll(".line");
+        let codeText = "";
+        if (lineElements.length > 0) {
+          codeText = Array.from(lineElements)
+            .map((el) => el.textContent)
+            .join("\n");
+        } else {
+          codeText = targetPre.textContent || "";
+        }
+
+        codeText = codeText.trim();
+        if (!codeText) continue;
+
+        try {
+          const id = `mermaid-svg-${Date.now()}-${i}`;
+          const { svg } = await mermaid.render(id, codeText);
+
+          const container = document.createElement("div");
+          container.className =
+            "mermaid flex justify-center my-8 overflow-x-auto p-6 bg-neutral-900/80 border border-neutral-800 rounded-2xl shadow-2xl shadow-black/60";
+          container.innerHTML = svg;
+
+          targetPre.setAttribute("data-mermaid-rendered", "true");
+          targetPre.replaceWith(container);
+        } catch (error) {
+          console.error(`[Mermaid] Error rendering diagram #${i}:`, error);
+        }
+      }
+    }
+
+    renderAllMermaid();
+  }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderMermaid);
+    document.addEventListener("DOMContentLoaded", initMermaid);
   } else {
-    renderMermaid();
+    initMermaid();
   }
+
+  document.addEventListener("astro:page-load", initMermaid);
 </script>
