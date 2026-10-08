@@ -19,7 +19,7 @@ import ibmCloudBadge from "../assets/badges/ibm-cloud.png";
 const allPosts = await getCollection("blog");
 const sortedPosts = allPosts
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 5);
+	.slice(0, 15);
 
 // --- CHEATSHEETS DATA ---
 const allCheatsheets = await getCollection("cheatsheets");

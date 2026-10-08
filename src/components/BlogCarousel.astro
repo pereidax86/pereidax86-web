@@ -60,7 +60,7 @@ const { posts } = Astro.props;
 		{/* Scroll Container */}
 		<div
 			id="carousel-container"
-			class="flex overflow-x-auto gap-4 py-4 px-2 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+			class="flex overflow-x-auto gap-4 py-4 px-2 snap-x snap-mandatory scrollbar-hide scroll-smooth [mask-image:linear-gradient(to_right,transparent,black_40px,black_calc(100%-40px),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_40px,black_calc(100%-40px),transparent)]"
 		>
 			{
 				posts.map((post) => (
