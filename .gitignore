@@ -25,3 +25,7 @@ pnpm-debug.log*
 node_modules/
 dist/
 .env
+
+# AI / Antigravity local rules
+GEMINI.md
+
