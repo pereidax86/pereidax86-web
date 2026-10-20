@@ -40,7 +40,7 @@ El impacto de no verificar la integridad de los datos y el software puede derrib
 
 A finales de 2020 ocurrió uno de los ataques cibernéticos más sofisticados de la historia. Los hackers lograron infiltrarse en la red de la empresa de software SolarWinds. Lo brillante y aterrador de este ataque fue que no modificaron el código fuente de los programadores; en su lugar, infectaron los servidores de compilación (los servidores que empaquetan el código final).
 
-Cuando los servidores de SolarWinds empaquetaban el software oficial "Orion", el virus insertaba un *backdoor* (puerta trasera) justo antes de aplicarle la firma digital oficial de la empresa. Así, cuando decenas de agencias del gobierno de EE.UU. y empresas del *Fortune 500* descargaron la "actualización oficial", sus sistemas de seguridad la aceptaron porque la firma digital era genuina. Esto demostró que si tu proceso de construcción (CI/CD) se ve comprometido, todo el software que produces pierde su integridad.
+Cuando los servidores de SolarWinds empaquetaban el software oficial "Orion", el virus insertaba un *backdoor* (puerta trasera) justo antes de aplicarle la firma digital oficial de la empresa. Así, cuando decenas de agencias del gobierno de EE.UU. y empresas del *Fortune 500* descargaron la "actualización oficial", sus sistemas de seguridad la aceptaron porque la firma digital era genuina. Esto demostró que si tu proceso de construcción (CI/CD) o tus artefactos de distribución se ven comprometidos (como también vimos en el código abierto con [el caso XZ Utils y Jia Tan](/blog/fuera-del-registro-06-caso-xz-utils-puerta-trasera-2024)), todo el software que produces pierde su integridad.
 
 ### 2. El caso Codecov y la confianza en *scripts* externos
 

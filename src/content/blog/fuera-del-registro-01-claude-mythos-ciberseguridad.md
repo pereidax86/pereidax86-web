@@ -32,7 +32,7 @@ Los números en las hojas de especificaciones asustan, pero los casos de uso rea
 
 Y no se detuvo ahí. Hizo de las suyas en OpenBSD, un sistema operativo famoso por su postura paranoica hacia la seguridad, explotando un fallo en el protocolo TCP SACK que llevaba latente desde 1999 (¡hace 27 años!). También destrozó navegadores web modernos, encadenando múltiples vulnerabilidades con una facilidad pasmosa para saltarse las *sandboxes* que los modelos de IA anteriores ni siquiera soñaban con arañar.
 
-> **protip >** Si mantienes proyectos de código abierto, abróchate el cinturón. La inundación de reportes de vulnerabilidades generados por IA ya está quemando y saturando a equipos enteros, como ocurrió con los mantenedores de `curl`. Parchear manualmente a la velocidad de la máquina ya no es una estrategia viable.
+> **protip >** Si mantienes proyectos de código abierto, abróchate el cinturón. La inundación de reportes de vulnerabilidades generados por IA ya está quemando y saturando a equipos enteros, como ocurrió con los mantenedores de `curl` (un desgaste humano que ya ha sido explotado antes, como vimos en [el caso XZ Utils y la infiltración de Jia Tan](/blog/fuera-del-registro-06-caso-xz-utils-puerta-trasera-2024)). Parchear manualmente a la velocidad de la máquina ya no es una estrategia viable.
 
 ## El lado oscuro: Escapes, voluntad propia y desalineación
 
