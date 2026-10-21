@@ -16,10 +16,11 @@ import rhContBadge from "../assets/badges/rh-containers.png";
 import ibmCloudBadge from "../assets/badges/ibm-cloud.png";
 
 // --- BLOG DATA ---
-const allPosts = await getCollection("blog");
+const allPosts = (await getCollection("blog")).filter((post) => !post.data.draft);
 const sortedPosts = allPosts
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 15);
+	.slice(0, 6);
+const totalBlogPosts = allPosts.length;
 
 // --- CHEATSHEETS DATA ---
 const allCheatsheets = await getCollection("cheatsheets");
@@ -113,15 +114,15 @@ const certBottom = {
 		</section>
 
 		{/* SECCIÓN REDES SOCIALES & BITÁCORA (MÓVIL: SNAPS 4 & 5 | TABLET: SNAP 3 | DESKTOP: SNAP 2) */}
-		<div class="w-full md:min-h-[100dvh] lg:min-h-screen md:snap-start flex flex-col justify-center my-auto">
+		<div class="w-full md:min-h-[100dvh] lg:min-h-screen md:snap-start flex flex-col justify-center gap-4 lg:gap-5 my-auto py-2 lg:py-4">
 			{/* REDES SOCIALES (MÓVIL SNAP 4) */}
-			<section class="min-h-[100dvh] md:min-h-0 snap-start md:snap-none flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-4">
+			<section class="min-h-[100dvh] md:min-h-0 snap-start md:snap-none flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-0">
 				<SocialGrid />
 			</section>
 
 			{/* BITÁCORA DEL SYSADMIN (MÓVIL SNAP 5) */}
-			<section class="min-h-[100dvh] md:min-h-0 snap-start md:snap-none flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-4">
-				<BlogCarousel posts={sortedPosts} />
+			<section class="min-h-[100dvh] md:min-h-0 snap-start md:snap-none flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-0">
+				<BlogCarousel posts={sortedPosts} totalPosts={totalBlogPosts} />
 			</section>
 		</div>
 

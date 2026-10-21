@@ -4,175 +4,407 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
 	posts: CollectionEntry<"blog">[];
+	totalPosts?: number;
 }
 
-const { posts } = Astro.props;
+const { posts, totalPosts = posts.length } = Astro.props;
+
+const featuredPost = posts[0];
+const secondaryPosts = posts.slice(1, 4);
+
+const formatDate = (date: Date) =>
+	date.toLocaleDateString("es-MX", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});
 ---
 
-<div class="w-full pt-2 pb-8 flex flex-col items-center gap-6">
-	<div class="text-center space-y-2">
-		<div class="flex items-center justify-center gap-3">
-			<h2 class="text-2xl md:text-3xl font-extrabold text-white text-center tracking-[-0.03em] font-display">Bitácora del sysadmin</h2>
+<div class="w-full max-w-7xl mx-auto apple-glass rounded-2xl p-4 sm:p-5 lg:p-6 2xl:p-8 shadow-2xl flex flex-col gap-4 sm:gap-5">
+	{/* CABECERA EDITORIAL */}
+	<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-neutral-800/70 pb-3.5">
+		<div class="space-y-1 text-center md:text-left">
+			<div class="flex items-center justify-center md:justify-start gap-3">
+				<h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-[-0.03em] font-display">
+					Bitácora del sysadmin
+				</h2>
+				<a
+					href="/rss.xml"
+					target="_blank"
+					title="Suscríbete al Feed RSS"
+					aria-label="Suscríbete al Feed RSS"
+					class="group/rss relative inline-flex items-center justify-center p-2 apple-glass-interactive rounded-xl hover:border-orange-500/50"
+				>
+					<div
+						class="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-amber-500 rounded-xl blur opacity-0 group-hover/rss:opacity-75 transition-opacity duration-200"
+					>
+					</div>
+					<svg
+						class="relative w-4 h-4 sm:w-5 sm:h-5 text-orange-500 group-hover/rss:scale-110 transition-transform fill-current duration-200"
+						viewBox="0 0 24 24"
+					>
+						<path
+							d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"
+						></path>
+					</svg>
+				</a>
+			</div>
+			<p class="text-xs sm:text-sm text-gray-400 font-mono max-w-2xl">
+				Historias desde mi teclado: experiencias y reflexiones sobre Linux, ciberseguridad e infraestructura.
+			</p>
+		</div>
+
+		{/* CONTROLES DE TABLET Y CTA DESKTOP */}
+		<div class="hidden md:flex items-center justify-end gap-2.5 flex-shrink-0">
+			{/* Botones Prev/Next solo para Tablet (md a lg) donde el carrusel está activo */}
+			<div class="flex lg:hidden items-center gap-1.5 mr-1">
+				<button
+					id="carousel-prev"
+					type="button"
+					class="p-2.5 apple-glass-interactive rounded-xl text-gray-200 hover:text-white hover:border-blue-500/50 disabled:opacity-35 disabled:pointer-events-none flex items-center justify-center cursor-pointer"
+					aria-label="Artículo anterior"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+					</svg>
+				</button>
+				<button
+					id="carousel-next"
+					type="button"
+					class="p-2.5 apple-glass-interactive rounded-xl text-gray-200 hover:text-white hover:border-blue-500/50 disabled:opacity-35 disabled:pointer-events-none flex items-center justify-center cursor-pointer"
+					aria-label="Artículo siguiente"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+					</svg>
+				</button>
+			</div>
+
 			<a
-				href="/rss.xml"
-				target="_blank"
-				title="Suscríbete al Feed RSS"
-				class="group relative inline-flex items-center justify-center p-2.5 apple-glass-interactive rounded-xl hover:border-orange-500/50 transition-all active:scale-95"
+				href="/blog"
+				class="group/all inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl apple-glass-interactive text-xs xl:text-sm font-mono font-bold text-blue-400 hover:text-blue-300"
 			>
-				<div
-					class="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-amber-500 rounded-xl blur opacity-0 group-hover:opacity-75 transition duration-300"
-				>
-				</div>
-				<svg
-					class="relative w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform fill-current duration-200"
-					viewBox="0 0 24 24"
-				>
-					<path
-						d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"
-					></path>
-				</svg>
+				<span>Ver los {totalPosts} artículos</span>
+				<span class="group-hover/all:translate-x-1 transition-transform duration-150">→</span>
 			</a>
 		</div>
-		<p class="text-sm text-gray-400 font-mono max-w-xl mx-auto">
-			Historias desde mi teclado: experiencias y reflexiones de cosas que he vivido, me llaman la atención o me parecen interesantes.
-		</p>
 	</div>
 
-	<div class="w-full relative group px-4 md:px-12">
-		{/* Botón Izquierdo */}
-		<button
-			id="carousel-prev"
-			class="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2.5 apple-glass-interactive rounded-full text-white hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-xl active:scale-90"
-			aria-label="Anterior"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="w-6 h-6"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
+	{/* ========================================================= */}
+	{/* VISTA DESKTOP (>= 1024px): BENTO EDITORIAL 1 + 3          */}
+	{/* ========================================================= */}
+	{featuredPost && (
+		<div class="hidden lg:grid lg:grid-cols-12 gap-5 items-stretch">
+			{/* COLUMNA IZQUIERDA (7 cols): ARTÍCULO #1 MÁS RECIENTE DESTACADO */}
+			<a
+				href={`/blog/${featuredPost.slug}`}
+				class="group/feat lg:col-span-7 apple-glass-interactive rounded-2xl overflow-hidden flex flex-col justify-between p-4 2xl:p-5"
 			>
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
-				></path>
-			</svg>
-		</button>
+				<div class="flex flex-col gap-3.5">
+					<div class="relative aspect-[16/8.5] 2xl:aspect-video w-full rounded-xl overflow-hidden bg-neutral-950 border border-white/10">
+						{featuredPost.data.image ? (
+							<Image
+								src={featuredPost.data.image}
+								alt={featuredPost.data.title}
+								class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/feat:scale-[1.03]"
+							/>
+						) : (
+							<div class="w-full h-full flex items-center justify-center bg-neutral-900">
+								<span class="text-5xl">🐧</span>
+							</div>
+						)}
+						<div class="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
 
-		{/* Scroll Container */}
-		<div
-			id="carousel-container"
-			class="flex overflow-x-auto gap-4 py-4 px-2 snap-x snap-mandatory scrollbar-hide scroll-smooth [mask-image:linear-gradient(to_right,transparent,black_40px,black_calc(100%-40px),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_40px,black_calc(100%-40px),transparent)]"
-		>
-			{
-				posts.map((post) => (
+						{/* Badge Más Reciente */}
+						<div class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-600/90 backdrop-blur-md text-[11px] font-mono font-bold text-white border border-blue-400/40 shadow-lg">
+							<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+							MÁS RECIENTE
+						</div>
+
+						{/* Fecha */}
+						<div class="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-mono text-gray-200 border border-white/10">
+							{formatDate(featuredPost.data.pubDate)}
+						</div>
+					</div>
+
+					<div class="space-y-2.5 px-1">
+						{/* Tags y Serie */}
+						<div class="flex flex-wrap items-center gap-1.5">
+							{featuredPost.data.seriesTitle && (
+								<span class="text-[11px] font-mono font-bold text-purple-300 bg-purple-500/15 px-2.5 py-0.5 rounded-md border border-purple-500/30">
+									📚 {featuredPost.data.seriesTitle}
+								</span>
+							)}
+							{(featuredPost.data.tags || []).slice(0, 3).map((tag) => (
+								<span class="text-[11px] font-mono font-semibold text-blue-300 bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20">
+									#{tag}
+								</span>
+							))}
+						</div>
+
+						<h3 class="text-xl xl:text-2xl font-extrabold text-white group-hover/feat:text-blue-400 transition-colors duration-150 leading-snug font-display">
+							{featuredPost.data.title}
+						</h3>
+
+						<p class="text-sm text-gray-300 leading-relaxed line-clamp-2 2xl:line-clamp-3">
+							{featuredPost.data.description}
+						</p>
+					</div>
+				</div>
+
+				<div class="flex items-center justify-between pt-4 mt-3 border-t border-neutral-800/70 px-1 text-xs font-mono text-blue-400 font-bold">
+					<span>Lectura recomendada</span>
+					<span class="inline-flex items-center gap-1 group-hover/feat:translate-x-1 transition-transform duration-150">
+						Leer artículo completo →
+					</span>
+				</div>
+			</a>
+
+			{/* COLUMNA DERECHA (5 cols): ARTÍCULOS #2, #3 Y #4 APILADOS */}
+			<div class="lg:col-span-5 flex flex-col justify-between gap-3.5">
+				{secondaryPosts.map((post, idx) => (
 					<a
 						href={`/blog/${post.slug}`}
-						class="snap-center shrink-0 w-[270px] sm:w-80 md:w-96 first:pl-2 last:pr-2 block hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
+						class="group/sec flex-1 apple-glass-interactive rounded-xl p-3.5 2xl:p-4 flex items-center gap-3.5"
 					>
-						<article class="h-full apple-glass-interactive rounded-xl overflow-hidden hover:border-blue-500/40 flex flex-col shadow-xl">
-							<div class="relative aspect-video overflow-hidden">
+						{/* Miniatura */}
+						<div class="relative w-24 h-20 xl:w-28 xl:h-22 rounded-lg overflow-hidden flex-shrink-0 bg-neutral-950 border border-white/10">
+							{post.data.image ? (
+								<Image
+									src={post.data.image}
+									alt={post.data.title}
+									class="w-full h-full object-cover transition-transform duration-300 ease-out group-hover/sec:scale-105"
+								/>
+							) : (
+								<div class="w-full h-full flex items-center justify-center bg-neutral-900">
+									<span class="text-2xl">🐧</span>
+								</div>
+							)}
+							<span class="absolute bottom-1 left-1 bg-neutral-950/85 backdrop-blur-sm px-1.5 py-0.5 rounded text-[10px] font-mono text-gray-300 border border-white/10">
+								#{idx + 2}
+							</span>
+						</div>
+
+						{/* Contenido compacto */}
+						<div class="min-w-0 flex-1 flex flex-col justify-between h-full gap-1">
+							<div class="flex items-center justify-between gap-2 text-[11px] font-mono">
+								<div class="flex items-center gap-1.5 truncate">
+									{(post.data.tags || []).slice(0, 2).map((tag) => (
+										<span class="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/20 truncate">
+											#{tag}
+										</span>
+									))}
+								</div>
+								<span class="text-gray-400 flex-shrink-0">{formatDate(post.data.pubDate)}</span>
+							</div>
+
+							<h4 class="text-sm xl:text-base font-bold text-gray-100 group-hover/sec:text-blue-400 transition-colors duration-150 line-clamp-2 leading-snug">
+								{post.data.title}
+							</h4>
+
+							<div class="flex items-center justify-between text-xs font-mono text-gray-400 pt-0.5">
+								<span class="truncate text-[11px] text-gray-400">
+									{post.data.seriesTitle ? `📚 ${post.data.seriesTitle}` : "Artículo técnico"}
+								</span>
+								<span class="text-blue-400 font-bold flex-shrink-0 group-hover/sec:translate-x-1 transition-transform duration-150">
+									Leer →
+								</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	)}
+
+	{/* ========================================================= */}
+	{/* VISTA MÓVIL Y TABLET (< 1024px): CARRUSEL TÁCTIL NATIVO   */}
+	{/* ========================================================= */}
+	<div class="lg:hidden flex flex-col gap-4">
+		<div
+			id="carousel-container"
+			class="flex overflow-x-auto gap-3.5 sm:gap-4 py-1 px-0.5 snap-x snap-mandatory scrollbar-hide scroll-smooth overscroll-x-contain"
+			style="touch-action: pan-x pan-y;"
+		>
+			{posts.map((post, index) => (
+				<a
+					href={`/blog/${post.slug}`}
+					data-carousel-card
+					data-index={index}
+					class="group/card snap-start shrink-0 w-[84%] sm:w-[290px] md:w-[calc((100%-1rem)/2)] block"
+				>
+					<article class="h-full apple-glass-interactive rounded-xl overflow-hidden flex flex-col justify-between">
+						<div>
+							<div class="relative aspect-video overflow-hidden bg-neutral-950">
 								{post.data.image ? (
 									<Image
 										src={post.data.image}
 										alt={post.data.title}
-										class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+										class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105"
 									/>
 								) : (
 									<div class="w-full h-full flex items-center justify-center bg-neutral-900">
 										<span class="text-4xl">🐧</span>
 									</div>
 								)}
-								<div class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 to-transparent" />
-							</div>
-							<div class="p-4 flex flex-col flex-1 gap-2">
-								<h4 class="text-white font-bold leading-tight line-clamp-2">
-									{post.data.title}
-								</h4>
-								<p class="text-gray-400 text-sm line-clamp-2 flex-1">
-									{post.data.description}
-								</p>
-								<div class="flex items-center justify-between mt-auto pt-2 text-xs font-mono text-blue-400">
-									<span>{post.data.pubDate.toLocaleDateString()}</span>
-									<span class="group-hover:translate-x-1 transition-transform">
-										Leer más →
-									</span>
+								<div class="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-transparent to-transparent" />
+
+								{index === 0 && (
+									<div class="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-blue-600/90 backdrop-blur-md text-[10px] font-mono font-bold text-white border border-blue-400/40">
+										<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+										NUEVO
+									</div>
+								)}
+
+								<div class="absolute top-2.5 right-2.5 bg-neutral-950/80 backdrop-blur-md px-2 py-0.5 rounded text-[11px] font-mono text-gray-200 border border-white/10">
+									{formatDate(post.data.pubDate)}
 								</div>
 							</div>
-						</article>
-					</a>
-				))
-			}
+
+							<div class="p-4 flex flex-col gap-2">
+								<div class="flex flex-wrap items-center gap-1.5">
+									{(post.data.tags || []).slice(0, 2).map((tag) => (
+										<span class="text-[10px] font-mono font-semibold text-blue-300 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+											#{tag}
+										</span>
+									))}
+								</div>
+
+								<h3 class="text-base font-bold text-white leading-snug line-clamp-2 group-hover/card:text-blue-400 transition-colors">
+									{post.data.title}
+								</h3>
+
+								<p class="text-gray-300 text-xs sm:text-sm line-clamp-2 leading-relaxed">
+									{post.data.description}
+								</p>
+							</div>
+						</div>
+
+						<div class="px-4 pb-4 pt-2 mt-auto flex items-center justify-between text-xs font-mono text-blue-400 font-bold border-t border-neutral-800/50">
+							<span>{post.data.seriesTitle ? `📚 ${post.data.seriesTitle}` : "Leer artículo"}</span>
+							<span class="group-hover/card:translate-x-1 transition-transform duration-150">
+								Leer más →
+							</span>
+						</div>
+					</article>
+				</a>
+			))}
+
+			{/* Tarjeta final para explorar archivo completo */}
+			<a
+				href="/blog"
+				data-carousel-card
+				data-index={posts.length}
+				class="group/more snap-start shrink-0 w-[70vw] max-w-[260px] sm:w-[250px] md:w-[260px] block"
+			>
+				<article class="h-full apple-glass-interactive rounded-xl p-6 flex flex-col items-center justify-center text-center gap-3 border-dashed border-blue-500/30">
+					<div class="w-12 h-12 rounded-full bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl font-mono group-hover/more:scale-110 transition-transform duration-200">
+						→
+					</div>
+					<h3 class="text-base font-bold text-white font-display">
+						Explorar todo el archivo
+					</h3>
+					<p class="text-xs text-gray-400 font-mono">
+						Descubre los {totalPosts} artículos, tutoriales y series completas.
+					</p>
+					<span class="text-xs font-mono font-bold text-blue-400 pt-1">
+						Ir al blog →
+					</span>
+				</article>
+			</a>
 		</div>
 
-		{/* Botón Derecho */}
-		<button
-			id="carousel-next"
-			class="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2.5 apple-glass-interactive rounded-full text-white hover:border-blue-500 transition-all hidden md:flex items-center justify-center shadow-xl active:scale-90"
-			aria-label="Siguiente"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="w-6 h-6"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-				></path>
-			</svg>
-		</button>
-	</div>
+		{/* BARRA INFERIOR MÓVIL: INDICADORES DE POSICIÓN (WAYFINDING) + BOTÓN VER TODOS */}
+		<div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+			{/* Puntos indicadores de posición en móvil/tablet */}
+			<div class="flex items-center gap-1.5" id="carousel-dots" aria-label="Posición del carrusel">
+				{posts.map((_, idx) => (
+					<span
+						data-dot-index={idx}
+						class={`h-1.5 rounded-full transition-all duration-200 ${
+							idx === 0 ? "w-5 bg-blue-400" : "w-1.5 bg-neutral-700"
+						}`}
+					></span>
+				))}
+			</div>
 
-	{/* Enlace para ver todas las publicaciones */}
-	<div class="text-center pt-1">
-		<a
-			href="/blog"
-			class="inline-flex items-center gap-2 text-sm font-mono font-bold text-blue-400 hover:text-blue-300 hover:underline transition-colors"
-		>
-			Ver todas las publicaciones →
-		</a>
+			{/* CTA táctil con altura mínima de 44px en móvil */}
+			<a
+				href="/blog"
+				class="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl apple-glass-interactive text-xs font-mono font-bold text-blue-400"
+			>
+				<span>Ver todas las publicaciones ({totalPosts})</span>
+				<span>→</span>
+			</a>
+		</div>
 	</div>
 </div>
 
 <script>
-	const container = document.getElementById("carousel-container");
-	const prevBtn = document.getElementById("carousel-prev");
-	const nextBtn = document.getElementById("carousel-next");
+	function initBlogCarousel() {
+		const container = document.getElementById("carousel-container");
+		const prevBtn = document.getElementById("carousel-prev") as HTMLButtonElement | null;
+		const nextBtn = document.getElementById("carousel-next") as HTMLButtonElement | null;
+		const dots = document.querySelectorAll("#carousel-dots [data-dot-index]");
 
-	if (container && prevBtn && nextBtn) {
-		const scrollAmount = 380;
-		let isUserInteracting = false;
+		if (!container) return;
 
-		prevBtn.addEventListener("click", () => {
-			container.scrollBy({
-				left: -scrollAmount,
-				behavior: "smooth",
-			});
-		});
+		const getStepWidth = () => {
+			const firstCard = container.querySelector("[data-carousel-card]") as HTMLElement | null;
+			const gap = parseFloat(window.getComputedStyle(container).gap) || 16;
+			return firstCard ? firstCard.offsetWidth + gap : 320;
+		};
 
-		nextBtn.addEventListener("click", () => {
-			container.scrollBy({
-				left: scrollAmount,
-				behavior: "smooth",
-			});
-		});
+		const updateControlsAndDots = () => {
+			const scrollLeft = container.scrollLeft;
+			const maxScrollLeft = container.scrollWidth - container.clientWidth;
 
-		// Auto-play timer (advance every 4 seconds unless hovered/touched)
-		container.addEventListener("mouseenter", () => (isUserInteracting = true));
-		container.addEventListener("mouseleave", () => (isUserInteracting = false));
-		container.addEventListener("touchstart", () => (isUserInteracting = true), { passive: true });
-		container.addEventListener("touchend", () => {
-			setTimeout(() => (isUserInteracting = false), 2000);
-		});
-
-		setInterval(() => {
-			if (!isUserInteracting) {
-				const maxScrollLeft = container.scrollWidth - container.clientWidth;
-				if (container.scrollLeft >= maxScrollLeft - 10) {
-					container.scrollTo({ left: 0, behavior: "smooth" });
-				} else {
-					container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-				}
+			if (prevBtn) {
+				prevBtn.disabled = scrollLeft <= 8;
 			}
-		}, 4000);
+			if (nextBtn) {
+				nextBtn.disabled = scrollLeft >= maxScrollLeft - 8;
+			}
+
+			if (dots.length > 0) {
+				const step = getStepWidth();
+				const activeIndex = Math.min(
+					dots.length - 1,
+					Math.max(0, Math.round(scrollLeft / step)),
+				);
+
+				dots.forEach((dot, idx) => {
+					if (idx === activeIndex) {
+						dot.classList.remove("w-1.5", "bg-neutral-700");
+						dot.classList.add("w-5", "bg-blue-400");
+					} else {
+						dot.classList.remove("w-5", "bg-blue-400");
+						dot.classList.add("w-1.5", "bg-neutral-700");
+					}
+				});
+			}
+		};
+
+		prevBtn?.addEventListener("click", () => {
+			container.scrollBy({
+				left: -getStepWidth(),
+				behavior: "smooth",
+			});
+		});
+
+		nextBtn?.addEventListener("click", () => {
+			container.scrollBy({
+				left: getStepWidth(),
+				behavior: "smooth",
+			});
+		});
+
+		container.addEventListener("scroll", updateControlsAndDots, { passive: true });
+		window.addEventListener("resize", updateControlsAndDots, { passive: true });
+
+		updateControlsAndDots();
 	}
+
+	initBlogCarousel();
+	document.addEventListener("astro:page-load", initBlogCarousel);
 </script>
