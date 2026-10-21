@@ -7,6 +7,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import SocialShare from "../../components/SocialShare.astro";
 import RelatedPosts from "../../components/RelatedPosts.astro";
 import SeriesBox from "../../components/SeriesBox.astro";
+import MermaidRenderer from "../../components/MermaidRenderer.astro";
 import { getReadingTime } from "../../utils/readingTime";
 
 export async function getStaticPaths() {
@@ -47,7 +48,7 @@ const breadcrumbItems = [
   type="article"
   pubDate={post.data.pubDate}
 >
-  <main class="w-full max-w-5xl px-4 py-8 mx-auto animate-fade-in">
+  <main class="w-full max-w-5xl px-4 py-8 mx-auto">
     {/* Migas de pan (Breadcrumbs) */}
     <Breadcrumbs items={breadcrumbItems} />
 
@@ -63,7 +64,7 @@ const breadcrumbItems = [
           <span class="text-blue-400 font-semibold">⏱️ {readingTime}</span>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-[-0.035em] leading-[1.08] font-display">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-[-0.035em] leading-[1.08] font-display break-words">
           {post.data.title}
         </h1>
 
@@ -100,7 +101,7 @@ const breadcrumbItems = [
         )
       }
 
-      {/* --- NAVEGACIÓN DE SERIE (SUPERIOR) --- */}
+      {/* --- NAVEGACIÓN DE SERIE (SUPERIOR, COLAPSADA POR DEFECTO) --- */}
       {
         post.data.series && (
           <div class="max-w-4xl mx-auto mb-8">
@@ -108,6 +109,7 @@ const breadcrumbItems = [
               seriesId={post.data.series}
               seriesTitle={post.data.seriesTitle}
               currentSlug={post.slug}
+              defaultOpen={false}
             />
           </div>
         )
@@ -143,137 +145,6 @@ const breadcrumbItems = [
       allPosts={allPosts}
     />
   </main>
+
+  <MermaidRenderer />
 </Layout>
-
-<style is:global>
-  .mermaid svg {
-    overflow: visible !important;
-  }
-  .mermaid .node,
-  .mermaid .node rect,
-  .mermaid .node circle,
-  .mermaid .node polygon,
-  .mermaid .node path,
-  .mermaid .label-container,
-  .mermaid .basic.node,
-  .mermaid .basic.node rect,
-  .mermaid .block {
-    filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.95)) !important;
-    fill: #171717 !important;
-    stroke: #ffffff !important;
-    stroke-width: 1.5px !important;
-  }
-  .mermaid .edgePath .path,
-  .mermaid .flowchart-link,
-  .mermaid .edgePaths path,
-  .mermaid path.path {
-    stroke: #ffffff !important;
-    stroke-width: 2px !important;
-  }
-  .mermaid .marker,
-  .mermaid marker path,
-  .mermaid #arrowhead path,
-  .mermaid .arrowheadPath {
-    fill: #ffffff !important;
-    stroke: #ffffff !important;
-  }
-  .mermaid text,
-  .mermaid .nodeLabel,
-  .mermaid .edgeLabel,
-  .mermaid p,
-  .mermaid span,
-  .mermaid div {
-    fill: #ffffff !important;
-    color: #ffffff !important;
-    font-family: inherit !important;
-  }
-</style>
-
-<script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-
-<script is:inline>
-  function initMermaid() {
-    if (typeof mermaid === "undefined") {
-      setTimeout(initMermaid, 100);
-      return;
-    }
-
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: "dark",
-      securityLevel: "loose",
-      fontFamily: "inherit",
-      themeVariables: {
-        primaryColor: "#171717",
-        primaryTextColor: "#ffffff",
-        primaryBorderColor: "#ffffff",
-        lineColor: "#ffffff",
-        textColor: "#ffffff",
-        edgeLabelBackground: "#171717",
-        nodeBorder: "#ffffff",
-        clusterBorders: "#ffffff",
-        mainBkg: "#171717",
-        fontFamily: "inherit",
-      },
-    });
-
-    async function renderAllMermaid() {
-      const rawBlocks = Array.from(
-        document.querySelectorAll(
-          '[data-language="mermaid"], [data-lang="mermaid"], .language-mermaid, pre.astro-code[data-language="mermaid"]'
-        )
-      );
-
-      if (rawBlocks.length === 0) return;
-
-      const targetBlocks = Array.from(
-        new Set(
-          rawBlocks.map((el) => (el.tagName === "PRE" ? el : el.closest("pre") || el))
-        )
-      );
-
-      for (let i = 0; i < targetBlocks.length; i++) {
-        const targetPre = targetBlocks[i];
-        if (targetPre.hasAttribute("data-mermaid-rendered")) continue;
-
-        const lineElements = targetPre.querySelectorAll(".line");
-        let codeText = "";
-        if (lineElements.length > 0) {
-          codeText = Array.from(lineElements)
-            .map((el) => el.textContent)
-            .join("\n");
-        } else {
-          codeText = targetPre.textContent || "";
-        }
-
-        codeText = codeText.trim();
-        if (!codeText) continue;
-
-        try {
-          const id = `mermaid-svg-${Date.now()}-${i}`;
-          const { svg } = await mermaid.render(id, codeText);
-
-          const container = document.createElement("div");
-          container.className =
-            "mermaid flex justify-center my-8 overflow-x-auto p-6 bg-neutral-900/80 border border-neutral-800 rounded-2xl shadow-2xl shadow-black/60";
-          container.innerHTML = svg;
-
-          targetPre.setAttribute("data-mermaid-rendered", "true");
-          targetPre.replaceWith(container);
-        } catch (error) {
-          console.error(`[Mermaid] Error rendering diagram #${i}:`, error);
-        }
-      }
-    }
-
-    renderAllMermaid();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initMermaid);
-  } else {
-    initMermaid();
-  }
-
-  document.addEventListener("astro:page-load", initMermaid);
-</script>

@@ -51,14 +51,18 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 					<img
 						src={gravatarUrl}
 						alt="Luis Pereida"
+						width="208"
+						height="208"
+						fetchpriority="high"
+						decoding="async"
 						class="absolute inset-0 w-full h-full object-cover rounded-full"
 					/>
-					{/* Video animado que se reproduce 1 sola vez y regresa suavemente a la imagen */}
+					{/* Video animado que se reproduce 1 sola vez (si no hay reduced-motion) y regresa suavemente a la imagen */}
 					<video
 						id="hero-avatar-video"
 						src="/video/subscribete.mp4"
 						class="absolute inset-0 w-full h-full object-cover rounded-full opacity-0 transition-opacity duration-700 ease-in-out cursor-pointer"
-						autoplay
+						preload="metadata"
 						muted
 						playsinline
 						poster={gravatarUrl}
@@ -86,9 +90,9 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 				>
 					y hago ciberseguridad para todos
 				</p>
-				<p class="text-xs sm:text-sm xl:text-base text-gray-300 font-mono mt-0.5 tracking-wide h-6 flex items-center gap-1">
-					<span id="typewriter" class="text-gray-200"></span>
-					<span class="animate-pulse bg-blue-400 w-2 h-4 block"></span>
+				<p class="text-xs sm:text-sm xl:text-base text-gray-300 font-mono mt-0.5 tracking-wide h-6 flex items-center gap-1" aria-label="@pereidax86">
+					<span id="typewriter" class="text-gray-200">@pereidax86</span>
+					<span class="animate-pulse bg-blue-400 w-2 h-4 block" aria-hidden="true"></span>
 				</p>
 
 				{/* STATUS BAR */}
@@ -106,7 +110,7 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 	</section>
 
 	{/* CONTENEDOR TABLET SNAP 2 (BIO/FILOSOFÍA + CERTS): Tablet Snap 2 | Móvil Snaps 2 & 3 | Desktop Cols 2 & 3 */}
-	<div class="w-full lg:w-2/3 md:min-h-[100dvh] md:snap-start lg:snap-none lg:min-h-0 flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row gap-6 items-stretch justify-center p-2 sm:p-4 lg:p-0">
+	<div class="w-full lg:w-2/3 md:min-h-[100dvh] md:snap-start lg:snap-none lg:min-h-0 flex flex-col md:grid md:grid-cols-2 md:content-center lg:flex lg:flex-row gap-6 items-stretch justify-center p-2 sm:p-4 lg:p-0">
 		
 		{/* CARD 2 (BIO & FILOSOFÍA): Móvil Snap 2 | Tablet Snap 2 Col 1 | Desktop Col 2 */}
 		<section class="min-h-[100dvh] py-6 sm:py-0 md:min-h-0 snap-start md:snap-none w-full lg:w-1/2 flex items-center justify-center">
@@ -148,21 +152,32 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 <script>
 	const text = "@pereidax86";
 	const typewriter = document.getElementById("typewriter");
-	let i = 0;
+	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-	function type() {
-		if (i < text.length) {
-			if (typewriter) {
-				typewriter.innerHTML += text.charAt(i);
+	if (typewriter) {
+		if (prefersReducedMotion.matches) {
+			typewriter.textContent = text;
+		} else {
+			typewriter.textContent = "";
+			let i = 0;
+			function type() {
+				if (prefersReducedMotion.matches) {
+					if (typewriter) typewriter.textContent = text;
+					return;
+				}
+				if (i < text.length) {
+					if (typewriter) {
+						typewriter.textContent += text.charAt(i);
+					}
+					i++;
+					setTimeout(type, 90);
+				}
 			}
-			i++;
-			setTimeout(type, 100);
+			setTimeout(type, 350);
 		}
 	}
 
-	setTimeout(type, 500);
-
-	// Video Avatar Smooth Fade-In, Fade-Out al finalizar y Replay en Hover
+	// Video Avatar Smooth Fade-In, Fade-Out al finalizar y Replay en Hover (respetando prefers-reduced-motion)
 	const avatarVideo = document.getElementById("hero-avatar-video") as HTMLVideoElement | null;
 	const avatarContainer = avatarVideo?.parentElement;
 
@@ -177,19 +192,20 @@ const { gravatarUrl, bioText, techStack, currentStatus, philosophy, certTop, cer
 			avatarVideo.classList.add("opacity-0");
 		};
 
-		if (avatarVideo.readyState >= 3) {
-			showVideo();
-		} else {
-			avatarVideo.addEventListener("canplaythrough", showVideo, { once: true });
-			avatarVideo.addEventListener("playing", showVideo, { once: true });
-		}
-
 		// Al finalizar la animación del video (1 sola reproducción), regresa suavemente a la imagen
 		avatarVideo.addEventListener("ended", hideVideo);
 
-		// Si el usuario pasa el mouse sobre el avatar, reproduce la animación de nuevo
+		if (!prefersReducedMotion.matches) {
+			avatarVideo.addEventListener("playing", showVideo, { once: true });
+			avatarVideo.play().catch(() => {
+				hideVideo();
+			});
+		}
+
+		// Si el usuario pasa el mouse sobre el avatar y no tiene reduced-motion activo, reproduce la animación de nuevo
 		if (avatarContainer) {
 			avatarContainer.addEventListener("mouseenter", () => {
+				if (prefersReducedMotion.matches) return;
 				avatarVideo.currentTime = 0;
 				showVideo();
 				avatarVideo.play().catch(() => {});

@@ -32,11 +32,11 @@ const breadcrumbSchema = {
 };
 ---
 
-<nav aria-label="Breadcrumb" class="mb-6 flex items-center text-xs font-mono text-gray-400 overflow-x-auto whitespace-nowrap py-1">
+<nav aria-label="Breadcrumb" class="mb-6 flex items-center text-xs font-mono text-gray-400 overflow-x-auto whitespace-nowrap">
   <ol class="inline-flex items-center space-x-1 md:space-x-2">
     <li class="inline-flex items-center">
-      <a href="/" class="inline-flex items-center hover:text-blue-400 transition-colors">
-        <svg class="w-3.5 h-3.5 mr-1.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+      <a href="/" class="inline-flex items-center min-h-[44px] sm:min-h-[36px] px-1.5 py-2 hover:text-blue-400 transition-colors rounded-lg">
+        <svg class="w-3.5 h-3.5 mr-1.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
         </svg>
         Inicio
@@ -44,13 +44,13 @@ const breadcrumbSchema = {
     </li>
     {items.map((item, index) => (
       <li class="flex items-center">
-        <span class="mx-1 text-gray-600">/</span>
+        <span class="mx-0.5 text-gray-500" aria-hidden="true">/</span>
         {index === items.length - 1 ? (
-          <span class="text-blue-400 font-semibold max-w-[200px] md:max-w-[400px] truncate" aria-current="page">
+          <span class="text-blue-400 font-semibold max-w-[200px] md:max-w-[400px] truncate px-1.5 py-2" aria-current="page">
             {item.label}
           </span>
         ) : (
-          <a href={item.href} class="hover:text-blue-400 transition-colors">
+          <a href={item.href} class="inline-flex items-center min-h-[44px] sm:min-h-[36px] px-1.5 py-2 hover:text-blue-400 transition-colors rounded-lg">
             {item.label}
           </a>
         )}

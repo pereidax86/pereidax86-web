@@ -4,6 +4,8 @@
 @theme {
     --font-display: "Rubik", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
     --font-body: "Rubik", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    --font-sans: "Rubik", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
 }
 
 /* ========================================= */
@@ -17,6 +19,11 @@ html {
 
 button, a, [role="button"] {
     touch-action: manipulation;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
 }
 
 /* ========================================= */
@@ -46,11 +53,21 @@ button, a, [role="button"] {
     transform: scale(0.97);
 }
 
+/* Evita apilar doble backdrop-filter: blur(20px) cuando una tarjeta o píldora ya vive dentro de un contenedor .apple-glass */
+.apple-glass .apple-glass-interactive,
+.apple-glass .apple-glass {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
 @media (hover: hover) and (pointer: fine) {
-    .apple-glass-interactive:hover {
+    .apple-glass-interactive:hover,
+    .apple-glass .apple-glass-interactive:hover {
         border-top-color: rgba(255, 255, 255, 0.3);
         border-color: rgba(59, 130, 246, 0.35);
-        background: rgba(30, 30, 30, 0.75);
+        background: rgba(38, 38, 38, 0.78);
     }
 }
 
@@ -64,11 +81,33 @@ button, a, [role="button"] {
 /* ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
-    *, ::before, ::after {
+    html,
+    #main-scroll-container,
+    #carousel-container {
+        scroll-behavior: auto !important;
+    }
+
+    /* Detener bucles decorativos continuos manteniendo el indicador visible */
+    .animate-pulse,
+    .animate-ping,
+    .animate-bounce,
+    .animate-spin {
+        animation: none !important;
+    }
+
+    /* Eliminar desplazamientos y escalados espaciales, preservando feedback de opacidad y color */
+    *,
+    ::before,
+    ::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+        transition-property: opacity, background-color, border-color, color, fill, stroke, box-shadow !important;
+        transition-duration: 150ms !important;
+        transition-timing-function: ease-out !important;
+    }
+
+    .apple-glass-interactive:active {
+        transform: none !important;
     }
 }
 
@@ -81,8 +120,30 @@ button, a, [role="button"] {
 }
 
 /* ========================================= */
-/* UTILIDADES GENERALES                      */
+/* UTILIDADES GENERALES Y ADAPTACIÓN         */
 /* ========================================= */
+
+/* Evita que ScrollToTop colisione con FloatingBanner en pantallas móviles (< 640px).
+   13.5rem libera la altura real del banner (~178px) y el botón de cierre que sobresale por encima. */
+@media (max-width: 639px) {
+    body[data-floating-banner-visible="true"] #scroll-top-btn {
+        bottom: calc(13.5rem + env(safe-area-inset-bottom, 0px));
+    }
+    #floating-banner {
+        bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+}
+
+/* En pantallas de baja altura vertical (laptops 768p, móviles en horizontal o zoom >= 125%),
+   relaja el snap-mandatory de 100dvh para evitar recortes de contenido al desplazarse */
+@media (max-height: 780px) {
+    #main-scroll-container {
+        height: auto !important;
+        min-height: 100dvh !important;
+        overflow-y: visible !important;
+        scroll-snap-type: y proximity !important;
+    }
+}
 
 .scrollbar-hide {
     -ms-overflow-style: none;
@@ -112,23 +173,23 @@ button, a, [role="button"] {
 }
 
 .markdown-content p {
-    @apply mb-6 leading-relaxed;
+    @apply mb-6 leading-relaxed break-words;
 }
 
 .markdown-content ul {
-    @apply list-disc list-inside mb-6 space-y-2 text-gray-300;
+    @apply list-disc list-inside mb-6 space-y-2 text-gray-300 break-words;
 }
 
 .markdown-content a {
-    @apply text-blue-400 hover:text-blue-300 underline underline-offset-4 decoration-blue-500/30 transition-colors;
+    @apply text-blue-400 hover:text-blue-300 underline underline-offset-4 decoration-blue-500/30 transition-colors break-words;
 }
 
 .markdown-content blockquote {
-    @apply border-l-4 border-purple-500 apple-glass p-5 rounded-r-xl italic text-gray-300 mb-8;
+    @apply border-l-4 border-purple-500 apple-glass p-5 rounded-r-xl italic text-gray-300 mb-8 break-words;
 }
 
 .markdown-content code {
-    @apply bg-neutral-900/90 text-pink-400 px-1.5 py-0.5 rounded text-sm font-mono border border-neutral-800/80;
+    @apply bg-neutral-900/90 text-pink-400 px-1.5 py-0.5 rounded text-sm font-mono border border-neutral-800/80 break-words;
 }
 
 .markdown-content pre {
@@ -141,4 +202,12 @@ button, a, [role="button"] {
 
 .markdown-content strong {
     @apply text-white font-bold;
+}
+
+/* Tablas anchas: scroll horizontal interno para no ensanchar el viewport en móvil */
+.markdown-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-bottom: 2rem;
 }

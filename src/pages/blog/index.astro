@@ -39,14 +39,13 @@ const pageDesc =
 ---
 
 <Layout title={pageTitle} description={pageDesc}>
-	<main class="w-full max-w-5xl px-6 py-12 mx-auto animate-fade-in">
-		<a href="/" class="inline-flex items-center gap-2 group">
-			<button
-				class="flex items-center gap-2 px-4 py-2 apple-glass-interactive text-gray-300 hover:text-white rounded-xl font-mono text-sm transition-all active:scale-95 shadow-sm cursor-pointer"
-			>
-				<span class="group-hover:-translate-x-1 transition-transform">←</span>
-				Volver al Inicio
-			</button>
+	<main class="w-full max-w-5xl px-6 py-12 mx-auto">
+		<a
+			href="/"
+			class="inline-flex items-center gap-2 group px-4 py-2.5 min-h-[44px] apple-glass-interactive text-gray-300 hover:text-white rounded-xl font-mono text-sm transition-all active:scale-95 shadow-sm"
+		>
+			<span class="group-hover:-translate-x-1 transition-transform" aria-hidden="true">←</span>
+			<span>Volver al Inicio</span>
 		</a>
 
 		<div class="text-center mb-10 space-y-4">
@@ -59,7 +58,7 @@ const pageDesc =
 
 			<a
 				href="/rss.xml"
-				class="inline-flex items-center gap-2 px-4 py-2 mt-4 text-orange-500 apple-glass-interactive border-orange-500/50 rounded-xl hover:bg-orange-500 hover:text-white hover:border-transparent transition-all active:scale-95 font-bold"
+				class="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] mt-4 text-orange-500 apple-glass-interactive border-orange-500/50 rounded-xl hover:bg-orange-500 hover:text-white hover:border-transparent transition-all active:scale-95 font-bold"
 				title="Suscríbete a nuestro Feed RSS"
 			>
 				<svg
@@ -79,12 +78,19 @@ const pageDesc =
 		{/* NAVEGACIÓN Y FILTROS POR SERIES */}
 		<div class="mb-10 space-y-6 max-w-4xl mx-auto">
 			{/* Botones de Series (Categorías principales) */}
-			<div class="flex overflow-x-auto sm:flex-wrap items-center justify-start sm:justify-center gap-2 pb-2 scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0" id="series-filters">
+			<div
+				class="flex overflow-x-auto sm:flex-wrap items-center justify-start sm:justify-center gap-2 pb-2 scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0"
+				id="series-filters"
+				role="group"
+				aria-label="Filtrar artículos por serie"
+			>
 				<button
+					type="button"
 					data-series="all"
-					class="series-btn active-series px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-blue-600 text-white border border-blue-500 shadow-md shadow-blue-500/20 active:scale-95 cursor-pointer flex items-center gap-1.5"
+					aria-pressed="true"
+					class="series-btn active-series min-h-[44px] sm:min-h-[40px] px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition-all bg-blue-600 text-white border border-blue-500 shadow-md shadow-blue-500/20 active:scale-95 cursor-pointer flex items-center gap-1.5 shrink-0"
 				>
-					✨ Todas ({posts.length})
+					<span aria-hidden="true">✨</span> Todas ({posts.length})
 				</button>
 				{uniqueSeriesKeys.map((seriesKey) => {
 					const samplePost = posts.find((p: any) => p.data.series === seriesKey);
@@ -93,10 +99,12 @@ const pageDesc =
 					const count = posts.filter((p: any) => p.data.series === seriesKey).length;
 					return (
 						<button
+							type="button"
 							data-series={seriesKey}
-							class="series-btn px-3.5 py-2 rounded-xl text-xs font-mono font-medium transition-all apple-glass-interactive text-gray-300 hover:text-white active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-sm"
+							aria-pressed="false"
+							class="series-btn min-h-[44px] sm:min-h-[40px] px-4 py-2.5 rounded-xl text-xs font-mono font-medium transition-all apple-glass-interactive text-gray-300 hover:text-white active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-sm shrink-0"
 						>
-							<span>{info.icon}</span>
+							<span aria-hidden="true">{info.icon}</span>
 							{info.label} ({count})
 						</button>
 					);
@@ -106,39 +114,44 @@ const pageDesc =
 			{/* Barra de búsqueda con Autocompletado de Tags */}
 			<div class="relative max-w-2xl mx-auto">
 				<div class="relative">
-					<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+					<label for="blog-search" class="sr-only">
+						Buscar artículos por título, contenido o etiqueta
+					</label>
+					<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400" aria-hidden="true">
 						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 						</svg>
 					</div>
 					<input
-						type="text"
+						type="search"
 						id="blog-search"
+						maxlength="120"
 						placeholder="Buscar por título, contenido o etiqueta (ej: #ansible)..."
-						class="w-full pl-11 pr-10 py-3.5 apple-glass rounded-xl text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/70 focus:ring-2 focus:ring-blue-500/20 transition-all font-mono text-sm shadow-inner"
+						class="w-full pl-11 pr-12 py-3.5 min-h-[48px] apple-glass rounded-xl text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-500/70 focus:ring-2 focus:ring-blue-500/20 transition-all font-mono text-base sm:text-sm shadow-inner"
 						autocomplete="off"
 					/>
 					<button
 						id="clear-search"
-						class="hidden absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white transition-colors cursor-pointer"
+						aria-label="Limpiar búsqueda"
+						class="hidden absolute inset-y-0 right-0 w-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-white transition-colors cursor-pointer"
 						title="Limpiar búsqueda"
 						type="button"
 					>
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 						</svg>
 					</button>
 				</div>
 
 				{/* Panel de Sugerencias de Tags */}
-				<div id="tag-suggestions" class="hidden flex flex-wrap items-center gap-1.5 pt-2 px-1 text-xs font-mono text-gray-400">
-					<span class="text-gray-500 font-semibold mr-1">Etiquetas sugeridas:</span>
+				<div id="tag-suggestions" class="hidden flex flex-wrap items-center gap-1.5 pt-2 px-1 text-xs font-mono text-gray-400" aria-live="polite">
+					<span class="text-gray-400 font-semibold mr-1">Etiquetas sugeridas:</span>
 					<div id="suggestions-list" class="flex flex-wrap items-center gap-1.5 inline-flex"></div>
 				</div>
 			</div>
 
 			{/* Contador de publicaciones encontradas */}
-			<div class="text-center font-mono text-xs text-gray-500" id="search-counter">
+			<div class="text-center font-mono text-xs text-gray-400" id="search-counter" role="status" aria-live="polite" aria-atomic="true">
 				Mostrando <span id="visible-count" class="text-blue-400 font-bold">{posts.length}</span> de {posts.length} artículos
 			</div>
 		</div>
@@ -188,9 +201,9 @@ const pageDesc =
 									))}
 							</div>
 
-							<h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-blue-400 transition-colors leading-tight">
+							<h2 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-blue-400 transition-colors leading-tight">
 								{post.data.title}
-							</h3>
+							</h2>
 
 							<p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
 								{post.data.description}
@@ -206,18 +219,19 @@ const pageDesc =
 		</div>
 
 		{/* Estado cuando no hay resultados de búsqueda */}
-		<div id="no-results" class="hidden text-center py-16 border border-dashed border-neutral-800 rounded-2xl space-y-4">
+		<div id="no-results" role="status" aria-live="polite" class="hidden text-center py-16 border border-dashed border-neutral-800 rounded-2xl space-y-4">
 			<p class="text-gray-300 font-mono text-lg">
 				🔍 /var/log/messages: 0 resultados encontrados
 			</p>
-			<p class="text-gray-500 text-sm max-w-md mx-auto">
+			<p class="text-gray-400 text-sm max-w-md mx-auto">
 				No se encontraron publicaciones que coincidan con la búsqueda. Intenta con otras palabras clave o restablece los filtros.
 			</p>
 			<button
 				id="reset-search-btn"
-				class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-blue-400 hover:text-blue-300 rounded-lg font-mono text-xs transition-all border border-neutral-700 inline-flex items-center gap-2 cursor-pointer"
+				type="button"
+				class="min-h-[44px] px-4 py-2.5 apple-glass-interactive text-blue-400 hover:text-blue-300 rounded-xl font-mono text-xs transition-all inline-flex items-center gap-2 cursor-pointer"
 			>
-				🔄 Restablecer filtros
+				<span aria-hidden="true">🔄</span> Restablecer filtros
 			</button>
 		</div>
 	</main>
@@ -226,6 +240,9 @@ const pageDesc =
 <script is:inline define:vars={{ allTags }}>
 	function initBlogSearch() {
 		const searchInput = document.getElementById("blog-search");
+		if (!searchInput || searchInput.dataset.initialized === "true") return;
+		searchInput.dataset.initialized = "true";
+
 		const clearBtn = document.getElementById("clear-search");
 		const postCards = document.querySelectorAll(".post-card");
 		const seriesBtns = document.querySelectorAll(".series-btn");
@@ -300,26 +317,24 @@ const pageDesc =
 				);
 
 				if (matchingTags.length > 0) {
-					suggestionsList.innerHTML = matchingTags
-						.slice(0, 5)
-						.map(
-							(tag) =>
-								`<button data-suggested-tag="${tag.toLowerCase()}" class="suggested-tag-btn px-2.5 py-0.5 rounded-full text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 transition-colors cursor-pointer">#${tag}</button>`
-						)
-						.join("");
-
-					suggestionsBox.classList.remove("hidden");
-
-					document.querySelectorAll(".suggested-tag-btn").forEach((btn) => {
+					suggestionsList.innerHTML = "";
+					matchingTags.slice(0, 5).forEach((tag) => {
+						const btn = document.createElement("button");
+						btn.type = "button";
+						btn.dataset.suggestedTag = tag.toLowerCase();
+						btn.className =
+							"suggested-tag-btn min-h-[38px] px-3 py-1.5 rounded-full text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 transition-colors cursor-pointer inline-flex items-center";
+						btn.textContent = "#" + tag;
 						btn.addEventListener("click", () => {
 							const selectedTag = btn.dataset.suggestedTag || "";
-							if (searchInput) {
-								searchInput.value = "#" + selectedTag;
-								searchQuery = "#" + selectedTag;
-								filterPosts();
-							}
+							searchInput.value = "#" + selectedTag;
+							searchQuery = "#" + selectedTag;
+							filterPosts();
 						});
+						suggestionsList.appendChild(btn);
 					});
+
+					suggestionsBox.classList.remove("hidden");
 					return;
 				}
 			}
@@ -327,35 +342,32 @@ const pageDesc =
 			suggestionsBox.classList.add("hidden");
 		}
 
-		if (searchInput) {
-			searchInput.addEventListener("input", (e) => {
-				searchQuery = e.target.value.toLowerCase().trim();
-				filterPosts();
-			});
+		searchInput.addEventListener("input", (e) => {
+			searchQuery = e.target.value.toLowerCase().trim();
+			filterPosts();
+		});
 
-			searchInput.addEventListener("keydown", (e) => {
-				if (e.key === "Escape") {
-					searchInput.value = "";
-					searchQuery = "";
-					filterPosts();
-				}
-			});
-		}
+		searchInput.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") {
+				searchInput.value = "";
+				searchQuery = "";
+				filterPosts();
+			}
+		});
 
 		if (clearBtn) {
 			clearBtn.addEventListener("click", () => {
-				if (searchInput) {
-					searchInput.value = "";
-					searchQuery = "";
-					searchInput.focus();
-					filterPosts();
-				}
+				searchInput.value = "";
+				searchQuery = "";
+				searchInput.focus();
+				filterPosts();
 			});
 		}
 
 		seriesBtns.forEach((btn) => {
 			btn.addEventListener("click", () => {
 				seriesBtns.forEach((b) => {
+					b.setAttribute("aria-pressed", "false");
 					b.classList.remove(
 						"bg-blue-600",
 						"text-white",
@@ -366,17 +378,16 @@ const pageDesc =
 						"active-series"
 					);
 					b.classList.add(
-						"bg-neutral-900/80",
+						"apple-glass-interactive",
 						"text-gray-300",
-						"border-neutral-800",
 						"font-medium"
 					);
 				});
 
+				btn.setAttribute("aria-pressed", "true");
 				btn.classList.remove(
-					"bg-neutral-900/80",
+					"apple-glass-interactive",
 					"text-gray-300",
-					"border-neutral-800",
 					"font-medium"
 				);
 				btn.classList.add(
@@ -396,7 +407,7 @@ const pageDesc =
 
 		if (resetBtn) {
 			resetBtn.addEventListener("click", () => {
-				if (searchInput) searchInput.value = "";
+				searchInput.value = "";
 				searchQuery = "";
 				activeSeries = "all";
 

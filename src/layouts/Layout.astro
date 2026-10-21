@@ -113,7 +113,7 @@ const schemaData = {
 <html lang="es" class="dark scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 
@@ -164,6 +164,7 @@ const schemaData = {
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://www.gravatar.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Rubik:wght@400;500;700;800&display=swap"
 			rel="stylesheet"
@@ -229,32 +230,10 @@ const schemaData = {
 </html>
 
 <style is:global>
-	:root {
-		--font-rubik: "Rubik", system-ui, sans-serif;
-		--font-jetbrains: "JetBrains Mono", monospace;
-	}
 	body {
-		font-family: var(--font-rubik);
+		font-family: var(--font-sans);
 	}
 	.font-mono {
-		font-family: var(--font-jetbrains) !important;
-	}
-
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-			transform: translateY(10px);
-		}
-		99% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-		100% {
-			opacity: 1;
-			transform: none;
-		}
-	}
-	.animate-fade-in {
-		animation: fadeIn 0.8s ease-out forwards;
+		font-family: var(--font-mono) !important;
 	}
 </style>

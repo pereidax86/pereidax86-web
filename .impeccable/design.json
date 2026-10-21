@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T22:56:30-06:00",
+  "title": "Design System: Luis Pereida (@pereidax86)",
+  "extensions": {
+    "colorMeta": {
+      "obsidian-terminal": {
+        "role": "neutral",
+        "displayName": "Obsidian Terminal",
+        "canonical": "#0a0a0a",
+        "tonalRamp": ["#0a0a0a", "#171717", "#262626", "#404040", "#525252", "#737373", "#a3a3a3", "#e5e5e5"]
+      },
+      "smoked-glass": {
+        "role": "neutral",
+        "displayName": "Smoked Glass",
+        "canonical": "rgba(23, 23, 23, 0.65)",
+        "tonalRamp": ["#121212", "#171717", "#1e1e1e", "#262626", "#333333", "#4d4d4d", "#737373", "#a3a3a3"]
+      },
+      "sysadmin-blue": {
+        "role": "primary",
+        "displayName": "SysAdmin Electric Blue",
+        "canonical": "#3b82f6",
+        "tonalRamp": ["#172554", "#1e3a8a", "#1e40af", "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#93c5fd"]
+      },
+      "sysadmin-blue-bright": {
+        "role": "primary",
+        "displayName": "SysAdmin Blue Bright",
+        "canonical": "#60a5fa",
+        "tonalRamp": ["#1e3a8a", "#1e40af", "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe"]
+      },
+      "kernel-purple": {
+        "role": "secondary",
+        "displayName": "Kernel Purple",
+        "canonical": "#a855f7",
+        "tonalRamp": ["#3b0764", "#581c87", "#6b21a8", "#7e22ce", "#9333ea", "#a855f7", "#c084fc", "#e9d5ff"]
+      },
+      "daemon-green": {
+        "role": "tertiary",
+        "displayName": "Daemon Active Green",
+        "canonical": "#22c55e",
+        "tonalRamp": ["#052e16", "#14532d", "#166534", "#15803d", "#16a34a", "#22c55e", "#4ade80", "#86efac"]
+      },
+      "syntax-pink": {
+        "role": "tertiary",
+        "displayName": "Syntax Pink",
+        "canonical": "#f472b6",
+        "tonalRamp": ["#500724", "#831843", "#9d174d", "#be185d", "#db2777", "#ec4899", "#f472b6", "#f9a8d4"]
+      },
+      "terminal-white": {
+        "role": "neutral",
+        "displayName": "Terminal White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#262626", "#404040", "#737373", "#9ca3af", "#d1d5db", "#e5e7eb", "#f3f4f6", "#ffffff"]
+      },
+      "muted-telemetry": {
+        "role": "neutral",
+        "displayName": "Muted Telemetry",
+        "canonical": "#9ca3af",
+        "tonalRamp": ["#1f2937", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#d1d5db", "#e5e7eb", "#f9fafb"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Hero",
+        "purpose": "Nombre principal en HeroHeader y títulos H1 de páginas de índice y artículos."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Títulos H2 de secciones del hub y encabezados H2 con barra azul dentro de artículos."
+      },
+      "title": {
+        "displayName": "Card & Module Title",
+        "purpose": "Títulos H3 de tarjetas de artículos, presentaciones y subsecciones."
+      },
+      "body": {
+        "displayName": "Editorial Body",
+        "purpose": "Cuerpo de lectura didáctica en artículos del blog, biografía y guías rápidas."
+      },
+      "label": {
+        "displayName": "Terminal Telemetry (Mono)",
+        "purpose": "Metadatos técnicos, fechas, etiquetas #tag, rutas Unix, filtros y botones."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-ambient",
+        "value": "0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08)",
+        "purpose": "Elevación base y bisel superior interno para todas las superficies .apple-glass."
+      },
+      {
+        "name": "interactive-blue-glow",
+        "value": "0 0 30px -5px rgba(59, 130, 246, 0.3)",
+        "purpose": "Resplandor cromático en hover para tarjetas de guías rápidas y llamadas a la acción."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-glass-spring",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Curva de respuesta táctil (180ms) para compresión scale(0.97) y destello de borde en .apple-glass-interactive."
+      },
+      {
+        "name": "ease-banner-enter",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrada suave (500ms) para elementos flotantes como FloatingBanner."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Glass Interactive CTA Button",
+      "kind": "button",
+      "refersTo": "button-glass",
+      "description": "Botón de acción en cristal ahumado con borde especular y flecha direccional animada.",
+      "html": "<a href=\"#\" class=\"ds-btn-glass\"><span>Ver los 24 artículos</span><span class=\"ds-arrow\">→</span></a>",
+      "css": ".ds-btn-glass { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 12px; background: rgba(23, 23, 23, 0.65); backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.08); border-top-color: rgba(255, 255, 255, 0.18); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08); font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #60a5fa; text-decoration: none; transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease, border-color 180ms ease; } .ds-btn-glass .ds-arrow { transition: transform 150ms ease; } .ds-btn-glass:hover { background: rgba(30, 30, 30, 0.75); border-color: rgba(59, 130, 246, 0.35); border-top-color: rgba(255, 255, 255, 0.3); color: #93c5fd; } .ds-btn-glass:hover .ds-arrow { transform: translateX(4px); } .ds-btn-glass:active { transform: scale(0.97); } .ds-btn-glass:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }"
+    },
+    {
+      "name": "Primary Action Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botón primario sólido en SysAdmin Electric Blue para acciones de compartir o filtro activo.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z\"/></svg><span>Compartir</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 20px; border-radius: 12px; background: #2563eb; border: 1px solid #3b82f6; color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; cursor: pointer; box-shadow: 0 8px 20px -4px rgba(59, 130, 246, 0.35); transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease; } .ds-btn-primary:hover { background: #3b82f6; transform: scale(1.03); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; }"
+    },
+    {
+      "name": "Blog Search Input",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Buscador interactivo en cristal oscuro con soporte para autocompletado de etiquetas #tag.",
+      "html": "<div class=\"ds-search-wrap\"><svg class=\"ds-search-icon\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z\"/></svg><input type=\"text\" class=\"ds-input-search\" placeholder=\"Buscar por título, contenido o etiqueta (ej: #ansible)...\" /></div>",
+      "css": ".ds-search-wrap { position: relative; max-width: 520px; } .ds-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af; pointer-events: none; } .ds-input-search { width: 100%; padding: 14px 40px 14px 44px; border-radius: 12px; background: rgba(23, 23, 23, 0.65); backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.08); border-top-color: rgba(255, 255, 255, 0.18); color: #e5e7eb; font-family: 'JetBrains Mono', monospace; font-size: 14px; transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-input-search::placeholder { color: #9ca3af; } .ds-input-search:focus { outline: none; border-color: rgba(59, 130, 246, 0.7); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }"
+    },
+    {
+      "name": "Tech Stack & Status Chips",
+      "kind": "chip",
+      "refersTo": "chip-tech",
+      "description": "Píldora de tecnología interactiva y badge de estado en vivo con indicador pulsante.",
+      "html": "<div class=\"ds-chip-row\"><span class=\"ds-chip-tech\"><span>🐧</span>Linux</span><span class=\"ds-chip-status\"><span class=\"ds-dot\"></span>Learning: CISSP & Advanced Red Teaming</span></div>",
+      "css": ".ds-chip-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; } .ds-chip-tech { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 8px; background: rgba(23, 23, 23, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); border-top-color: rgba(255, 255, 255, 0.18); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: #93c5fd; transition: transform 180ms ease, border-color 180ms ease; } .ds-chip-tech:hover { border-color: rgba(59, 130, 246, 0.35); color: #bfdbfe; } .ds-chip-status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; background: rgba(23, 23, 23, 0.65); border: 1px solid rgba(34, 197, 94, 0.4); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #4ade80; } .ds-dot { width: 8px; height: 8px; border-radius: 9999px; background: #22c55e; box-shadow: 0 0 8px #22c55e; }"
+    },
+    {
+      "name": "Editorial Bento Article Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Tarjeta de artículo con superficie Smoked Glass, etiquetas en monoespaciado y título en Rubik.",
+      "html": "<a href=\"#\" class=\"ds-card-glass\"><div class=\"ds-card-meta\"><span class=\"ds-tag\">#linux</span><span class=\"ds-tag\">#sysadmin</span><span class=\"ds-date\">20 oct 2026</span></div><h3 class=\"ds-card-title\">Linux Básico en 10 Comandos</h3><p class=\"ds-card-desc\">Domina la terminal paso a paso con analogías claras y ejemplos reales para tu día a día.</p><div class=\"ds-card-footer\"><span>📚 Linux Esencial</span><span class=\"ds-read\">Leer artículo →</span></div></a>",
+      "css": ".ds-card-glass { display: flex; flex-direction: column; gap: 10px; max-width: 380px; padding: 20px; border-radius: 16px; background: rgba(23, 23, 23, 0.65); backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.08); border-top-color: rgba(255, 255, 255, 0.18); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08); text-decoration: none; transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), border-color 180ms ease, background-color 180ms ease; } .ds-card-glass:hover { background: rgba(30, 30, 30, 0.75); border-color: rgba(59, 130, 246, 0.35); border-top-color: rgba(255, 255, 255, 0.3); } .ds-card-glass:active { transform: scale(0.98); } .ds-card-meta { display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; } .ds-tag { padding: 2px 8px; border-radius: 6px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #60a5fa; font-weight: 600; } .ds-date { margin-left: auto; color: #9ca3af; } .ds-card-title { margin: 0; font-family: 'Rubik', system-ui, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff; transition: color 150ms ease; } .ds-card-glass:hover .ds-card-title { color: #60a5fa; } .ds-card-desc { margin: 0; font-family: 'Rubik', system-ui, sans-serif; font-size: 14px; line-height: 1.5; color: #d1d5db; } .ds-card-footer { display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(38, 38, 38, 0.8); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9ca3af; } .ds-read { color: #60a5fa; font-weight: 700; }"
+    },
+    {
+      "name": "Terminal Breadcrumb Navigation",
+      "kind": "nav",
+      "refersTo": "button-glass",
+      "description": "Barra de migas de pan en estilo ruta de sistema con ícono de inicio y página actual resaltada.",
+      "html": "<nav class=\"ds-breadcrumb\" aria-label=\"Breadcrumb\"><a href=\"#\" class=\"ds-bc-link\"><svg width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 20 20\"><path d=\"M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z\"/></svg>Inicio</a><span class=\"ds-bc-sep\">/</span><a href=\"#\" class=\"ds-bc-link\">Blog</a><span class=\"ds-bc-sep\">/</span><span class=\"ds-bc-current\">Linux Básico en 10 Comandos</span></nav>",
+      "css": ".ds-breadcrumb { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9ca3af; } .ds-bc-link { display: inline-flex; align-items: center; gap: 6px; color: #9ca3af; text-decoration: none; transition: color 150ms ease; } .ds-bc-link svg { color: #3b82f6; } .ds-bc-link:hover { color: #60a5fa; } .ds-bc-sep { color: #525252; } .ds-bc-current { color: #60a5fa; font-weight: 600; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Translucent Command Center",
+    "overview": "El sistema visual de pereidax86.com fusiona la honestidad técnica de una terminal Linux (\"pantalla negra y letras blancas\") con la calidez táctil de paneles de cristal ahumado inspirados en interfaces de escritorio modernas. Cada superficie está pensada para cumplir una doble misión: recibir sin intimidación al estudiante o autodidacta que aprende sus primeros comandos mediante analogías simples, y ofrecer al mismo tiempo la densidad, orden y precisión que un administrador de sistemas o especialista Senior espera de su entorno de trabajo.\n\nLa composición descansa sobre un lienzo oscuro profundo (#0a0a0a) recorrido por una retícula técnica de 24px x 24px apenas perceptible, sobre la cual flotan módulos Bento translúcidos con iluminación cenital especular. El lenguaje visual rechaza de forma explícita dos extremos: por un lado, el cliché de \"hacker de película\" (lluvia de código verde fosforescente, calaveras o efectos glitch estridentes que dificultan la lectura); por otro, el minimalismo corporativo frío e impersonal que oculta la pasión por el Open Source.",
+    "keyCharacteristics": [
+      "Lienzo oscuro de alto contraste (#0a0a0a) con retícula milimétrica fija (24px x 24px) que evoca un plano de arquitectura de sistemas.",
+      "Materiales de cristal ahumado (.apple-glass) con desenfoque óptico (20px), saturación al 180% y borde superior especular (rgba(255, 255, 255, 0.18)).",
+      "Dualidad tipográfica estricta: títulos geométricos y cercanos en Rubik combinados con telemetría, metadatos, rutas (/var/log/...) y código en JetBrains Mono.",
+      "Señalización semántica viva mediante indicadores de estado pulsantes (como demonios de sistema activos) y codificación por color para dificultad y categorías.",
+      "Degradación accesible de primera clase: conversión automática a superficies sólidas (#171717) cuando el usuario activa reducción de transparencia, e impresión limpia en papel (@media print A4) para las guías rápidas."
+    ],
+    "rules": [
+      {
+        "name": "The Specular Rim Rule",
+        "body": "Ningún contenedor sobre el lienzo oscuro debe flotar sin definición perimetral: toda tarjeta .apple-glass lleva un borde translúcido de 1px (rgba(255, 255, 255, 0.08)) con un borde superior más luminoso (rgba(255, 255, 255, 0.18)) que simula luz cenital real.",
+        "section": "colors"
+      },
+      {
+        "name": "The Inline Command Rule",
+        "body": "El tono Syntax Pink (#f472b6) sobre cápsula oscura (#171717) pertenece únicamente a comandos, rutas, banderas y código inline; nunca debe usarse como color decorativo en botones o títulos generales, salvo el acento propio de la marca TikTok en redes sociales.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contrast Floor Rule",
+        "body": "Sobre superficies Smoked Glass, el texto informativo más tenue permitido es Muted Telemetry (#9ca3af, text-gray-400); evita tonos más oscuros (#6b7280) para garantizar legibilidad WCAG AA en tamaños pequeños.",
+        "section": "colors"
+      },
+      {
+        "name": "The Terminal Telemetry Rule",
+        "body": "Todo metadato estructural (fechas, tiempos de lectura, contadores de artículos, etiquetas #tag, niveles de dificultad, rutas y botones de acción secundaria) se compone obligatoriamente en JetBrains Mono (font-mono).",
+        "section": "typography"
+      },
+      {
+        "name": "The Tight Display Rule",
+        "body": "Los titulares en Rubik (font-display) aplican siempre un ajuste negativo de interletraje (-0.03em a -0.035em) y font-optical-sizing: auto para mantener una silueta compacta y editorial.",
+        "section": "typography"
+      },
+      {
+        "name": "The Specular Compression Rule",
+        "body": "Todo elemento interactivo de cristal (.apple-glass-interactive) responde al puntero iluminando su borde superior (rgba(255, 255, 255, 0.3)) y teñiendo su contorno con azul eléctrico (rgba(59, 130, 246, 0.35)), y responde al toque o clic físico con una micro-compresión elástica (transform: scale(0.97) en 180ms cubic-bezier(0.23, 1, 0.32, 1)).",
+        "section": "elevation"
+      },
+      {
+        "name": "The Solid Fallback Rule",
+        "body": "Cuando el sistema operativo solicita reducir la transparencia (prefers-reduced-transparency: reduce), todo desenfoque óptico se desactiva y las superficies .apple-glass pasan a carbón sólido (#171717), manteniendo intactos sus bordes para preservar la jerarquía espacial.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do utilizar las utilidades .apple-glass para contenedores estáticos y .apple-glass-interactive para cualquier tarjeta, botón o fila clicable del sistema.",
+      "Do escribir todos los metadatos técnicos, fechas, filtros, etiquetas #tag, tiempos de lectura y rutas de estado en JetBrains Mono (font-mono).",
+      "Do representar siempre arquitecturas, flujos y estructuras técnicas mediante bloques mermaid estilizados en alto contraste oscuro (#171717 con trazos #ffffff).",
+      "Do mantener un área interactiva mínima de 44x44px en botones de cierre, filtros y controles táctiles en vistas móviles.",
+      "Do preservar las reglas @media print en las guías rápidas (cheatsheets) para que se impriman en fondo blanco y texto negro sin elementos de navegación sobrantes."
+    ],
+    "donts": [
+      "Don't utilizar guiones largos (em-dashes) ni semirrayas (en-dashes) en títulos, descripciones, microcopy de interfaz, artículos o guías; usa siempre comas, dos puntos, paréntesis o punto y coma.",
+      "Don't utilizar diagramas en arte ASCII (text) para explicar redes, flujos o arquitecturas salvo solicitud explícita del usuario.",
+      "Don't mezclar superficies antiguas sin cristal (bg-neutral-900/50 border-neutral-800 aisladas) en nuevas tarjetas o botones interactivos cuando corresponda usar .apple-glass-interactive.",
+      "Don't aplicar el color Syntax Pink (#f472b6) fuera de elementos <code> en línea o del ícono oficial de TikTok.",
+      "Don't inventar certificaciones, métricas o testimonios no verificados; toda insignia técnica mostrada debe enlazar a su verificación oficial (Credly o ASPEN)."
+    ]
+  }
+}

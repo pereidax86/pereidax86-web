@@ -1,5 +1,4 @@
 ---
-import CheatsheetCard from "./CheatsheetCard.astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -46,14 +45,17 @@ const { cheatsheets } = Astro.props;
 		))}
 
 		{cheatsheets.length === 0 && (
-			<div class="p-6 text-center border border-dashed border-neutral-800/80 rounded-xl text-gray-500 font-mono text-xs">
+			<div class="p-6 text-center border border-dashed border-neutral-800/80 rounded-xl text-gray-400 font-mono text-xs">
 				No hay guías disponibles.
 			</div>
 		)}
 	</div>
 
 	<div class="text-center pt-2 border-t border-neutral-800/60">
-		<a href="/cheatsheets" class="text-xs lg:text-sm font-mono text-blue-400 hover:text-blue-300 hover:underline">
+		<a
+			href="/cheatsheets"
+			class="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs lg:text-sm font-mono font-bold text-blue-400 hover:text-blue-300 hover:underline rounded-xl"
+		>
 			Ver todas las guías →
 		</a>
 	</div>

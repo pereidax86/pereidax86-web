@@ -4,14 +4,18 @@
 
 <button
 	id="scroll-top-btn"
+	type="button"
 	aria-label="Volver arriba"
-	class="fixed bottom-8 right-8 p-3.5 apple-glass-interactive text-white rounded-full shadow-2xl transition-all duration-300 active:scale-90 transform translate-y-20 opacity-0 z-50 group cursor-pointer"
+	aria-hidden="true"
+	tabindex="-1"
+	class="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 w-12 h-12 min-w-[48px] min-h-[48px] flex items-center justify-center apple-glass-interactive text-white rounded-full shadow-2xl transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-90 transform translate-y-20 opacity-0 pointer-events-none z-50 group cursor-pointer"
 >
 	<svg
 		class="w-6 h-6 group-hover:-translate-y-1 transition-transform"
 		fill="none"
 		stroke="currentColor"
 		viewBox="0 0 24 24"
+		aria-hidden="true"
 	>
 		<path
 			stroke-linecap="round"
@@ -30,12 +34,17 @@
 	}
 
 	function updateBtnVisibility() {
+		if (!scrollBtn) return;
 		if (getScrollPos() > 300) {
-			scrollBtn?.classList.remove("translate-y-20", "opacity-0");
-			scrollBtn?.classList.add("translate-y-0", "opacity-100");
+			scrollBtn.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
+			scrollBtn.classList.add("translate-y-0", "opacity-100", "pointer-events-auto");
+			scrollBtn.removeAttribute("aria-hidden");
+			scrollBtn.removeAttribute("tabindex");
 		} else {
-			scrollBtn?.classList.add("translate-y-20", "opacity-0");
-			scrollBtn?.classList.remove("translate-y-0", "opacity-100");
+			scrollBtn.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
+			scrollBtn.classList.remove("translate-y-0", "opacity-100", "pointer-events-auto");
+			scrollBtn.setAttribute("aria-hidden", "true");
+			scrollBtn.setAttribute("tabindex", "-1");
 		}
 	}
 
@@ -48,16 +57,17 @@
 	});
 
 	scrollBtn?.addEventListener("click", () => {
+		const scrollBehavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 		const mainContainer = document.getElementById("main-scroll-container");
 		if (mainContainer) {
 			mainContainer.scrollTo({
 				top: 0,
-				behavior: "smooth",
+				behavior: scrollBehavior,
 			});
 		}
 		window.scrollTo({
 			top: 0,
-			behavior: "smooth",
+			behavior: scrollBehavior,
 		});
 	});
 </script>

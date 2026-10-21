@@ -29,19 +29,19 @@ const allCerts = [certTop, ...certsMiddle, certBottom];
 	class="w-full h-full apple-glass rounded-2xl p-5 sm:p-6 2xl:p-8 flex flex-col justify-between space-y-3 sm:space-y-4 shadow-2xl"
 >
 	<div class="border-b border-neutral-800/80 pb-3">
-		<h3 class="text-xs sm:text-sm 2xl:text-base font-mono font-bold text-white uppercase tracking-wider">
+		<h2 class="text-xs sm:text-sm 2xl:text-base font-mono font-bold text-white uppercase tracking-wider">
 			Certificaciones Oficiales
-		</h3>
+		</h2>
 	</div>
 
-	<div class="flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-col gap-2.5 sm:gap-3 flex-1 justify-around">
+	<div class="flex flex-col gap-2.5 sm:gap-3 flex-1 justify-around md:justify-start lg:justify-around">
 		{
 			allCerts.map((cert) => (
 				<a
 					href={cert.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="group flex items-center gap-3 p-3 2xl:p-4 rounded-xl apple-glass-interactive hover:border-blue-500/50 transition-all duration-200 active:scale-[0.98] shadow-md md:last:col-span-2 lg:last:col-span-1"
+					class="group flex items-center gap-3 p-3 2xl:p-4 rounded-xl apple-glass-interactive hover:border-blue-500/50 transition-all duration-200 active:scale-[0.98] shadow-md"
 				>
 					<div class="w-10 h-10 sm:w-12 sm:h-12 2xl:w-14 2xl:h-14 flex-shrink-0 flex items-center justify-center relative">
 						<Image
@@ -51,9 +51,9 @@ const allCerts = [certTop, ...certsMiddle, certBottom];
 						/>
 					</div>
 					<div class="flex-1 min-w-0">
-						<h4 class="text-xs sm:text-sm 2xl:text-base font-bold text-gray-100 group-hover:text-blue-400 transition-colors leading-tight">
+						<h3 class="text-xs sm:text-sm 2xl:text-base font-bold text-gray-100 group-hover:text-blue-400 transition-colors leading-tight">
 							{cert.name}
-						</h4>
+						</h3>
 						{cert.meta && (
 							<p class="text-xs 2xl:text-sm font-mono text-blue-400 font-semibold mt-0.5">
 								{cert.meta.id}

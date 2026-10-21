@@ -45,15 +45,17 @@ const isHome = pathname === "/" || pathname === "";
 
 {
   !isHome && (
-    <div
+    <aside
         id="floating-banner"
+        aria-label="Sugerencia de redes sociales"
         class="fixed bottom-4 left-4 right-4 sm:right-auto z-50 hidden flex-row items-center gap-4 apple-glass p-4 pr-8 rounded-2xl shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-10 opacity-0 max-w-[calc(100vw-2rem)] sm:max-w-sm"
     >
-    <!-- Botón de Cerrar -->
+    <!-- Botón de Cerrar (Área táctil mínima de 44x44px) -->
     <button
         id="close-banner"
-        class="absolute -top-3 -right-3 bg-neutral-800 text-gray-400 hover:text-white hover:bg-red-500/20 hover:border-red-500/50 rounded-full p-1.5 border border-neutral-700 shadow-md transition-all"
-        aria-label="Cerrar"
+        type="button"
+        class="absolute -top-3 -right-3 w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center bg-neutral-800 text-gray-300 hover:text-white hover:bg-red-500/20 hover:border-red-500/50 rounded-full border border-neutral-700 shadow-md transition-all cursor-pointer"
+        aria-label="Cerrar sugerencia"
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,6 +63,7 @@ const isHome = pathname === "/" || pathname === "";
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
         >
             <path
                 stroke-linecap="round"
@@ -71,7 +74,7 @@ const isHome = pathname === "/" || pathname === "";
     </button>
 
     <!-- Video Circular -->
-    <div class="relative w-20 h-20 shrink-0">
+    <div class="relative w-20 h-20 shrink-0" aria-hidden="true">
         <div
             id="video-border"
             class="absolute -inset-1 rounded-full border-2 animate-pulse"
@@ -81,9 +84,10 @@ const isHome = pathname === "/" || pathname === "";
             class="w-full h-full rounded-full overflow-hidden border-2 border-neutral-900 bg-black shadow-inner"
         >
             <video
+                id="floating-banner-video"
                 src="/video/subscribete.mp4"
                 class="w-full h-full object-cover transform scale-110"
-                autoplay
+                preload="none"
                 loop
                 muted
                 playsinline></video>
@@ -91,7 +95,7 @@ const isHome = pathname === "/" || pathname === "";
     </div>
 
     <!-- Texto y CTA -->
-    <div class="flex flex-col max-w-[240px]">
+    <div class="flex flex-col max-w-[240px] min-w-0">
         <p class="text-sm text-gray-300 font-medium leading-tight mb-1.5">
             ¿Quieres seguir aprendiendo?
         </p>
@@ -99,6 +103,7 @@ const isHome = pathname === "/" || pathname === "";
             id="social-link"
             href="#"
             target="_blank"
+            rel="noopener noreferrer"
             class="text-base font-bold hover:underline decoration-2 underline-offset-2 transition-all leading-snug"
         >
             <!-- Se llena con JS -->
@@ -107,7 +112,7 @@ const isHome = pathname === "/" || pathname === "";
             y no te pierdas nada.
         </p>
     </div>
-</div>
+</aside>
   )
 }
 
@@ -116,6 +121,7 @@ const isHome = pathname === "/" || pathname === "";
     const closeBtn = document.getElementById("close-banner");
     const socialLink = document.getElementById("social-link");
     const videoBorder = document.getElementById("video-border");
+    const bannerVideo = document.getElementById("floating-banner-video");
     
     // Configuración
     const BANNER_DELAY = 5000; // 5 segundos
@@ -134,10 +140,14 @@ const isHome = pathname === "/" || pathname === "";
             videoBorder.classList.add(randomSocial.color);
         }
 
-        // Mostrar baner con delay
+        // Mostrar baner con delay y reproducir video solo cuando sea visible
         setTimeout(() => {
             if (banner) {
                 banner.classList.remove("hidden");
+                document.body.dataset.floatingBannerVisible = "true";
+                if (bannerVideo && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                    bannerVideo.play().catch(() => {});
+                }
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         banner.classList.remove("translate-y-10", "opacity-0");
@@ -147,16 +157,21 @@ const isHome = pathname === "/" || pathname === "";
         }, BANNER_DELAY);
     }
 
-    // Manejar cierre
+    // Manejar cierre (salida más rápida que la entrada: 250ms vs 500ms)
     if (closeBtn && banner) {
         closeBtn.addEventListener("click", () => {
-            // Ocultar visualmente
-            banner.classList.add("translate-y-20", "opacity-0");
+            // Ocultar visualmente y pausar decodificación de video
+            banner.classList.remove("duration-500");
+            banner.classList.add("duration-200", "translate-y-20", "opacity-0");
+            delete document.body.dataset.floatingBannerVisible;
+            if (bannerVideo) {
+                bannerVideo.pause();
+            }
 
             // Esperar animación y ocultar del DOM
             setTimeout(() => {
                 banner.classList.add("hidden");
-            }, 500);
+            }, 200);
         });
     }
 </script>
