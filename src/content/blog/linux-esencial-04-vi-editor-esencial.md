@@ -14,7 +14,7 @@ Cuando te aventuras en el mundo de Linux, tarde o temprano te encontrarás con *
 
 Vi es una herramienta que todos los usuarios de Linux deberían conocer. Y aunque puede parecer complicado al principio (en especial cuando intentas cerrarlo por primera vez, como no puedes empiezas a googlear *“Como salir de vi”* y terminas quemando la computadora), su importancia no puede subestimarse.
 
-> **protip >** Recuerda: **En Linux, todo es un archivo** desde configuraciones del sistema hasta simples notas, ya hablaremos de eso más adelante.
+> **protip >** Recuerda: **En Linux, todo es un archivo** desde configuraciones del sistema hasta simples notas (un concepto que desglosamos a fondo en nuestra [guía del Árbol de Directorios FHS](/blog/linux-esencial-06-arbol-directorios-fhs)).
 
 Por eso, aprender a usar un editor de texto poderoso es esencial para navegar y gestionar tu sistema. La buena noticia es que aprender Vi es más sencillo de lo que parece. Con un poco de práctica pronto verás que es una herramienta insustituible.
 

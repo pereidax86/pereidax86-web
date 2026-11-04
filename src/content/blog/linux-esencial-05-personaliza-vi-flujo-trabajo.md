@@ -116,6 +116,6 @@ Esto guardará el archivo automáticamente cuando te muevas a otro archivo o eje
 
 Personalizar `vi` es una de las mejores inversiones de tiempo que puedes hacer para mejorar tu productividad. Desde configuraciones básicas hasta herramientas avanzadas, cada ajuste se traduce en un flujo de trabajo más eficiente y adaptado a tus necesidades.
 
-Recuerda que, como siempre, **lo más importante es nunca dejar de preguntar**. Explora nuevas configuraciones, prueba plugins y sigue aprendiendo para dominar este editor increíblemente versátil.
+Recuerda que, como siempre, **lo más importante es nunca dejar de preguntar**. Explora nuevas configuraciones, prueba plugins y continúa tu camino explorando [el árbol de directorios y la filosofía FHS de Linux](/blog/linux-esencial-06-arbol-directorios-fhs) para dominar con exactitud dónde vive cada archivo de configuración que vas a editar.
 
 Lo escrito en esta entrada no es lo único que existe, ¡El límite es tu creatividad!
