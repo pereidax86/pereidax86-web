@@ -4,7 +4,7 @@ description: "Descubre qué es el Filesystem Hierarchy Standard (FHS), por qué 
 pubDate: 2026-10-21
 author: "Luis Pereida"
 tags: ["Linux", "SysAdmin", "Terminal", "FHS", "Básico"]
-image: "../../assets/images/blog/linux-fhs-tree.jpg"
+image: "../../assets/images/blog/linux-fhs-tree.webp"
 series: "linux-esencial"
 seriesTitle: "Linux Esencial & Terminal"
 seriesOrder: 6
@@ -130,7 +130,7 @@ Aquí se almacenan los archivos ejecutables (los comandos y utilerías que ejecu
 
 ---
 
-## De Mortales a Pros: Rutas Absolutas vs Rutas Relativas
+## Rutas Absolutas vs Rutas Relativas
 
 Uno de los errores más frustrantes cuando estás empezando a utilizar los comandos `cd`, `ls` o `cp` es recibir el temido mensaje: `No such file or directory`. Nueve de cada diez veces, este error ocurre por confundir una ruta absoluta con una ruta relativa.
 

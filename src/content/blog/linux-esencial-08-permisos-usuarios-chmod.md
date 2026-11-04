@@ -4,19 +4,19 @@ description: "Desmitifica la seguridad en Linux. Aprende a leer ls -l, entender 
 pubDate: 2026-10-28
 author: "Luis Pereida"
 tags: ["Linux", "Seguridad", "SysAdmin", "Terminal", "Ciberseguridad"]
-image: "../../assets/images/blog/linux-permissions-security.jpg"
+image: "../../assets/images/blog/linux-permissions-security.webp"
 series: "linux-esencial"
 seriesTitle: "Linux Esencial & Terminal"
 seriesOrder: 8
 ---
 
-Es una escena clásica en el desarrollo y la administración de sistemas: estás configurando un servidor web, intentas subir una imagen o ejecutar un script recién creado, y la terminal te estampa un seco y tajante mensaje en la cara:
+y aqui estas tu, configurando un servidor web, intentas subir una imagen o ejecutar un script recién creado, y la terminal te estampa un seco y tajante mensaje en la cara:
 
 `bash: ./deploy.sh: Permission denied`
 
-En ese instante de frustración, buscas en foros o le preguntas a un colega con prisas, y alguien suelta la infame frase: *"Ponle `chmod 777` a todo y listo, con eso jala"*.
+En ese instante de frustración, buscas en foros o le preguntas a un colega con prisas, y alguien suelta la infame frase: *"Ponle `chmod 777` a todo y listo, no se que hace pero con eso jala"* (basado en hechos reales).
 
-Efectivamente, ejecutas el comando, el script corre mágicamente y sientes un alivio pasajero. Lo que muchos no te dicen es que acabas de resolver un problema de cerradura derribando la puerta principal de tu casa y colgando un letrero de bienvenida para cualquier intruso.
+Efectivamente, ejecutas el comando, el script corre mágicamente y sientes un alivio pasajero. Lo que muchos no te dicen es que acabas de resolver un problema de cerradura derribando la puerta principal de tu casa, bajandole los chones al servidor y colgando un letrero de bienvenida para cualquier intruso.
 
 Linux fue diseñado desde sus cimientos como un sistema operativo multiusuario y multitarea. A diferencia de las computadoras personales de los años 80 donde una sola persona controlaba todo el hardware, en los servidores conviven decenas de servicios, demonios y usuarios simultáneos. Los permisos no son un capricho burocrático para hacerte la vida difícil; son las paredes y candados que evitan que un proceso comprometido tome el control absoluto de tu máquina.
 
@@ -44,11 +44,14 @@ flowchart TD
     Raw --> O["Otros / Mundo (o)<br/>[ r-- ] (Solo Lectura)"]
 ```
 
-1. **Primer carácter (El Tipo):** Indica qué clase de objeto es (recordando lo visto en nuestro [artículo sobre el árbol FHS y la filosofía de archivos](/blog/linux-esencial-06-arbol-directorios-fhs)):
-   * `-` : Archivo regular (documento, imagen, script).
-   * `d` : Directorio (carpeta).
-   * `l` : Enlace simbólico (*shortcut* o puntero a otro archivo).
-   * `c` o `b` : Dispositivo de caracteres o bloques (como los discos en `/dev`).
+1. **Primer carácter (El Tipo de Archivo):** En Linux casi todo se representa como un archivo, pero no todos los archivos son iguales (como vimos en nuestra [entrega sobre el árbol FHS](/blog/linux-esencial-06-arbol-directorios-fhs)). Este primer carácter identifica cuál de los 7 tipos fundamentales de objetos representa:
+   * `-`: **Archivo regular** (documentos de texto, imágenes, ejecutables, scripts).
+   * `d`: **Directorio** (carpetas que contienen otros archivos y directorios).
+   * `l`: **Enlace simbólico** (*symlink*, un acceso directo que apunta a otro archivo o carpeta).
+   * `b`: **Dispositivo de bloques** (*block device*, hardware que almacena o transfiere datos en bloques de tamaño fijo, como tus discos duros `/dev/sda` o `/dev/nvme0n1`).
+   * `c`: **Dispositivo de caracteres** (*character device*, canales de hardware que procesan flujos de información byte por byte en tiempo real, como terminales `/dev/tty` o generadores de aleatoriedad `/dev/urandom`).
+   * `s`: **Socket de dominio local** (*Unix socket*, canales de comunicación directa entre procesos en memoria sin pasar por la tarjeta de red, como `/var/run/docker.sock`).
+   * `p`: **Tubería con nombre** (*named pipe* o FIFO, *First In First Out*, exactamente el mismo concepto de tubería que dominamos en [la entrega de tuberías y redirecciones](/blog/linux-esencial-07-tuberias-redirecciones), pero persistente en disco con `mkfifo`).
 
 2. **Tríada de Usuario (`u` / Propietario):** Los siguientes 3 caracteres (`rwx`) definen lo que puede hacer la persona que creó o posee el archivo.
 3. **Tríada de Grupo (`g`):** Los siguientes 3 caracteres (`r-x`) definen lo que pueden hacer los integrantes del grupo asignado (en este ejemplo, el grupo `developers`).
