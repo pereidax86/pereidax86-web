@@ -11,7 +11,7 @@ Este skill guía la redacción, estructuración y validación de entradas de blo
 
 ## 1. Reglas Universales e Inviolables (Todo Post)
 
-Cualquier artículo generado para `pereidax86-web` DEBE cumplir estas 5 reglas:
+Cualquier artículo generado para `pereidax86-web` DEBE cumplir estas 6 reglas:
 
 1. **Cero guiones largos:** NUNCA uses guiones largos (*em-dash* `—`) ni semirrayas (`–`). Utiliza comas, paréntesis, dos puntos o punto y seguido.
 2. **Diagramas en Mermaid:** NUNCA uses diagramas en arte ASCII (`text`). Todo flujo, arquitectura o secuencia debe usar bloques ```mermaid (`flowchart`, `sequenceDiagram`, `block-beta`, etc.).
@@ -30,12 +30,13 @@ Cualquier artículo generado para `pereidax86-web` DEBE cumplir estas 5 reglas:
    pubDate: YYYY-MM-DD
    author: "Luis Pereida"
    tags: ["Tag1", "Tag2", "Tag3"]
-   image: "../../assets/images/blog/nombre-imagen.png"
+   image: "../../assets/images/blog/nombre-imagen.webp"
    series: "slug-de-la-serie"
    seriesTitle: "Nombre Visible de la Serie"
    seriesOrder: N
    ---
    ```
+6. **Imágenes en Formato WebP:** Toda imagen de portada, infografía o recurso visual asociado al post debe generarse o guardarse obligatoriamente en formato `.webp`. No utilizar `.png`, `.jpg` o `.jpeg` para nuevas imágenes.
 
 ---
 
@@ -93,3 +94,4 @@ Antes de entregar el artículo, verifica:
 - [ ] ¿Se usó `> **protip >**` para los tips?
 - [ ] ¿Termina con `## Ctrl + D` y la frase *"lo más importante es nunca dejar de preguntar"*?
 - [ ] ¿El frontmatter contiene todos los campos requeridos?
+- [ ] ¿La imagen de portada y los recursos visuales están en formato `.webp`?
