@@ -10,7 +10,33 @@ export default defineConfig({
   },
   site: 'https://pereidax86.com',
   trailingSlash: 'never',
-  integrations: [sitemap(), robotsTxt()],
+  integrations: [
+    sitemap(),
+    robotsTxt({
+      policy: [
+        {
+          userAgent: '*',
+          allow: '/',
+        },
+        {
+          userAgent: 'OAI-SearchBot',
+          allow: '/',
+        },
+        {
+          userAgent: 'PerplexityBot',
+          allow: '/',
+        },
+        {
+          userAgent: 'ClaudeBot',
+          allow: '/',
+        },
+        {
+          userAgent: 'GPTBot',
+          allow: '/',
+        },
+      ],
+    }),
+  ],
   
   build: {
     assets: 'assets'
